@@ -11,7 +11,7 @@ import SwiftUI
 ///
 /// - 1개의 NavigationBarItem을 갖는다
 ///     -- Tile: Home
-///     -- Action: GameHomeView 열기
+///     --  Action: GameHomeView 열기
 struct AboutView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
