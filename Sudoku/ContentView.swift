@@ -17,7 +17,6 @@ import SwiftData
 ///
 /// - Returns:
 ///     - a: The *a* component of the vector.
-///
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
