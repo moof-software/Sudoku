@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/// - Type: Action Sheet
+/// - 1개의 Button을 갖는다
+///     - Tile: Home
+///     - Action: GameHomeView 열기 또는 dismiss()
 struct LeaderBoardView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
