@@ -72,7 +72,7 @@
 - GNU License에 관한 정보가 나온다.
 
 
-## [UXID-003] Game Center (FR-13)
+## [UXID-003] Game Center [FR-13](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.50xp59pzd4z6)
 ### Back Button 
 - Connects to UXID-001
 
@@ -81,7 +81,7 @@
 - Will redirect to the Game Center(external connection)
 - 게임센터로 연결된다(외부 연결)
 
-## [UXID-004] Help Screen (FR-10)
+## [UXID-004] Help Screen [FR-10](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.odm1es84wbfa)
 
 ### Back Button 
 - Connects to UXID-001
@@ -107,7 +107,7 @@
 ### “Multi” Button
 - To be determined in version 2.0
 
-## [UXID-006] Level Screen (FR-1.2, FR-5)
+## [UXID-006] Level Screen [FR-1.2](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.se66h25agf9) , [FR-5](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.g31l79n4knew)
 
 ### Back Button 
 - Connects to UXID-001
@@ -231,7 +231,7 @@
 ### Camera Button
 - Connects to UXID-011
 
-## [UXID-010] Solution Screen (FR-17)
+## [UXID-010] Solution Screen [FR-17](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.zfwj258w69vy)
 
 ### Sudoku Board
 - 9x9 Sudoku Board 
