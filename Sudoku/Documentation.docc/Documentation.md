@@ -41,7 +41,7 @@ open Sudoku.xcodeproj
 Sudoku/
 ├── Sudoku/                    # Main app source
 │   ├── Assets.xcassets/       # App icons and color assets
-│   ├── ContentView.swift      # Main UI content
+│   ├── GameHomeView.swift     # Main Game UI content
 │   ├── Item.swift             # Model or component file
 │   ├── SudokuApp.swift        # App entry point
 │   └── Documentation.docc/    # Developer documentation
