@@ -17,7 +17,7 @@ import SwiftUI
 ///     - Action: ScoreView 열기 또는 dismiss()
 struct GameBoardView: View {
     var body: some View {
-        Text("Hello, Sudoku Board!")
+        Text("Game Board View")
     }
 }
 

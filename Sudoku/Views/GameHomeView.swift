@@ -26,9 +26,71 @@ import SwiftUI
 struct GameHomeView: View {
 
     var body: some View {
-        Text("Sudoku Home View")
+        VStack {
+            /// HStack for top side buttons
+            HStack {
+                /// About button
+                NavigationLink {
+                    AboutView()
+                } label: {
+                    Image(systemName: "info.circle")
+                }
+                .padding()
+                Spacer()
+                /// Game Center button
+                Button(action: gameCenterButtonAction) {
+                    Text("Game Center")
+                }
+                .padding()
+                Spacer()
+                /// Help Button
+                NavigationLink {
+                    HelpView()
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                }
+                .padding()
+            }
+            Spacer()
+            Text("Sudoku Home View")
+            /// VStack for middle buttons
+            VStack {
+                /// Game button
+                NavigationLink {
+                    LevelView()
+                } label: {
+                    Text("Game")
+                }
+                /// Solver Button
+                NavigationLink {
+                    SolverView()
+                } label: {
+                    Text("Solver")
+                }
+            }
+            Spacer()
+            /// HStack for bottom side buttons
+            HStack {
+                /// Leaderboard button
+                NavigationLink {
+                    LeaderBoardView()
+                } label: {
+                    Image(systemName: "chart.bar.fill")
+                }
+                .padding()
+                Spacer()
+                /// Settings button
+                NavigationLink {
+                    SettingView()
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                }
+                .padding()
+            }
+        }
     }
 
+    private func gameCenterButtonAction() { }
 }
 
 #Preview {
