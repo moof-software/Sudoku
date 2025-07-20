@@ -23,11 +23,11 @@ struct AboutView: View {
                 Spacer()
             }
             Spacer()
-            Text("Version Info: Hello my name is Jisu Lim and I like Oreos and blondies. I am currently testing the version info text.")
+            Text("Version Info: ")
                 .padding()
-            Text("Developers Info: Hello my name is Jisu Lim and I like Oreos and blondies. I am currently testing the developer info text.")
+            Text("Developers Info: ")
                 .padding()
-            Text("GNU License Info: Hello my name is Jisu Lim and I like Oreos and blondies. I am currently testing the GNU License info text.")
+            Text("GNU License Info: ")
                 .padding()
             Spacer()
             Button("Easter Egg Placeholder", systemImage: "sparkles") {
