@@ -12,8 +12,25 @@ import SwiftUI
 ///     - Tile: Home
 ///     - Action: GameHomeView 열기 또는 dismiss()
 struct SolutionView: View {
+
+    @State private var solutionBoardText = "Board"
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            Text(solutionBoardText)
+                .frame(maxWidth: .infinity, maxHeight: 500)
+                .background(Color.gray.opacity(0.2))
+            Button("Solve it!") {
+                solutionBoardText = "Solved!"
+            }
+            .buttonStyle(.bordered)
+            Spacer()
+            Button("Home") {
+                // Connect to GameHomeView
+            }
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
 
