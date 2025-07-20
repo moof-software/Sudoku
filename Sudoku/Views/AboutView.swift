@@ -14,7 +14,26 @@ import SwiftUI
 ///     - Action: GameHomeView 열기
 struct AboutView: View {
     var body: some View {
-        Text("About View!")
+        VStack {
+            HStack {
+                Button("< Back") {
+                    // Connect to GameHomeView
+                }
+                .padding()
+                Spacer()
+            }
+            Spacer()
+            Text("Version Info: Hello my name is Jisu Lim and I like Oreos and blondies. I am currently testing the version info text.")
+                .padding()
+            Text("Developers Info: Hello my name is Jisu Lim and I like Oreos and blondies. I am currently testing the developer info text.")
+                .padding()
+            Text("GNU License Info: Hello my name is Jisu Lim and I like Oreos and blondies. I am currently testing the GNU License info text.")
+                .padding()
+            Spacer()
+            Button("Easter Egg Placeholder", systemImage: "sparkles") {
+                // will add Easter Egg Content later
+            }
+        }
     }
 }
 
