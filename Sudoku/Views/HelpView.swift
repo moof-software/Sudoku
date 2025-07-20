@@ -12,6 +12,9 @@ import SwiftUI
 ///     - Tile: Home
 ///     - Action: GameHomeView 열기
 struct HelpView: View {
+
+    @State private var displayedText = "Help Screen"
+
     var body: some View {
         VStack {
             HStack {
@@ -21,12 +24,13 @@ struct HelpView: View {
                 .padding()
                 Spacer()
                 Button("Next >") {
-                    // Connect to next page for Help
+                    // Change text on screen to "Next Page"
+                    displayedText = "Next Page"
                 }
                 .padding()
             }
             Spacer()
-            Text("Help Screen")
+            Text(displayedText)
             Spacer()
         }
     }
