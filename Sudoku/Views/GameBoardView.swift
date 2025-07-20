@@ -6,15 +6,44 @@
 //
 
 import SwiftUI
-
-/// - Type: Navigation Stack
-/// - Open시 항상 LevelView를 표시한다.
-/// - (임시)1개의 Label을 갖는다
-///     - Title: Level
-///     - LevelView에서 선택한 값을 표시한다.
-/// - (임시)1개의 Button을 갖는다
-///     - Tile: End
-///     - Action: ScoreView 열기 또는 dismiss()
+/// View that contains the main gaming screen.
+///
+/// Contains:
+/// - VStack
+///     - HStack
+///         - "Error" Text
+///             - Placeholder for Errors
+///         - `scoreText` Text
+///             - Default `scoreText` must be set to "Score"
+///             - Placeholder for Scores
+///         - "Time" Text
+///             - Placeholder for Timer
+///     - `boardText` Text
+///         - Default `boardText` must be set to "Board"
+///         - Placeholder for Sudoku Board
+///     - HStack
+///         - Rewind Button
+///             - Label: arrow.counterclockwise system image
+///             - Action: change boardText to "Rewinding..." for 3 seconds
+///         - Undo Button
+///             - Label: arrow.left system image
+///             - Action: change boardText to "Undoing..." for 3 seconds
+///         - Redo Button
+///             - Label: arrow.right system image
+///             - Action: change boardText to "Redoing..." for 3 seconds
+///         - Hint Button
+///             - Label: "Hint"
+///             - Action: change boardText to "Providing hint..." for 3 seconds
+///         - Memo Button
+///             - Label: pencil system image
+///             - Action: Toggle  "Number Pad" text to "Memo" using memoToggled
+///     - Number Pad
+///         - Currently Text with memoToggled that switches from "Number Pad" to "Memo" when toggled by Memo Button
+///     - End Button
+///         - Label: "End"
+///         - Action: Connects to ScoreView
+///     - "Ads" Text
+///         - Placeholder
 struct GameBoardView: View {
 
     @State var scoreText = "Score"
@@ -39,43 +68,23 @@ struct GameBoardView: View {
                 .background(Color.gray.opacity(0.2))
             HStack {
                 Button("", systemImage: "arrow.counterclockwise") {
-                    // change boardText to "rewind" for 3 seconds
-                    // Change to rewind
-                    boardText = "Rewinding..."
-                    // After 3 seconds, revert back
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        boardText = "Board"
-                    }
+                    // change boardText to "Rewinding..." for 3 seconds
+                    changeBoardText(to: "Rewinding...")
                 }
                 .padding(10)
                 Button("", systemImage: "arrow.left") {
-                    // change boardText to "undo" for 3 seconds
-                    // Change to undo
-                    boardText = "Undoing..."
-                    // After 3 seconds, revert back
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        boardText = "Board"
-                    }
+                    // change boardText to "Undoing..." for 3 seconds
+                    changeBoardText(to: "Undoing...")
                 }
                 .padding(10)
                 Button("", systemImage: "arrow.right") {
-                    // change boardText to "redo" for 3 seconds
-                    // Change to redo
-                    boardText = "Redoing..."
-                    // After 3 seconds, revert back
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        boardText = "Board"
-                    }
+                    // change boardText to "Redoing..." for 3 seconds
+                    changeBoardText(to: "Redoing...")
                 }
                 .padding(10)
                 Button("Hint") {
-                    // change boardText to "Providing Hint" for 3 seconds
-                    // Change to Providing Hint
-                    boardText = "Providing Hint..."
-                    // After 3 seconds, revert back
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        boardText = "Board"
-                    }
+                    // change boardText to "Providing hint..." for 3 seconds
+                    changeBoardText(to: "Providing hint...")
                 }
                 .padding(10)
                 Spacer()
@@ -95,6 +104,16 @@ struct GameBoardView: View {
             .buttonStyle(.bordered)
             Spacer()
             Text("Ads")
+        }
+    }
+    /// Temporarily change `boardText` to a message and revert back after 3 seconds.
+    /// - Parameters:
+    ///   - temporary: String user wants `boardText` to change into.
+    ///   - duration: Number of delayed seconds (Default: 3 seconds)
+    func changeBoardText(to temporary: String, duration: TimeInterval = 3) {
+        boardText = temporary
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            boardText = "Board"
         }
     }
 }
