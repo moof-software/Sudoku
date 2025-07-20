@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 /// View that shows user's current rankings
 ///
 /// Contains:
