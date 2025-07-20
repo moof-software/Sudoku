@@ -7,13 +7,20 @@
 
 import SwiftUI
 
-/// - Type: Navigation Stack
-/// - 1개의 NavigationBarItem을 갖는다
-///     - Title: Home
-///     - GameHomeView 열기.
-/// - 1개의 Button을 갖는다
-///     - Tile: Manual
-///     - Action: SolutionView 열기 또는 dismiss()
+/// View that provides which solver tool is needed for the user ( Manual or Camera)
+///
+/// Contains:
+/// - VStack
+///     - HStack
+///         - Back Button
+///             - Label: "< Back"
+///             - Action: Connect to GameHomeView
+///     - Manual Button
+///         - Label: "Manual"
+///         - Action: Connect to SolutionView
+///     - Camer Button
+///         - Label: "Camera"
+///         - Action: TBD
 struct SolverView: View {
     var body: some View {
         VStack {

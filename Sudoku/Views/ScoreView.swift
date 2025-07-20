@@ -7,9 +7,15 @@
 
 import SwiftUI
 
-/// - Type: Action Sheet
-/// - 1개의 Button을 갖는다
-///     - End - GameHomeView 열기 또는 dismiss()
+/// View that shows the final scores.
+///
+/// Contains:
+/// - VStack
+///     - "Final Score" Text
+///     - "Scores:" Text
+///     - Home Button
+///         - Label: "Home"
+///         - Action: Connect to GameHomeView
 struct ScoreView: View {
     var body: some View {
         VStack {

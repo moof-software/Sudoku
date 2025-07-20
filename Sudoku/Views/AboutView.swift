@@ -9,14 +9,6 @@ import SwiftUI
 
 /// View that contains information regarding versions, developers, and licenses.
 ///
-///
-/// - Parameters:
-///     - example: description
-/// - Returns:A view containing information on a typical About View.
-/// - Throws: Throwing message.
-/// - Note: This is a note.
-/// - Warning: This is a warning message.
-///
 /// Contains:
 /// - VStack
 ///     - HStack
@@ -29,11 +21,6 @@ import SwiftUI
 ///     - Easter Egg Button
 ///         - Label: " Easter Egg Placeholder " with fun symbols surrounding it
 ///         - Action: TBD
-///
-/// Example:
-/// ```swift
-/// GreetingView(message: "Hi!", fontSize: 24)
-/// ```
 
 struct AboutView: View {
     var body: some View {

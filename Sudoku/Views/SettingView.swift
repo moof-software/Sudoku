@@ -7,10 +7,29 @@
 
 import SwiftUI
 
-/// - Type: Action Sheet
-/// - 1개의 Button을 갖는다
-///     - Tile: Home
-///     - Action: GameHomeView 열기 또는 dismiss()
+/// View that lets users set sounds, effects, and tile patterns.
+///
+/// Contains:
+/// - VStack
+///     - HStack
+///         - Back Button
+///             - Label: "< Back"
+///             - Action: Connect to GameHomeView
+///     - "Settings" Text
+///     - Section
+///         - Sound Toggle
+///             - Label:  "Sound"
+///             - Action: TBD
+///     - Section
+///         - Effects Picker
+///             - Label:  "Effect"
+///             - Picker Style: 3 segments
+///             - Action: TBD
+///     - Section
+///         - Tile Pattern Picker
+///             - Label:  "Tile Pattern"
+///             - Picker Style: 3 segments
+///             - Action: TBD
 struct SettingView: View {
 
     @State private var soundOn: Bool = true
