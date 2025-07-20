@@ -26,7 +26,41 @@ import SwiftUI
 struct GameHomeView: View {
 
     var body: some View {
-        Text("Sudoku Home View")
+        VStack {
+            HStack {
+                Button("", systemImage: "info.circle") {
+                    // Connect to About Page
+                }
+                .padding()
+                Spacer()
+                Button("", systemImage: "questionmark.circle") {
+                    // Connect to Help Page
+                }
+                .padding()
+            }
+            Spacer()
+            Button("Game") {
+                // Connect to Level Page
+            }
+            .buttonStyle(.bordered)
+            Button("Solver") {
+                // Connect to Solver Page
+            }
+            .buttonStyle(.bordered)
+            Text("Ads")
+            Spacer()
+            HStack {
+                Button("", systemImage: "chart.bar.xaxis") {
+                    // Connect to Leaderboard Page
+                }
+                .padding()
+                Spacer()
+                Button("", systemImage: "gear") {
+                    // Connect to Setting Page
+                }
+                .padding()
+            }
+        }
     }
 
 }
