@@ -7,13 +7,40 @@
 
 import SwiftUI
 
-/// - Type: Navigation Stack
-/// - (임시) 1개의 button을 갖는다
-///     - Tile: Home
-///     - Action: GameHomeView 열기 또는 dismiss()
+/// View that provides an empty or partially filled Sudoku board that can be solved with a button.
+///
+/// Contains:
+///
+/// - VStack
+///     - `solutionBoardText` Text
+///         - Default must be "Board"
+///     - Solve It Button
+///         - Label: "Solve it!"
+///         - Action: Changes `solutionBoardText` to "Solved"
+///     - Home Button
+///         - Label: "Home"
+///         - Action: Connect to GameHomeView
 struct SolutionView: View {
+
+    @State private var solutionBoardText = "Board"
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            Text(solutionBoardText)
+                .frame(maxWidth: .infinity, maxHeight: 500)
+                .background(Color.gray.opacity(0.2))
+            Button("Solve it!") {
+                // Changes board text
+                solutionBoardText = "Solved!"
+            }
+            .buttonStyle(.bordered)
+            Spacer()
+            Button("Home") {
+                // Connect to GameHomeView
+            }
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
 

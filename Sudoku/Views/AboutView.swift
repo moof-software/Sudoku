@@ -7,14 +7,43 @@
 
 import SwiftUI
 
-/// Type: Navigation Stack
+/// View that contains information regarding versions, developers, and licenses.
 ///
-/// - 1개의 NavigationBarItem을 갖는다
-///     - Tile: Home
-///     - Action: GameHomeView 열기
+/// Contains:
+/// - VStack
+///     - HStack
+///         - Back Button
+///             - Label: " < Back "
+///             - Action: Connects to GameHomeView
+///     - Text containing version information
+///     - Text containing developers information
+///     - Text containing GNU license information
+///     - Easter Egg Button
+///         - Label: " Easter Egg Placeholder " with fun symbols surrounding it
+///         - Action: TBD
+
 struct AboutView: View {
     var body: some View {
-        Text("About View!")
+        VStack {
+            HStack {
+                Button("< Back") {
+                    // Connect to GameHomeView
+                }
+                .padding()
+                Spacer()
+            }
+            Spacer()
+            Text("Version Info: ")
+                .padding()
+            Text("Developers Info: ")
+                .padding()
+            Text("GNU License Info: ")
+                .padding()
+            Spacer()
+            Button("Easter Egg Placeholder", systemImage: "sparkles") {
+                // will add Easter Egg Content later
+            }
+        }
     }
 }
 

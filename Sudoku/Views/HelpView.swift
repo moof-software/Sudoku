@@ -7,13 +7,41 @@
 
 import SwiftUI
 
-/// Type: Navigation Stack
-///  - 1개의 NavigationBarItem을 갖는다
-///     - Tile: Home
-///     - Action: GameHomeView 열기
+/// View that shows a Sudoku tutorial for first-time users.
+///
+/// Contains:
+/// - VStack
+///     - HStack
+///         - Back Button
+///             - Label: "< Back"
+///             - Action: Connect to GameHomeView
+///         - Next Button
+///             - Label: "Next >"
+///             - Action: Change `displayedText` to "Next Page"
+///     - `displayedText` Text
+///         - Default must be "Help Screen"
 struct HelpView: View {
+
+    @State private var displayedText = "Help Screen"
+
     var body: some View {
-        Text("Help View")
+        VStack {
+            HStack {
+                Button("< Back") {
+                    // Connect to GameHomeView
+                }
+                .padding()
+                Spacer()
+                Button("Next >") {
+                    // Change text on screen to "Next Page"
+                    displayedText = "Next Page"
+                }
+                .padding()
+            }
+            Spacer()
+            Text(displayedText)
+            Spacer()
+        }
     }
 }
 

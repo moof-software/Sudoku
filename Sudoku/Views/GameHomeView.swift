@@ -7,26 +7,69 @@
 
 import SwiftUI
 
-/// 6개의 버튼이 필요하다.
-/// - About - AboutView(NavigationStack type) 열기
-/// - Help - HelpView(NavigationStack type) 열기
-/// - Leader Board - LeaderBoardView(ActionSheet type) 열기
-/// - Setting - SettingView(ActionSheet type) 열기
-/// - Game- GameBoardView(NavigationStack type, 진입시 항상 LevelView ActionSheet type형 화면을 표시한다) 열기
-/// - Solver - SolverView(NavigationStack type) 열기
+/// View containing About, Help, Game, Solver, LeaderBoard, and Setting buttons.
 ///
-/// - Parameters:
-///     - x: The *x* component of the vector.
-///     - y: The *y* component of the vector.
-///     - z: The *z* component of the vector.
-///
-/// - Returns:
-///     - a: The *a* component of the vector.
-///
+/// Contains:
+/// - VStack
+///     - HStack
+///         - About Button
+///             - Label: info.circle system image
+///             - Action: Connect to AboutView
+///         - Help Button
+///             - Label: questionmark.circle system image
+///             - Action: Connect to HelpView
+///     - Game Button
+///         - Label: "Game"
+///         - Action: Connect to LevelView
+///     - Solver Button
+///         - Label: "Solver"
+///         - Action: Connect to SolverView
+///     - "Ads" Text
+///     - HStack
+///         - Leaderboard Button
+///             - Label: chart.bar.xaxis system image
+///             - Action: Connect to LeaderboardView
+///         - Setting Button
+///             - Label: gear system image
+///             - Action: Connect to SettingView
 struct GameHomeView: View {
 
     var body: some View {
-        Text("Sudoku Home View")
+        VStack {
+            HStack {
+                Button("", systemImage: "info.circle") {
+                    // Connect to About Page
+                }
+                .padding()
+                Spacer()
+                Button("", systemImage: "questionmark.circle") {
+                    // Connect to Help Page
+                }
+                .padding()
+            }
+            Spacer()
+            Button("Game") {
+                // Connect to Level Page
+            }
+            .buttonStyle(.bordered)
+            Button("Solver") {
+                // Connect to Solver Page
+            }
+            .buttonStyle(.bordered)
+            Text("Ads")
+            Spacer()
+            HStack {
+                Button("", systemImage: "chart.bar.xaxis") {
+                    // Connect to Leaderboard Page
+                }
+                .padding()
+                Spacer()
+                Button("", systemImage: "gear") {
+                    // Connect to Setting Page
+                }
+                .padding()
+            }
+        }
     }
 
 }

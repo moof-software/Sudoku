@@ -16,10 +16,10 @@ import SwiftUI
 ///    .shadow(color: .black, radius: 10)
 /// ```
 struct StartUpView: View {
-    
+
     /// Startup view를 화면에 표시 여부를 Bool값으로 @Binding으로 받는 showStartUpView
     @Binding var showStartUpView: Bool
-    
+
     @State private var loadingString: [String] = "Loading your sudoku game data...".map { String($0) }
     @State private var showLoadingString: Bool = false
     private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -28,13 +28,13 @@ struct StartUpView: View {
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-            
+
             Text("Sudoku")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(Color.black)
                 .shadow(color: .black, radius: 10)
-            
+
             ZStack {
                 if showLoadingString {
                     HStack(spacing: 0) {
