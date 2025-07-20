@@ -12,7 +12,18 @@ import SwiftUI
 ///     - End - GameHomeView 열기 또는 dismiss()
 struct ScoreView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Final Score")
+                .font(.title)
+                .bold()
+            Spacer()
+            Text("Scores:")
+            Spacer()
+            Button("Home") {
+                // Connect to GameHomeView
+            }
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
 

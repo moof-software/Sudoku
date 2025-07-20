@@ -27,24 +27,25 @@ struct LevelView: View {
                 .font(.largeTitle)
                 .bold()
             Spacer()
-            
             Button("Easy") {
                 // Change "score" text in GameBoard View to easy
+                // Connect to GameBoardView
             }
             .buttonStyle(.bordered)
-            
             Button("Medium") {
                 // Change "score" text in GameBoard View to medium
+                // Connect to GameBoardView
             }
             .buttonStyle(.bordered)
-            
             Button("Hard") {
                 // Change "score" text in GameBoard View to hard
+                // Connect to GameBoardView
             }
             .buttonStyle(.bordered)
             Spacer()
             Button("Resume") {
                 // Change "score" text in GameBoard View to resume
+                // Connect to GameBoardView
             }
         }
     }
