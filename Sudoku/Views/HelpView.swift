@@ -13,7 +13,22 @@ import SwiftUI
 ///     - Action: GameHomeView 열기
 struct HelpView: View {
     var body: some View {
-        Text("Help View")
+        VStack {
+            HStack {
+                Button("< Back") {
+                    // Connect to GameHomeView
+                }
+                .padding()
+                Spacer()
+                Button("Next >") {
+                    // Connect to next page for Help
+                }
+                .padding()
+            }
+            Spacer()
+            Text("Help Screen")
+            Spacer()
+        }
     }
 }
 

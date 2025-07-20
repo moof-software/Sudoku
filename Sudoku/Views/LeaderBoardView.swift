@@ -12,8 +12,27 @@ import SwiftUI
 ///     - Tile: Home
 ///     - Action: GameHomeView 열기 또는 dismiss()
 struct LeaderBoardView: View {
+
+    @State private var displayedText = "Leaderboard Screen"
+
     var body: some View {
-        Text("Leader Board")
+        VStack {
+            HStack {
+                Button("< Back") {
+                    // Connect to GameHomeView
+                }
+                .padding()
+                Spacer()
+                Button("Clear") {
+                    // Change text from "Leaderboard Screen" to "Cleared"
+                    displayedText = "Cleared"
+                }
+                .padding()
+            }
+            Spacer()
+            Text(displayedText)
+            Spacer()
+        }
     }
 }
 
