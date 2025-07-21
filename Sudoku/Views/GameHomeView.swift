@@ -33,16 +33,20 @@ import SwiftUI
 ///             - Label: gear system image
 ///             - Action: Connect to SettingView
 struct GameHomeView: View {
-    @State private var showAboutView: Bool = false
-    @State private var showLeaderView: Bool = false
-    @State private var showSettingView: Bool = false
-    
+    enum Sheet: String, Identifiable {
+        case showAboutView, showLedaerView, showSettingView
+
+        var id: String { rawValue }
+    }
+
+    @State private var presentedSheet: Sheet?
+
     var body: some View {
         VStack {
             HStack {
                 Button("", systemImage: "info.circle") {
                     // Connect to About Page
-                    showAboutView.toggle()
+                    presentedSheet = .showAboutView
                 }
                 .padding()
                 Spacer()
@@ -51,10 +55,7 @@ struct GameHomeView: View {
                 }
                 .padding()
             }
-            .navigationDestination(isPresented: $showAboutView) {
-                AboutView()
-            }
-            
+
             Spacer()
             Button("Game") {
                 // Connect to Level Page
@@ -69,31 +70,28 @@ struct GameHomeView: View {
             HStack {
                 Button("", systemImage: "chart.bar.xaxis") {
                     // Connect to Leaderboard Page
-                    
-                    showLeaderView.toggle()
-                    
-                    print(showLeaderView ? "True" : "False")
+                    presentedSheet = .showLedaerView
                 }
                 .padding()
-                .sheet(
-                    isPresented: $showLeaderView, content: {
-                        LeaderBoardView()
-                })
 
-                
                 Spacer()
                 Button("", systemImage: "gear") {
                     // Connect to Setting Page
-                    showSettingView.toggle()
+                    presentedSheet = .showSettingView
                 }
                 .padding()
-                .sheet(
-                    isPresented: $showSettingView, content: {
-                        SettingView()
-                })
             }
         }
-        
+        .sheet(item: $presentedSheet, content: { sheet in
+            switch sheet {
+            case .showAboutView:
+                AboutView()
+            case .showLedaerView:
+                LeaderBoardView()
+            case .showSettingView:
+                SettingView()
+            }
+        })
     }
 
 }
