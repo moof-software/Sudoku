@@ -33,12 +33,16 @@ import SwiftUI
 ///             - Label: gear system image
 ///             - Action: Connect to SettingView
 struct GameHomeView: View {
-
+    @State private var showAboutView: Bool = false
+    @State private var showLeaderView: Bool = false
+    @State private var showSettingView: Bool = false
+    
     var body: some View {
         VStack {
             HStack {
                 Button("", systemImage: "info.circle") {
                     // Connect to About Page
+                    showAboutView.toggle()
                 }
                 .padding()
                 Spacer()
@@ -47,6 +51,10 @@ struct GameHomeView: View {
                 }
                 .padding()
             }
+            .navigationDestination(isPresented: $showAboutView) {
+                AboutView()
+            }
+            
             Spacer()
             Button("Game") {
                 // Connect to Level Page
@@ -61,15 +69,31 @@ struct GameHomeView: View {
             HStack {
                 Button("", systemImage: "chart.bar.xaxis") {
                     // Connect to Leaderboard Page
+                    
+                    showLeaderView.toggle()
+                    
+                    print(showLeaderView ? "True" : "False")
                 }
                 .padding()
+                .sheet(
+                    isPresented: $showLeaderView, content: {
+                        LeaderBoardView()
+                })
+
+                
                 Spacer()
                 Button("", systemImage: "gear") {
                     // Connect to Setting Page
+                    showSettingView.toggle()
                 }
                 .padding()
+                .sheet(
+                    isPresented: $showSettingView, content: {
+                        SettingView()
+                })
             }
         }
+        
     }
 
 }

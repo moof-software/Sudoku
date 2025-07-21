@@ -25,13 +25,6 @@ import SwiftUI
 struct AboutView: View {
     var body: some View {
         VStack {
-            HStack {
-                Button("< Back") {
-                    // Connect to GameHomeView
-                }
-                .padding()
-                Spacer()
-            }
             Spacer()
             Text("Version Info: ")
                 .padding()

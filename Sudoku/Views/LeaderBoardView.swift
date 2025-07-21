@@ -21,6 +21,7 @@ import SwiftUI
 ///     - `displayedText` Text
 ///         - Default must be "Leaderboard Screen"
 struct LeaderBoardView: View {
+    @Environment(\.dismiss) var dismiss
 
     @State private var displayedText = "Leaderboard Screen"
 
@@ -29,6 +30,7 @@ struct LeaderBoardView: View {
             HStack {
                 Button("< Back") {
                     // Connect to GameHomeView
+                    dismiss()
                 }
                 .padding()
                 Spacer()

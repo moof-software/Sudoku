@@ -31,6 +31,7 @@ import SwiftUI
 ///             - Picker Style: 3 segments
 ///             - Action: TBD
 struct SettingView: View {
+    @Environment(\.dismiss) var dismiss
 
     @State private var soundOn: Bool = true
     @State private var selectedEffect = 1
@@ -41,6 +42,7 @@ struct SettingView: View {
             HStack {
                 Button("< Back") {
                     // Connect to GameHomeView
+                    dismiss()
                 }
                 .padding()
                 Spacer()
