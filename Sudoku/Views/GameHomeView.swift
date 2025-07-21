@@ -36,7 +36,7 @@ struct GameHomeView: View {
     @State private var showAboutView: Bool = false
     @State private var showLeaderView: Bool = false
     @State private var showSettingView: Bool = false
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -54,7 +54,7 @@ struct GameHomeView: View {
             .navigationDestination(isPresented: $showAboutView) {
                 AboutView()
             }
-            
+
             Spacer()
             Button("Game") {
                 // Connect to Level Page
@@ -69,9 +69,9 @@ struct GameHomeView: View {
             HStack {
                 Button("", systemImage: "chart.bar.xaxis") {
                     // Connect to Leaderboard Page
-                    
+
                     showLeaderView.toggle()
-                    
+
                     print(showLeaderView ? "True" : "False")
                 }
                 .padding()
@@ -80,7 +80,6 @@ struct GameHomeView: View {
                         LeaderBoardView()
                 })
 
-                
                 Spacer()
                 Button("", systemImage: "gear") {
                     // Connect to Setting Page
@@ -93,7 +92,7 @@ struct GameHomeView: View {
                 })
             }
         }
-        
+
     }
 
 }
