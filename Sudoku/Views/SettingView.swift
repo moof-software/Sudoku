@@ -39,22 +39,14 @@ struct SettingView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Button("< Back") {
-                    // Connect to GameHomeView
-                    dismiss()
-                }
-                .padding()
-                Spacer()
-            }
-            Text("Settings")
-                .font(.headline)
             Spacer()
+            // Sound Section
             Section {
                 Toggle("Sound", isOn: $soundOn)
                     .padding()
                     .toggleStyle(SwitchToggleStyle(tint: .blue))
             }
+            // Effect Section
             Section {
                 Picker("Effect", selection: $selectedEffect) {
                     Text("1").tag(1)
@@ -70,6 +62,7 @@ struct SettingView: View {
                     Spacer()
                 }
             }
+            // Tile Pattern Section
             Section {
                 Picker("Tile Pattern", selection: $selectedPattern) {
                     Text("1").tag(1)

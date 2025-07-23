@@ -26,13 +26,17 @@ struct AboutView: View {
     var body: some View {
         VStack {
             Spacer()
+            // Version Info
             Text("Version Info: ")
                 .padding()
+            // Developers Info
             Text("Developers Info: ")
                 .padding()
+            // License Info
             Text("GNU License Info: ")
                 .padding()
             Spacer()
+            // Easter Egg
             Button("Easter Egg Placeholder", systemImage: "sparkles") {
                 // will add Easter Egg Content later
             }

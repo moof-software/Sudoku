@@ -17,11 +17,8 @@ struct SudokuApp: App {
         WindowGroup {
             /// ZStack으로 ``GameHomeView``와 ``StartUpView``를 화면에 표시한다.
             ZStack {
-                NavigationStack {
-
-                    GameHomeView()
-                        .toolbar(.hidden)
-                }
+                GameHomeView()
+                    .toolbar(.hidden)
 
                 ZStack {
                     if showStartUpView {

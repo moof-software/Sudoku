@@ -20,20 +20,15 @@ import SwiftUI
 ///             - Action: Change `displayedText` to "Cleared"
 ///     - `displayedText` Text
 ///         - Default must be "Leaderboard Screen"
-struct LeaderBoardView: View {
-    @Environment(\.dismiss) var dismiss
 
+struct LeaderBoardView: View {
     @State private var displayedText = "Leaderboard Screen"
 
     var body: some View {
         VStack {
             HStack {
-                Button("< Back") {
-                    // Connect to GameHomeView
-                    dismiss()
-                }
-                .padding()
                 Spacer()
+                // Clear Button
                 Button("Clear") {
                     // Change text from "Leaderboard Screen" to "Cleared"
                     displayedText = "Cleared"
@@ -41,6 +36,7 @@ struct LeaderBoardView: View {
                 .padding()
             }
             Spacer()
+            // Leaderboard Screen
             Text(displayedText)
             Spacer()
         }
