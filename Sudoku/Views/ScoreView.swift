@@ -17,16 +17,21 @@ import SwiftUI
 ///         - Label: "Home"
 ///         - Action: Connect to GameHomeView
 struct ScoreView: View {
+    @Binding var path: [Screen]
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
             Text("Final Score")
                 .font(.title)
                 .bold()
             Spacer()
+            Text("Time:")
             Text("Scores:")
             Spacer()
             Button("Home") {
                 // Connect to GameHomeView
+                dismiss()
+                path.removeLast()
             }
             .buttonStyle(.borderedProminent)
         }
@@ -34,5 +39,6 @@ struct ScoreView: View {
 }
 
 #Preview {
-    ScoreView()
+    @Previewable @State var path = [Screen]()
+    ScoreView(path: $path)
 }

@@ -22,6 +22,8 @@ import SwiftUI
 ///         - Action: Connect to GameHomeView
 struct SolutionView: View {
 
+    @Binding var path: [Screen]
+
     @State private var solutionBoardText = "Board"
 
     var body: some View {
@@ -38,6 +40,7 @@ struct SolutionView: View {
             Spacer()
             Button("Home") {
                 // Connect to GameHomeView
+                path.removeAll()
             }
             .buttonStyle(.borderedProminent)
         }
@@ -45,5 +48,6 @@ struct SolutionView: View {
 }
 
 #Preview {
-    SolutionView()
+    @Previewable @State var path = [Screen]()
+    SolutionView(path: $path)
 }

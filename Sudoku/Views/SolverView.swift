@@ -22,18 +22,13 @@ import SwiftUI
 ///         - Label: "Camera"
 ///         - Action: TBD
 struct SolverView: View {
+    @Binding var path: [Screen]
     var body: some View {
         VStack {
-            HStack {
-                Button("< Back") {
-                    // Connect to GameHomeView
-                }
-                .padding()
-                Spacer()
-            }
             Spacer()
             Button("Manual") {
                 // Connect to Solution Screen
+                path.append(.solutionView)
             }
             Button("Camera") {
                 // TBD
@@ -44,5 +39,6 @@ struct SolverView: View {
 }
 
 #Preview {
-    SolverView()
+    @Previewable @State var path = [Screen]()
+    SolverView(path: $path)
 }

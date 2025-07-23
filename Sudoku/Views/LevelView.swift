@@ -29,15 +29,9 @@ import SwiftUI
 ///         - Label: "Resume"
 ///         - Action: Change GameBoardView `scoreText` to "Resumed Game", connect to GameBoardView
 struct LevelView: View {
+    @Binding var path: [Screen]
     var body: some View {
         VStack {
-            HStack {
-                Button("< Back") {
-                    // Connect to GameHomeView
-                }
-                .padding()
-                Spacer()
-            }
             Text("Levels")
                 .font(.largeTitle)
                 .bold()
@@ -45,27 +39,32 @@ struct LevelView: View {
             Button("Easy") {
                 // Change "score" text in GameBoard View to easy
                 // Connect to GameBoardView
+                path.append(.boardView)
             }
             .buttonStyle(.bordered)
             Button("Medium") {
                 // Change "score" text in GameBoard View to medium
                 // Connect to GameBoardView
+                path.append(.boardView)
             }
             .buttonStyle(.bordered)
             Button("Hard") {
                 // Change "score" text in GameBoard View to hard
                 // Connect to GameBoardView
+                path.append(.boardView)
             }
             .buttonStyle(.bordered)
             Spacer()
             Button("Resume") {
                 // Change "score" text in GameBoard View to resumed game
                 // Connect to GameBoardView
+                path.append(.boardView)
             }
         }
     }
 }
 
 #Preview {
-    LevelView()
+    @Previewable @State var path = [Screen]()
+    LevelView(path: $path)
 }

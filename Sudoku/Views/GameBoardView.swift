@@ -46,7 +46,10 @@ import SwiftUI
 ///         - Placeholder
 struct GameBoardView: View {
 
+    @Binding var path: [Screen]
+
     @State var scoreText = "Score"
+    @State private var showScoreView: Bool = false
     @State private var boardText = "Board"
     @State private var memoToggled = false
 
@@ -98,10 +101,20 @@ struct GameBoardView: View {
                 .frame(maxWidth: .infinity, maxHeight: 70)
                 .background(Color.gray.opacity(0.2))
             Spacer()
-            Button("End") {
-                // Connect to ScoreView
+            HStack {
+                Button("End") {
+                    // Connect to LevelView
+                    path.removeLast()
+                }
+                .buttonStyle(.bordered)
+                Button("Score") {
+                    showScoreView.toggle()
+                }
+                .buttonStyle(.bordered)
+                .sheet(isPresented: $showScoreView, content: {
+                    ScoreView(path: $path)
+                })
             }
-            .buttonStyle(.bordered)
             Spacer()
             Text("Ads")
         }
@@ -119,5 +132,6 @@ struct GameBoardView: View {
 }
 
 #Preview {
-    GameBoardView()
+    @Previewable @State var path = [Screen]()
+    GameBoardView(path: $path)
 }

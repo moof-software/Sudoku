@@ -22,24 +22,11 @@ import SwiftUI
 ///         - Default must be "Help Screen"
 struct HelpView: View {
 
-    @State private var displayedText = "Help Screen"
-
     var body: some View {
         VStack {
-            HStack {
-                Button("< Back") {
-                    // Connect to GameHomeView
-                }
-                .padding()
-                Spacer()
-                Button("Next >") {
-                    // Change text on screen to "Next Page"
-                    displayedText = "Next Page"
-                }
-                .padding()
-            }
             Spacer()
-            Text(displayedText)
+            // Help Screen
+            Text("Help Screen")
             Spacer()
         }
     }
