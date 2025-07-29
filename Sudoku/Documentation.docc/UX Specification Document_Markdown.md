@@ -1,10 +1,10 @@
 # [Project 1] UX(Conceptual Design) Specification
 
-### Date Created: 07/11/25
+Date Created: 07/11/25
 
-### Created by: Hungu Lim, Jisu Lim, Hyunsu Lim
+Created by: Hungu Lim, Jisu Lim, Hyunsu Lim
 
-### Version: 1.0
+Version: 1.0
 
  
 
