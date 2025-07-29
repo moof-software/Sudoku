@@ -46,6 +46,18 @@ Implements:
 
 *(Fig. 1) GameHome Conceptual Design*
 
+![GameHomeView Image Specification 1.1](1.1_GameHomeView)
+
+*(Fig. 1.1) GameHome Storyboard UI Design*
+
+### 1.1 Storyboard Design Description
+- About Button: info.circle image, takes user to About Page, point size 30
+- Help Button: question.circle image, takes user to Help Page, point size 30
+- Game Button: gamecontroller.fill image, takes user to Level Page, icon placement top, corner radius 25
+- Solver Button: wand.and.sparkles image, takes user to Solver Page, icon placement top, corner radius 25
+- Leaderboard Button: chart.bar.xaxis image, takes user to Leaderboard Page, point size 30
+- Setting Button: gearshape.fill image, takes user to Settings Page, point size 30
+
 ## [UUID-003] AboutView detail
 
 Connects to [UXID-002](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.dpoanieffg3k) 
