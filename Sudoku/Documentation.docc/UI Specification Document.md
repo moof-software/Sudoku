@@ -50,13 +50,36 @@ Implements:
 
 *(Fig. 1.1) GameHome Storyboard UI Design*
 
-### 1.1 Storyboard Design Description
-- About Button: info.circle image, takes user to About Page, point size 30
-- Help Button: question.circle image, takes user to Help Page, point size 30
-- Game Button: gamecontroller.fill image, takes user to Level Page, icon placement top, corner radius 25
-- Solver Button: wand.and.sparkles image, takes user to Solver Page, icon placement top, corner radius 25
-- Leaderboard Button: chart.bar.xaxis image, takes user to Leaderboard Page, point size 30
-- Setting Button: gearshape.fill image, takes user to Settings Page, point size 30
+### [Fig 1.1] Storyboard Design Description
+
+Button Types: IconButton, NameButton
+
+**IconButton:** 
+- Label: Image
+    - Modifiers:
+        - resizeable
+        - frame (width 30, height 30)
+- button padding default (16)
+
+**NameButton:**
+- Label:
+    - VStack
+        - Image 
+        - Text
+    - Modifiers:
+        - frame (width 200, height 80)
+- background
+    - RoundedRectangle with cornerRadius 25
+        - stroke in accentColor, linewidth 4
+
+
+
+- About Button: IconButton with label as SystemImage "info.circle," location top left not ignoring safe area.
+- Help Button: IconButton with label as SystemImage "question.circle," location top right not ignoring safe area.
+- Game Button: NameButton with label as SystemImage "gamecontroller.fill" and text as "Game", location center above Solver Button
+- Solver Button: NameButton with label as SystemImage "wand.and.sparkles" and text as "Solver", location center below Game Button
+- Leaderboard Button: IconButton with label as SystemImage "chart.bar.xaxis," location bottom left not ignoring safe area.
+- Setting Button: IconButton with label as SystemImage "gearshape.fill," location bottom right not ignoring safe area.
 
 ## [UUID-003] AboutView detail
 
