@@ -48,12 +48,18 @@ struct GameHomeView: View {
     @State private var showLeaderView: Bool = false
     @State private var showSettingView: Bool = false
 
-    /// About Button: IconButton with label as SystemImage “info.circle,” location top left not ignoring safe area.
-    /// Help Button: IconButton with label as SystemImage “question.circle,” location top right not ignoring safe area.
-    /// Game Button: NameButton with label as SystemImage “gamecontroller.fill” and text as “Game”, location center above Solver Button
-    /// Solver Button: NameButton with label as SystemImage “wand.and.sparkles” and text as “Solver”, location center below Game Button
-    /// Leaderboard Button: IconButton with label as SystemImage “chart.bar.xaxis,” location bottom left not ignoring safe area.
-    /// Setting Button: IconButton with label as SystemImage “gearshape.fill,” location bottom right not ignoring safe area.
+    /// About Button: IconButton with label as SystemImage “info.circle,”
+    ///     location top left not ignoring safe area.
+    /// Help Button: IconButton with label as SystemImage “question.circle,”
+    ///     location top right not ignoring safe area.
+    /// Game Button: NameButton with label as SystemImage “gamecontroller.fill” and text as “Game,”
+    ///     location center above Solver Button
+    /// Solver Button: NameButton with label as SystemImage “wand.and.sparkles” and text as “Solver”,
+    ///     location center below Game Button
+    /// Leaderboard Button: IconButton with label as SystemImage “chart.bar.xaxis,”
+    ///     location bottom left not ignoring safe area.
+    /// Setting Button: IconButton with label as SystemImage “gearshape.fill,”
+    ///     location bottom right not ignoring safe area.
     var body: some View {
         NavigationStack(path: $path) {
             VStack {
