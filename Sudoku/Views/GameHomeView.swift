@@ -47,15 +47,27 @@ struct GameHomeView: View {
     @State private var showAboutView: Bool = false
     @State private var showLeaderView: Bool = false
     @State private var showSettingView: Bool = false
-
+    
+    
+    
+    
+    
+    /// About Button: IconButton with label as SystemImage “info.circle,” location top left not ignoring safe area.
+    /// Help Button: IconButton with label as SystemImage “question.circle,” location top right not ignoring safe area.
+    /// Game Button: NameButton with label as SystemImage “gamecontroller.fill” and text as “Game”, location center above Solver Button
+    /// Solver Button: NameButton with label as SystemImage “wand.and.sparkles” and text as “Solver”, location center below Game Button
+    /// Leaderboard Button: IconButton with label as SystemImage “chart.bar.xaxis,” location bottom left not ignoring safe area.
+    /// Setting Button: IconButton with label as SystemImage “gearshape.fill,” location bottom right not ignoring safe area.
     var body: some View {
         NavigationStack(path: $path) {
             VStack {
                 HStack {
                     // About Button -> AboutView()
-                    Button("", systemImage: "info.circle") {
+                    Button {
                         // Connect to About Page
                         showAboutView.toggle()
+                    } label: {
+                        IconButtonView(iconName: "info.circle")
                     }
                     .padding()
                     .sheet(
@@ -69,7 +81,8 @@ struct GameHomeView: View {
                     NavigationLink {
                         HelpView()
                     } label: {
-                        Image(systemName: "questionmark.circle")
+//                        Image(systemName: "questionmark.circle")
+                        IconButtonView(iconName: "questionmark.circle")
                     }
                     .padding()
                 }
@@ -77,18 +90,20 @@ struct GameHomeView: View {
                 Spacer()
 
                 // Game Button -> LevelView()
-                Button("Game") {
+                Button {
                     // Connect to Game page
                     path.append(.levelView)
+                } label: {
+                    IconNameButtonView(icon: "gamecontroller.fill", title: "Game")
                 }
-                .buttonStyle(.bordered)
 
                 // Solver Button -> SolverView()
-                Button("Solver") {
+                Button {
                     // Connect to Solver Page
                     path.append(.solverView)
+                } label: {
+                    IconNameButtonView(icon: "wand.and.sparkles", title: "Solver")
                 }
-                .buttonStyle(.bordered)
 
                 // Ads
                 Text("Ads")
@@ -97,9 +112,11 @@ struct GameHomeView: View {
 
                 HStack {
                     // Leaderboard Button -> LeaderBoardView()
-                    Button("", systemImage: "chart.bar.xaxis") {
+                    Button {
                         // Connect to Leaderboard Page
                         showLeaderView.toggle()
+                    } label: {
+                        IconButtonView(iconName: "chart.bar.xaxis")
                     }
                     .padding()
                     .sheet(
@@ -110,9 +127,11 @@ struct GameHomeView: View {
                     Spacer()
 
                     // Setting Button -> SettingView()
-                    Button("", systemImage: "gear") {
+                    Button {
                         // Connect to Setting Page
                         showSettingView.toggle()
+                    } label: {
+                        IconButtonView(iconName: "gear")
                     }
                     .padding()
                     .sheet(

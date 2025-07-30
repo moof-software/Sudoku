@@ -7,12 +7,24 @@
 
 import SwiftUI
 
+/// Button Types: IconButton
+///
+/// IconButton:
+/// Label: Image
+///     Modifiers:
+///         resizeable
+///         frame (width 30, height 30)
+/// button padding default (16)
 struct IconButtonView: View {
+    let iconName: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(systemName: iconName)
+            .resizable()
+            .frame(width: 30, height: 30, alignment: .center)
     }
 }
 
 #Preview {
-    IconButtonView()
+    IconButtonView(iconName: "info.circle")
 }
