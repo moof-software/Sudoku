@@ -66,6 +66,7 @@ Button Types: IconButton, NameButton
     - VStack
         - Image 
         - Text
+            - Semibold
     - Modifiers:
         - frame (width 200, height 80)
 - background
