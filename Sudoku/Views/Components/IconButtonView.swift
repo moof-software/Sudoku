@@ -17,7 +17,7 @@ import SwiftUI
 /// button padding default (16)
 struct IconButtonView: View {
     let iconName: String
-    
+
     var body: some View {
         Image(systemName: iconName)
             .resizable()
