@@ -102,6 +102,67 @@ Implements:
 
 *(Fig. 2) About Conceptual Design*
 
+![AboutView Image Specification 2.1](2.1_AboutView)
+
+*(Fig. 2.1) About Storyboard UI Design*
+
+### [Fig 2.1] Storyboard Design Description
+
+- VStack (alignment: center)
+    - titleLabel (width 232, height 113)
+        - Type: Text
+        - Text: "Ultimate Sudoku Pro"
+        - Font: Chalkduster
+        - Size: 28.0
+        - Multiline alignment: center
+    - versionLabel (width 136, height 21)
+        - Type: Text
+        - Text: "Version: 1.0"
+        - Font: headline
+        - Padding: ???
+    - HStack
+        - developersLabel (width 288, height 21)
+            - Type: Text
+            - Text: "Developers :"
+            - Font: System bold
+            - Size: 17.0
+        - Spacer
+    - staffsLabel (wdith 262, height 139)
+        - Type: Text
+        - Text: "Team leader: Hungu Lim \n
+                Technical writer: Jisu Lim \n
+                Quality manager: Hyunsu Lim..."
+        - Font: semibold
+        - Size: 17.0
+        - Multiline alignment: leading
+    - HStack
+        - licenseLabel (width 288, height 21)
+            - Type: Text
+            - Text: "License Info :"
+            - Font: System bold
+            - Size: 17.0
+        - Spacer
+    - Scrollview (width 240, height 484)
+        - License info text
+
+GNU License Script:
+
+Copyright (C) 2025 moof software
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
 ## [UUID-004] HelpView detail
 
 Connects to [UXID-004](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.wgh1tju4ajc5)
@@ -119,6 +180,17 @@ Implements:
 ![HelpView Image Specified](hU3_Image_8.jpeg)
 
 *(Fig. 3) Help Conceptual Design*
+
+![HelpView Image Specification 3.1](3.1_HelpView)
+
+*(Fig. 3.1) Help Storyboard UI Design*
+
+### [Fig 2.1] Storyboard Design Description
+
+- Scrollview (horizontal, width 343 height 635)
+    - HStack
+        - Images
+- Modifier: scrollTargetBehavior(viewAligned)
 
 ## [UUID-005] LeaderBoardView detail
 
