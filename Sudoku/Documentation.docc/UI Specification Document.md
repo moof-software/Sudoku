@@ -120,6 +120,10 @@ Implements:
         - Text: "Version: 1.0"
         - Font: headline
         - Padding: ???
+        - Content: Pull from 
+    ```Swift
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {}
+    ```
     - HStack
         - developersLabel (width 288, height 21)
             - Type: Text
