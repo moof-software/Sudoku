@@ -23,23 +23,108 @@ import SwiftUI
 ///         - Action: TBD
 
 struct AboutView: View {
+    private var version: String {
+        if let ver = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            return ver
+        } else {
+            return "Unknown"
+        }
+    }
+
+    private var buildNumber: String {
+        if let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
+            return build
+        } else {
+            return "0"
+        }
+    }
+    
     var body: some View {
+        
+        
         VStack {
-            Spacer()
-            // Version Info
-            Text("Version Info: ")
-                .padding()
-            // Developers Info
-            Text("Developers Info: ")
-                .padding()
-            // License Info
-            Text("GNU License Info: ")
-                .padding()
-            Spacer()
-            // Easter Egg
-            Button("Easter Egg Placeholder", systemImage: "sparkles") {
-                // will add Easter Egg Content later
+            ///- titleLabel (width 232, height 113)
+            ///    - Type: Text
+            ///    - Text: "Ultimate Sudoku Pro"
+            ///    - Font: Chalkduster
+            ///    - Size: 28.0
+            ///    - Multiline alignment: center
+            Text(String(localized: "Game Title"))
+                .font(.custom("Chalkduster", size: 28.0))
+                .multilineTextAlignment(.center)
+                .frame(width: 230, height: 115)
+
+            ///- versionLabel (width 136, height 21)
+            ///    - Type: Text
+            ///    - Text: "Version: 1.0"
+            ///    - Font: headline
+            ///    - Padding: ???
+            ///    - Content: Pull from
+            ///```Swift
+            /// Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {}
+            ///```
+            Text(String(localized: "Version") + ": " + version + "." + buildNumber)
+                .font(.headline)
+                .frame(width: 150, height: 20)
+
+            ///- developersLabel (width 288, height 21)
+            ///     - Type: Text
+            ///     - Text: "Developers :"
+            ///     - Font: System bold
+            ///     - Size: 17.0
+            HStack{
+                Text(String(localized: "Developers :"))
+                    .bold()
+                    .frame(height: 20)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
             }
+            
+            ///- staffsLabel (wdith 262, height 80)
+            ///    - Type: Text
+            ///    - Text: "Team leader: Hungu Lim \n
+            ///            Technical writer: Jisu Lim \n
+            ///            Quality manager: Hyunsu Lim..."
+            ///    - Font: semibold
+            ///    - Size: 17.0
+            ///    - Multiline alignment: leading
+            Text(String(localized: "Staffs"))
+                .fontWeight(.semibold)
+                .frame(width: 260, height: 90)
+                .multilineTextAlignment(.leading)
+
+            ///- licenseLabel (width 288, height 21)
+            ///    - Type: Text
+            ///    - Text: "License Info :"
+            ///    - Font: System bold
+            ///    - Size: 17.0
+            ///- Spacer
+            HStack{
+                Text(String(localized: "License Info :"))
+                    .bold()
+                    .frame(height: 20)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+            }
+            
+            ///- Scrollview (width 240, height 484)
+            ///     - License info text
+            ScrollView {
+                Text(String(localized: "License"))
+                    .font(.caption)
+                    .multilineTextAlignment(.leading)
+                    .padding()
+            }
+            .frame(width: 330, height: 280)
+            
+//            - VStack (alignment: center)
+
+//                - Scrollview (width 240, height 484)
+//                    - License info text
+            
+            
         }
     }
 }

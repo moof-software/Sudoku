@@ -1,7 +1,163 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
 
+    },
+    "1" : {
+
+    },
+    "2" : {
+
+    },
+    "3" : {
+
+    },
+    "Ads" : {
+
+    },
+    "Camera" : {
+
+    },
+    "Clear" : {
+
+    },
+    "Developers :" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개발자 :"
+          }
+        }
+      }
+    },
+    "Easy" : {
+
+    },
+    "Effect" : {
+
+    },
+    "End" : {
+
+    },
+    "Errors" : {
+
+    },
+    "Final Score" : {
+
+    },
+    "Game Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultimate Sudoku Pro"
+          }
+        }
+      }
+    },
+    "Hard" : {
+
+    },
+    "Help Screen" : {
+
+    },
+    "Hint" : {
+
+    },
+    "Home" : {
+
+    },
+    "Levels" : {
+
+    },
+    "License" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright (C) 2025 moof software\n\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <https://www.gnu.org/licenses/>."
+          }
+        }
+      }
+    },
+    "License Info :" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라이센스 정보 :"
+          }
+        }
+      }
+    },
+    "Manual" : {
+
+    },
+    "Medium" : {
+
+    },
+    "Memo" : {
+
+    },
+    "Number Pad" : {
+
+    },
+    "Resume" : {
+
+    },
+    "Score" : {
+
+    },
+    "Scores:" : {
+
+    },
+    "Solve it!" : {
+
+    },
+    "Sound" : {
+
+    },
+    "Staffs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "moof software\n       Team leader : Hungu Lim\nTechnical writer  : Jisu Lim\nQuality manager : Hyunsu Lim"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "moof software\n      팀리더 : 임헌구\n   기술문서 : 임지수\n품질관리자 : 임현수"
+          }
+        }
+      }
+    },
+    "Sudoku" : {
+
+    },
+    "Tile Pattern" : {
+
+    },
+    "Time" : {
+
+    },
+    "Time:" : {
+
+    },
+    "Version" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }
