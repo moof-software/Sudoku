@@ -120,9 +120,6 @@ struct AboutView: View {
                     .padding()
             }
             .frame(width: 330, height: 280)
-
-
-
         }
     }
 }
