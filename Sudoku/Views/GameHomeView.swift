@@ -96,7 +96,7 @@ struct GameHomeView: View {
                     // Connect to Game page
                     path.append(.levelView)
                 } label: {
-                    IconNameButtonView(icon: "gamecontroller.fill", title: "Game")
+                    IconNameButtonView(icon: "gamecontroller.fill", title: String(localized: "Game"))
                 }
 
                 // Solver Button -> SolverView()
@@ -104,7 +104,7 @@ struct GameHomeView: View {
                     // Connect to Solver Page
                     path.append(.solverView)
                 } label: {
-                    IconNameButtonView(icon: "wand.and.sparkles", title: "Solver")
+                    IconNameButtonView(icon: "wand.and.sparkles", title: String(localized: "Solver"))
                 }
 
                 // Ads
