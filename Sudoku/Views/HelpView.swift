@@ -12,9 +12,12 @@ import SwiftUI
 ///     - ScrollView(horizontal)
 ///         - LazyHStack(Spacing:0)
 ///             - Images put in using ForEach
-///                 - Modifiers: resizeable, scaled to fit, container relative frame adjusted for horizontal, count and span 1.
+///                 - Modifiers: resizeable, scaled to
+///                 fit, container relative frame
+///                 adjusted for horizontal, count and span 1.
 ///         - Modifier: Scroll to Target Layout
-///     - Modifiers: Scroll to Target Behavior(paging), Scroll Position(with ID), Scroll Indicators (set to never)
+///     - Modifiers: Scroll to Target Behavior(paging),
+///     Scroll Position(with ID), Scroll Indicators (set to never)
 ///     - Text that shows page/all page number
 
 struct HelpView: View {
