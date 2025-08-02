@@ -42,9 +42,9 @@ struct AboutView: View {
     var body: some View {
 
         VStack {
-            /// - titleLabel (width 232, height 113)
+            /// - titleLabel (width 230, height 115)
             ///    - Type: Text
-            ///    - Text: "Ultimate Sudoku Pro"
+            ///    - Text: "Ultimate Sudoku Pro" ( localized from Localizable )
             ///    - Font: Chalkduster
             ///    - Size: 28.0
             ///    - Multiline alignment: center
@@ -53,12 +53,12 @@ struct AboutView: View {
                 .multilineTextAlignment(.center)
                 .frame(width: 230, height: 115)
 
-            /// - versionLabel (width 136, height 21)
+            /// - versionLabel (width 150, height 20)
             ///    - Type: Text
             ///    - Text: "Version: 1.0"
             ///    - Font: headline
             ///    - Padding: ???
-            ///    - Content: Pull from
+            ///    - Content: Pull from Bundle with code below and with helper code "buildNumber"
             /// ```Swift
             /// Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {}
             /// ```
@@ -66,11 +66,12 @@ struct AboutView: View {
                 .font(.headline)
                 .frame(width: 150, height: 20)
 
-            /// - developersLabel (width 288, height 21)
+            /// - developersLabel (height 20)
             ///     - Type: Text
             ///     - Text: "Developers :"
-            ///     - Font: System bold
-            ///     - Size: 17.0
+            ///     - Font: bold
+            ///     - Padding: horizontal, 40
+            /// - Spacer
             HStack {
                 Text(String(localized: "Developers :"))
                     .bold()
@@ -80,24 +81,23 @@ struct AboutView: View {
                 Spacer()
             }
 
-            /// - staffsLabel (wdith 262, height 80)
+            /// - staffsLabel (width 260, height 90)
             ///    - Type: Text
             ///    - Text: "Team leader: Hungu Lim \n
-            ///            Technical writer: Jisu Lim \n
+            ///            Technical writer: Jisu Lim
             ///            Quality manager: Hyunsu Lim..."
             ///    - Font: semibold
-            ///    - Size: 17.0
             ///    - Multiline alignment: leading
             Text(String(localized: "Staffs"))
                 .fontWeight(.semibold)
                 .frame(width: 260, height: 90)
                 .multilineTextAlignment(.leading)
 
-            /// - licenseLabel (width 288, height 21)
+            /// - licenseLabel (height 20)
             ///    - Type: Text
             ///    - Text: "License Info :"
-            ///    - Font: System bold
-            ///    - Size: 17.0
+            ///    - Font: bold
+            ///    - Padding: horizontal, 40
             /// - Spacer
             HStack {
                 Text(String(localized: "License Info :"))
@@ -108,8 +108,11 @@ struct AboutView: View {
                 Spacer()
             }
 
-            /// - Scrollview (width 240, height 484)
+            /// - Scrollview (width 330, height 280)
             ///     - License info text
+            ///         - Font: caption
+            ///         - Multiline Text Alignment: leading
+            ///         - Padding
             ScrollView {
                 Text(String(localized: "License"))
                     .font(.caption)
@@ -117,12 +120,6 @@ struct AboutView: View {
                     .padding()
             }
             .frame(width: 330, height: 280)
-
-//            - VStack (alignment: center)
-
-//                - Scrollview (width 240, height 484)
-//                    - License info text
-
         }
     }
 }

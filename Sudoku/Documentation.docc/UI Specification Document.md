@@ -109,45 +109,47 @@ Implements:
 ### [Fig 2.1] Storyboard Design Description
 
 - VStack (alignment: center)
-    - titleLabel (width 232, height 113)
+    - titleLabel (width 230, height 115)
         - Type: Text
-        - Text: "Ultimate Sudoku Pro"
+        - Text: "Ultimate Sudoku Pro" ( localized from Localizable )
         - Font: Chalkduster
         - Size: 28.0
         - Multiline alignment: center
-    - versionLabel (width 136, height 21)
+    - versionLabel (width 150, height 20)
         - Type: Text
         - Text: "Version: 1.0"
         - Font: headline
         - Padding: ???
-        - Content: Pull from 
+        - Content: Pull from Bundle with code below and with helper code "buildNumber"
     ```Swift
     Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {}
     ```
     - HStack
-        - developersLabel (width 288, height 21)
+        - developersLabel (height 20)
             - Type: Text
             - Text: "Developers :"
-            - Font: System bold
-            - Size: 17.0
+            - Font: bold
+            - Padding: horizontal, 40
         - Spacer
-    - staffsLabel (wdith 262, height 139)
+    - staffsLabel (wdith 260, height 90)
         - Type: Text
-        - Text: "Team leader: Hungu Lim \n
-                Technical writer: Jisu Lim \n
+        - Text: "Team leader: Hungu Lim
+                Technical writer: Jisu Lim
                 Quality manager: Hyunsu Lim..."
         - Font: semibold
-        - Size: 17.0
         - Multiline alignment: leading
     - HStack
-        - licenseLabel (width 288, height 21)
+        - licenseLabel (height 20)
             - Type: Text
             - Text: "License Info :"
-            - Font: System bold
-            - Size: 17.0
+            - Font: bold
+            - Padding: horizontal, 40
         - Spacer
-    - Scrollview (width 240, height 484)
+    - Scrollview (width 330, height 280)
         - License info text
+        - Font: caption
+        - Multiline Text Alignment: leading
+        - Padding
 
 GNU License Script:
 
@@ -191,10 +193,14 @@ Implements:
 
 ### [Fig 2.1] Storyboard Design Description
 
-- Scrollview (horizontal, width 343 height 635)
-    - HStack
-        - Images
-- Modifier: scrollTargetBehavior(viewAligned)
+- VStack
+    - ScrollView(horizontal)
+        - LazyHStack(Spacing:0)
+            - Images put in using ForEach
+                - Modifiers: resizeable, scaled to fit, container relative frame adjusted for horizontal, count and span 1.
+        - Modifier: Scroll to Target Layout
+    - Modifiers: Scroll to Target Behavior(paging), Scroll Position(with ID), Scroll Indicators (set to never)
+    - Text that shows page/all page number
 
 ## [UUID-005] LeaderBoardView detail
 
