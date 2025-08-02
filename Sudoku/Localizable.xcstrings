@@ -4,6 +4,16 @@
     "" : {
 
     },
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "1" : {
 
     },
@@ -47,6 +57,16 @@
     "Final Score" : {
 
     },
+    "Game" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임"
+          }
+        }
+      }
+    },
     "Game Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -55,13 +75,16 @@
             "state" : "translated",
             "value" : "Ultimate Sudoku Pro"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최강 스도쿠 프로"
+          }
         }
       }
     },
     "Hard" : {
-
-    },
-    "Help Screen" : {
 
     },
     "Hint" : {
@@ -76,6 +99,12 @@
     "License" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright (C) 2025 moof software\n\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <https://www.gnu.org/licenses/>."
+          }
+        },
+        "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copyright (C) 2025 moof software\n\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <https://www.gnu.org/licenses/>."
@@ -116,6 +145,16 @@
     },
     "Solve it!" : {
 
+    },
+    "Solver" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동풀이"
+          }
+        }
+      }
     },
     "Sound" : {
 
