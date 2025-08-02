@@ -8,10 +8,14 @@
 import SwiftUI
 
 /// View that shows a Sudoku tutorial for first-time users.
-/// - Scrollview (horizontal, width 343 height 635)
-///    - HStack
-///        - Images
-/// - Modifier: scrollTargetBehavior(viewAligned)
+/// - VStack
+///     - ScrollView(horizontal)
+///         - LazyHStack(Spacing:0)
+///             - Images put in using ForEach
+///                 - Modifiers: resizeable, scaled to fit, container relative frame adjusted for horizontal, count and span 1.
+///         - Modifier: Scroll to Target Layout
+///     - Modifiers: Scroll to Target Behavior(paging), Scroll Position(with ID), Scroll Indicators (set to never)
+///     - Text that shows page/all page number
 
 struct HelpView: View {
     @State private var scrolledID: Int? = 0
