@@ -31,7 +31,6 @@
 		553F5E962E25B5AD00E6805B /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553F5EA52E25B5AF00E6805B /* SudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		553F5EAF2E25B5AF00E6805B /* SudokuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		553F5EDA2E25D04700E6805B /* ExportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = ExportOptions.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -81,7 +80,6 @@
 		553F5E8D2E25B5AD00E6805B = {
 			isa = PBXGroup;
 			children = (
-				553F5ED92E25D03C00E6805B /* Support */,
 				553F5E982E25B5AD00E6805B /* Sudoku */,
 				553F5EA82E25B5AF00E6805B /* SudokuTests */,
 				553F5EB22E25B5AF00E6805B /* SudokuUITests */,
@@ -97,14 +95,6 @@
 				553F5EAF2E25B5AF00E6805B /* SudokuUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		553F5ED92E25D03C00E6805B /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				553F5EDA2E25D04700E6805B /* ExportOptions.plist */,
-			);
-			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

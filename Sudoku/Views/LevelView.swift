@@ -32,34 +32,43 @@ struct LevelView: View {
     @Binding var path: [Screen]
     var body: some View {
         VStack {
-            Text("Levels")
-                .font(.largeTitle)
+            Text(String(localized: "Levels"))
+                .font(.custom("Chalkduster", size: 28))
                 .bold()
-            Spacer()
-            Button("Easy") {
+            // Spacer()
+            Button {
                 // Change "score" text in GameBoard View to easy
                 // Connect to GameBoardView
                 path.append(.boardView)
+            } label: {
+                NameButtonView(title: String(localized: "Easy"), size: 32)
             }
-            .buttonStyle(.bordered)
-            Button("Medium") {
+            .padding()
+            
+            Button {
                 // Change "score" text in GameBoard View to medium
                 // Connect to GameBoardView
                 path.append(.boardView)
+            } label: {
+                NameButtonView(title: String(localized: "Medium"), size: 32)
             }
-            .buttonStyle(.bordered)
-            Button("Hard") {
+            .padding()
+            
+            Button {
                 // Change "score" text in GameBoard View to hard
                 // Connect to GameBoardView
                 path.append(.boardView)
+            } label: {
+                NameButtonView(title: String(localized: "Hard"), size: 32)
             }
-            .buttonStyle(.bordered)
-            Spacer()
-            Button("Resume") {
-                // Change "score" text in GameBoard View to resumed game
-                // Connect to GameBoardView
-                path.append(.boardView)
-            }
+            .padding()
+            
+            // Spacer()
+//            Button("Resume") {
+//                // Change "score" text in GameBoard View to resumed game
+//                // Connect to GameBoardView
+//                path.append(.boardView)
+//            }
         }
     }
 }
