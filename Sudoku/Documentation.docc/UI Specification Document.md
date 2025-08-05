@@ -52,7 +52,7 @@ Implements:
 
 ### [Fig 1.1] Storyboard Design Description
 
-Button Types: IconButton, NameButton
+Button Types: IconButton, NameButton, located in Components folder
 
 **IconButton:** 
 - Label: Image
@@ -74,7 +74,7 @@ Button Types: IconButton, NameButton
         - stroke in accentColor, linewidth 4
 
 
-
+**Screen Details**
 - About Button: IconButton with label as SystemImage "info.circle," location top left not ignoring safe area.
 - Help Button: IconButton with label as SystemImage "question.circle," location top right not ignoring safe area.
 - Game Button: NameButton with label as SystemImage "gamecontroller.fill" and text as "Game", location center above Solver Button
@@ -263,6 +263,38 @@ Implements:
 
 *(Fig. 6) Level Conceptual Design*
 
+![LevelView Image Specification 6.1](6.1_LevelView)
+
+*(Fig. 6.1) Levels Storyboard UI Design*
+
+### [Fig 6.1] Storyboard Design Description
+
+Button Type: NameButtonView, located in Components folder
+
+**NameButton:** 
+- Parameters: title (String), size (Int)
+- Label: title as Text
+    - Modifiers: custom font of "Chalkduster", size: CGFloat(size)
+
+**Screen Details**
+- VStack
+    - Title
+        - Type: Text
+        - Text: "Levels"
+        - Font: custom("Chalkduster", size: 28), bold
+    - Easy Button
+        - Action: open GameBoardView(append path to boardView)
+        - Label: NameButtonView with localized title "Easy", size 32
+        - Default padding
+    - Medium Button
+        - Action: open GameBoardView(append path to boardView)
+        - Label: NameButtonView with localized title "Medium", size 32
+        - Default padding
+    - Hard Button
+        - Action: open GameBoardView(append path to boardView)
+        - Label: NameButtonView with localized title "Hard", size 32
+        - Default padding
+
 ## [UUID-008] ScoreView detail
 
 Connects to [UXID-008](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.whn6zythk9x)
@@ -305,6 +337,77 @@ Implements:
 ![GameBoardView Image Specified](OS3_Image_18.jpeg)
 
 *(Fig. 8) Game Board Conceptual Design*
+
+![GameBoardView Image Specification 8.1](8.1_GameBoardView)
+
+*(Fig. 8.1) Game Board Storyboard UI Design*
+
+### [Fig 8.1] Storyboard Design Description
+
+scoreText: String, default set to "Score"
+memoToggled: Boolean, default set to false
+showScoreView: Boolean, default set to false
+
+- VStack
+    - HStack
+        - Text: "Errors"
+            - Font: Custom font "Chalkduster", size: 18
+        - Spacer
+        - Text: scoreText
+            - Font: Custom font "Chalkduster", size: 18
+        - Spacer
+        - Text: "Time"
+            - Font: Custom font "Chalkduster", size: 18
+    - Spacer
+    - Game Board
+        - ZStack(alignment: center)
+            - Rounded Rectangle (cornerRadius 4)
+                - Frame: width and height infinity
+                - Background: gray, opacity 0.2
+                - ForegroundStyle: gray, opacity 0.2
+                - aspectRatio: 1.0, contentMode: fit
+        - Board() with padding 1
+    - Default padding
+    - HStack
+        - Button: Rewind (label: arrow.counterclockwise)
+            - Action: changeBoardText("Rewinding...")
+            - Padding: 10
+        - Button: Undo (label: arrow.left)
+            - Action: changeBoardText("Undoing...")
+            - Padding: 10
+        - Button: Redo (label: arrow.right)
+            - Action: changeBoardText("Redoing...")
+            - Padding: 10
+        - Button: Hint (label: "Hint" with custom font "Chalkduster" pt 18)
+            - Action: changeBoardText("Providing Hint...")
+            - Padding: 10
+        - Spacer
+        - Button: Memo (label: pencil)
+            - Action: Toggle memoToggled
+            - Padding: 10
+    - Text
+        - Conditional operator relying on memoToggled
+        - if memoToggled = True, set to "Memo"
+        - if memoToggled = False, set to "Number Pad"
+        - Frame: maxWidth infinity, maxHeight 70
+        - Background: gray, opacity 0.2
+    - Spacer
+    - HStack
+        - Button: End (label: "End" with custom font "Chalkduster" pt 18)
+            - Action: remove last path (connect back to levelView)
+            - Default padding
+        - Button: Score (label: "Score" with custom font "Chalkduster" pt 18)
+            - Action: toggle showScoreView(showing ScoreView sheet)
+            - Default padding
+            - .sheet to present ScoreView (must connect path)
+    - Spacer
+    - Text: "Ads"
+
+- Function: changeBoardText
+    - Parameters: to (temporaray string), duration: 3(TimeInterval)
+    - Action: Set scoreText to temporary string, use DispatchQueue to asyncAfter duration (seconds) and change back to default("Score")
+
+
 
 ## [UUID-010] SolverView detail
 
