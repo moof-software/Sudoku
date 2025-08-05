@@ -44,7 +44,7 @@ struct LevelView: View {
                 NameButtonView(title: String(localized: "Easy"), size: 32)
             }
             .padding()
-            
+
             Button {
                 // Change "score" text in GameBoard View to medium
                 // Connect to GameBoardView
@@ -53,7 +53,7 @@ struct LevelView: View {
                 NameButtonView(title: String(localized: "Medium"), size: 32)
             }
             .padding()
-            
+
             Button {
                 // Change "score" text in GameBoard View to hard
                 // Connect to GameBoardView
@@ -62,7 +62,7 @@ struct LevelView: View {
                 NameButtonView(title: String(localized: "Hard"), size: 32)
             }
             .padding()
-            
+
             // Spacer()
 //            Button("Resume") {
 //                // Change "score" text in GameBoard View to resumed game
