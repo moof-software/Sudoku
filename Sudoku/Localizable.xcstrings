@@ -43,7 +43,14 @@
       }
     },
     "Easy" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "쉬움"
+          }
+        }
+      }
     },
     "Effect" : {
 
@@ -85,7 +92,14 @@
       }
     },
     "Hard" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어려움"
+          }
+        }
+      }
     },
     "Hint" : {
 
@@ -94,7 +108,14 @@
 
     },
     "Levels" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "난이도"
+          }
+        }
+      }
     },
     "License" : {
       "localizations" : {
@@ -126,15 +147,19 @@
 
     },
     "Medium" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중간"
+          }
+        }
+      }
     },
     "Memo" : {
 
     },
     "Number Pad" : {
-
-    },
-    "Resume" : {
 
     },
     "Score" : {
