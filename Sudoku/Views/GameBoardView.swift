@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 /// View that contains the main gaming screen.
 ///
 /// Contains:
@@ -66,9 +67,19 @@ struct GameBoardView: View {
                     .padding()
             }
             Spacer()
-            Text(boardText)
-                .frame(maxWidth: .infinity, maxHeight: 500)
-                .background(Color.gray.opacity(0.2))
+
+            ZStack(alignment: .center) {
+                RoundedRectangle(cornerRadius: 4)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.gray.opacity(0.2))
+                    .foregroundStyle(Color.gray.opacity(0.2))
+                    .aspectRatio(1.0, contentMode: .fit)
+
+                Board()
+                    .padding(1)
+            }
+            .padding()
+
             HStack {
                 Button("", systemImage: "arrow.counterclockwise") {
                     // change boardText to "Rewinding..." for 3 seconds
@@ -111,9 +122,12 @@ struct GameBoardView: View {
                     showScoreView.toggle()
                 }
                 .buttonStyle(.bordered)
-                .sheet(isPresented: $showScoreView, content: {
-                    ScoreView(path: $path)
-                })
+                .sheet(
+                    isPresented: $showScoreView,
+                    content: {
+                        ScoreView(path: $path)
+                    }
+                )
             }
             Spacer()
             Text("Ads")
