@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-
 // work in progress, will ask dad.
 struct NumberPad: View {
     var body: some View {
