@@ -7,37 +7,47 @@
 
 import SwiftUI
 
+struct Grid {
+    let row: Int
+    let col: Int
+}
+
+struct CellData {
+    let value: Int
+    let board: Grid
+    let block: Grid
+}
+
 struct Cell: View {
-    let info: MatrixInfo
+    let data: CellData
 
     var body: some View {
-        ZStack(alignment: .center) {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.gray.opacity(0.2))
-                .foregroundStyle(Color.gray.opacity(0.2))
-                .aspectRatio(1.0, contentMode: .fit)
+        Button {
+            print("My value: \(data.value)")
+        } label: {
+            Text(data.value.formatted(.number))
+                .font(.system(size: 1000, weight: .bold))
+                .lineLimit(1)
 
-            VStack {
-                ForEach(0..<3) { row in
-                    HStack {
-                        ForEach(0..<3) { col in
-                            let tileInfo = MatrixInfo(row: row, col: col)
-                            Tile(
-                                info: TileInfo(
-                                    value: 0,
-                                    cell: info,
-                                    colRow: tileInfo
-                                )
-                            )
-                        }
-                    }
-                }
-            }
         }
+        #if os(macOS)
+            .buttonStyle(.plain)
+        #endif
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .minimumScaleFactor(0.01)
+        .background(.gray)
+        .foregroundColor(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .aspectRatio(1, contentMode: .fit)
     }
 }
 
 #Preview {
-    Cell(info: MatrixInfo(row: 0, col: 0))
+    Cell(
+        data: CellData(
+            value: 0,
+            board: Grid(row: 0, col: 0),
+            block: Grid(row: 0, col: 0)
+        )
+    )
 }

@@ -50,7 +50,7 @@ struct GameBoardView: View {
     @Binding var path: [Screen]
 
     // Score text will change according to some buttons being pressed
-    @State var scoreText: String = "Score"
+    @State var scoreText: String = String(localized: "Score")
     // toggling ScoreView as a sheet (temp)
     @State private var showScoreView: Bool = false
     // toggling Number Pad to Memo
@@ -61,7 +61,7 @@ struct GameBoardView: View {
             HStack {
 //            - Text: "Errors"
 //                - Font: Custom font "Chalkduster", size: 18
-                Text("Errors")
+                Text(String(localized: "Errors"))
                     .font(.custom("Chalkduster", size: 18))
                     .padding()
                 Spacer()
@@ -73,7 +73,7 @@ struct GameBoardView: View {
                 Spacer()
 //            - Text: "Time"
 //                - Font: Custom font "Chalkduster", size: 18
-                Text("Time")
+                Text(String(localized: "Time"))
                     .font(.custom("Chalkduster", size: 18))
                     .padding()
             }
@@ -103,7 +103,7 @@ struct GameBoardView: View {
 //                - Padding: 10
                 Button {
                     // change boardText to "Rewinding..." for 3 seconds
-                    changeBoardText(to: "Rewinding...")
+                    changeBoardText(to: String(localized: "Restart"))
                 } label: {
                     Image(systemName: "arrow.counterclockwise")
                 }
@@ -113,7 +113,7 @@ struct GameBoardView: View {
 //                - Padding: 10
                 Button {
                     // change boardText to "Undoing..." for 3 seconds
-                    changeBoardText(to: "Undoing...")
+                    changeBoardText(to: String(localized: "Undoing..."))
                 } label: {
                     Image(systemName: "arrow.left")
                 }
@@ -123,7 +123,7 @@ struct GameBoardView: View {
 //                - Padding: 10
                 Button {
                     // change boardText to "Redoing..." for 3 seconds
-                    changeBoardText(to: "Redoing...")
+                    changeBoardText(to: String(localized: "Redoing..."))
                 } label: {
                     Image(systemName: "arrow.right")
                 }
@@ -134,9 +134,9 @@ struct GameBoardView: View {
 //                - Padding: 10
                 Button {
                     // change boardText to "Providing hint..." for 3 seconds
-                    changeBoardText(to: "Providing hint...")
+                    changeBoardText(to: String(localized: "Hint"))
                 } label: {
-                    Text("Hint")
+                    Text(String(localized: "Hint"))
                         .font(.custom("Chalkduster", size: 18))
                 }
                 .padding(10)
@@ -156,9 +156,19 @@ struct GameBoardView: View {
 //            - if memoToggled = False, set to "Number Pad"
 //            - Frame: maxWidth infinity, maxHeight 70
 //            - Background: gray, opacity 0.2
-            Text(memoToggled ? "Memo" : "Number Pad")
-                .frame(maxWidth: .infinity, maxHeight: 70)
-                .background(Color.gray.opacity(0.2))
+            if memoToggled {
+                Text(String(localized: "Memo"))
+                    .frame(maxWidth: .infinity, maxHeight: 70)
+                    .background(Color.gray.opacity(0.2))
+            } else {
+                ZStack(alignment: .center) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .frame(maxWidth: .infinity, maxHeight: 70)
+                        .foregroundStyle(Color.gray.opacity(0.2))
+
+                    NumberPad()
+                }
+            }
             Spacer()
             HStack {
 //            - Button: End (label: "End" with custom font "Chalkduster" pt 18)
@@ -168,7 +178,7 @@ struct GameBoardView: View {
                     // Connect to LevelView
                     path.removeLast()
                 } label: {
-                    Text("End")
+                    Text(String(localized: "End"))
                         .font(.custom("Chalkduster", size: 18))
                 }
                 .padding()
@@ -179,7 +189,7 @@ struct GameBoardView: View {
                 Button {
                     showScoreView.toggle()
                 } label: {
-                    Text("Score")
+                    Text(String(localized: "Score"))
                         .font(.custom("Chalkduster", size: 18))
                 }
                 .padding()
@@ -201,7 +211,7 @@ struct GameBoardView: View {
     func changeBoardText(to temporary: String, duration: TimeInterval = 3) {
         scoreText = temporary
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            scoreText = "Score"
+            scoreText = String(localized: "Score")
         }
     }
 }
