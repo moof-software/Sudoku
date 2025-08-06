@@ -369,8 +369,8 @@ showScoreView: Boolean, default set to false
         - Board() with padding 1
     - Default padding
     - HStack
-        - Button: Rewind (label: arrow.counterclockwise)
-            - Action: changeBoardText("Rewinding...")
+        - Button: Restart (label: arrow.counterclockwise)
+            - Action: changeBoardText("Restart")
             - Padding: 10
         - Button: Undo (label: arrow.left)
             - Action: changeBoardText("Undoing...")
@@ -379,7 +379,7 @@ showScoreView: Boolean, default set to false
             - Action: changeBoardText("Redoing...")
             - Padding: 10
         - Button: Hint (label: "Hint" with custom font "Chalkduster" pt 18)
-            - Action: changeBoardText("Providing Hint...")
+            - Action: changeBoardText("Hint")
             - Padding: 10
         - Spacer
         - Button: Memo (label: pencil)
@@ -388,7 +388,7 @@ showScoreView: Boolean, default set to false
     - Text
         - Conditional operator relying on memoToggled
         - if memoToggled = True, set to "Memo"
-        - if memoToggled = False, set to "Number Pad"
+        - if memoToggled = False, provide NumberPad
         - Frame: maxWidth infinity, maxHeight 70
         - Background: gray, opacity 0.2
     - Spacer
