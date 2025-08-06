@@ -56,10 +56,24 @@
 
     },
     "End" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "종료"
+          }
+        }
+      }
     },
     "Errors" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오답수"
+          }
+        }
+      }
     },
     "Final Score" : {
 
@@ -102,10 +116,24 @@
       }
     },
     "Hint" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "힌트"
+          }
+        }
+      }
     },
     "Home" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "홈"
+          }
+        }
+      }
     },
     "Levels" : {
       "localizations" : {
@@ -157,13 +185,44 @@
       }
     },
     "Memo" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메모"
+          }
+        }
+      }
     },
-    "Number Pad" : {
-
+    "Redoing..." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "복구하기"
+          }
+        }
+      }
+    },
+    "Restart" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다시하기"
+          }
+        }
+      }
     },
     "Score" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수"
+          }
+        }
+      }
     },
     "Scores:" : {
 
@@ -207,10 +266,27 @@
 
     },
     "Time" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간"
+          }
+        }
+      }
     },
     "Time:" : {
 
+    },
+    "Undoing..." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실행취소"
+          }
+        }
+      }
     },
     "Version" : {
       "localizations" : {
