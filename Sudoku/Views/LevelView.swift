@@ -5,6 +5,7 @@
 //  Created by Jisu Lim on 7/15/25.
 //
 
+import SwiftData
 import SwiftUI
 
 /// View that allows users to choose which level they are playing on or resume a current game.
@@ -29,6 +30,7 @@ import SwiftUI
 ///         - Label: "Resume"
 ///         - Action: Change GameBoardView `scoreText` to "Resumed Game", connect to GameBoardView
 struct LevelView: View {
+    @Environment(\.modelContext) var modelContext
     @Binding var path: [Screen]
     var body: some View {
         VStack {
@@ -40,6 +42,13 @@ struct LevelView: View {
                 // Change "score" text in GameBoard View to easy
                 // Connect to GameBoardView
                 path.append(.boardView)
+
+                var sample: Sudoku {
+                    let sudoku = Sudoku()
+                    return sudoku
+                }
+                modelContext.insert(sample)
+
             } label: {
                 NameButtonView(title: String(localized: "Easy"), size: 32)
             }
@@ -64,11 +73,11 @@ struct LevelView: View {
             .padding()
 
             // Spacer()
-//            Button("Resume") {
-//                // Change "score" text in GameBoard View to resumed game
-//                // Connect to GameBoardView
-//                path.append(.boardView)
-//            }
+            //            Button("Resume") {
+            //                // Change "score" text in GameBoard View to resumed game
+            //                // Connect to GameBoardView
+            //                path.append(.boardView)
+            //            }
         }
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Jisu Lim on 7/15/25.
 //
 
+import SwiftData
 import SwiftUI
 
 /// View that contains the main gaming screen.
@@ -46,7 +47,8 @@ import SwiftUI
 ///     - "Ads" Text
 ///         - Placeholder
 struct GameBoardView: View {
-
+    @Environment(\.modelContext) var modelContext
+    @Query var sudokus: [Sudoku]
     @Binding var path: [Screen]
 
     // Score text will change according to some buttons being pressed
@@ -59,32 +61,32 @@ struct GameBoardView: View {
     var body: some View {
         VStack {
             HStack {
-//            - Text: "Errors"
-//                - Font: Custom font "Chalkduster", size: 18
+                //            - Text: "Errors"
+                //                - Font: Custom font "Chalkduster", size: 18
                 Text(String(localized: "Errors"))
                     .font(.custom("Chalkduster", size: 18))
                     .padding()
                 Spacer()
-//            - Text: scoreText
-//                - Font: Custom font "Chalkduster", size: 18
+                //            - Text: scoreText
+                //                - Font: Custom font "Chalkduster", size: 18
                 Text(scoreText)
                     .font(.custom("Chalkduster", size: 18))
                     .padding()
                 Spacer()
-//            - Text: "Time"
-//                - Font: Custom font "Chalkduster", size: 18
+                //            - Text: "Time"
+                //                - Font: Custom font "Chalkduster", size: 18
                 Text(String(localized: "Time"))
                     .font(.custom("Chalkduster", size: 18))
                     .padding()
             }
             Spacer()
-//        - ZStack(alignment: center)
-//            - Rounded Rectangle (cornerRadius 4)
-//                - Frame: width and height infinity
-//                - Background: gray, opacity 0.2
-//                - ForegroundStyle: gray, opacity 0.2
-//                - aspectRatio: 1.0, contentMode: fit
-//        - Board() with padding 1
+            //        - ZStack(alignment: center)
+            //            - Rounded Rectangle (cornerRadius 4)
+            //                - Frame: width and height infinity
+            //                - Background: gray, opacity 0.2
+            //                - ForegroundStyle: gray, opacity 0.2
+            //                - aspectRatio: 1.0, contentMode: fit
+            //        - Board() with padding 1
             ZStack(alignment: .center) {
                 RoundedRectangle(cornerRadius: 4)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -98,9 +100,9 @@ struct GameBoardView: View {
             .padding()
 
             HStack {
-//            - Button: Rewind (label: arrow.counterclockwise)
-//                - Action: changeBoardText("Rewinding...")
-//                - Padding: 10
+                //            - Button: Rewind (label: arrow.counterclockwise)
+                //                - Action: changeBoardText("Rewinding...")
+                //                - Padding: 10
                 Button {
                     // change boardText to "Rewinding..." for 3 seconds
                     changeBoardText(to: String(localized: "Restart"))
@@ -108,9 +110,9 @@ struct GameBoardView: View {
                     Image(systemName: "arrow.counterclockwise")
                 }
                 .padding(10)
-//            - Button: Undo (label: arrow.left)
-//                - Action: changeBoardText("Undoing...")
-//                - Padding: 10
+                //            - Button: Undo (label: arrow.left)
+                //                - Action: changeBoardText("Undoing...")
+                //                - Padding: 10
                 Button {
                     // change boardText to "Undoing..." for 3 seconds
                     changeBoardText(to: String(localized: "Undoing..."))
@@ -118,9 +120,9 @@ struct GameBoardView: View {
                     Image(systemName: "arrow.left")
                 }
                 .padding(10)
-//            - Button: Redo (label: arrow.right)
-//                - Action: changeBoardText("Redoing...")
-//                - Padding: 10
+                //            - Button: Redo (label: arrow.right)
+                //                - Action: changeBoardText("Redoing...")
+                //                - Padding: 10
                 Button {
                     // change boardText to "Redoing..." for 3 seconds
                     changeBoardText(to: String(localized: "Redoing..."))
@@ -128,10 +130,10 @@ struct GameBoardView: View {
                     Image(systemName: "arrow.right")
                 }
                 .padding(10)
-//            - Button: Hint (label: "Hint" with custom font
-//                "Chalkduster" pt 18)
-//                - Action: changeBoardText("Providing Hint...")
-//                - Padding: 10
+                //            - Button: Hint (label: "Hint" with custom font
+                //                "Chalkduster" pt 18)
+                //                - Action: changeBoardText("Providing Hint...")
+                //                - Padding: 10
                 Button {
                     // change boardText to "Providing hint..." for 3 seconds
                     changeBoardText(to: String(localized: "Hint"))
@@ -141,21 +143,21 @@ struct GameBoardView: View {
                 }
                 .padding(10)
                 Spacer()
-//            - Button: Memo (label: pencil)
-//                - Action: Toggle memoToggled
-//                - Padding: 10
+                //            - Button: Memo (label: pencil)
+                //                - Action: Toggle memoToggled
+                //                - Padding: 10
                 Button("", systemImage: "pencil") {
                     // change numberpadText to "Memo"
                     memoToggled.toggle()
                 }
                 .padding(10)
             }
-//        - Text
-//            - Conditional operator relying on memoToggled
-//            - if memoToggled = True, set to "Memo"
-//            - if memoToggled = False, set to "Number Pad"
-//            - Frame: maxWidth infinity, maxHeight 70
-//            - Background: gray, opacity 0.2
+            //        - Text
+            //            - Conditional operator relying on memoToggled
+            //            - if memoToggled = True, set to "Memo"
+            //            - if memoToggled = False, set to "Number Pad"
+            //            - Frame: maxWidth infinity, maxHeight 70
+            //            - Background: gray, opacity 0.2
             if memoToggled {
                 Text(String(localized: "Memo"))
                     .frame(maxWidth: .infinity, maxHeight: 70)
@@ -171,21 +173,24 @@ struct GameBoardView: View {
             }
             Spacer()
             HStack {
-//            - Button: End (label: "End" with custom font "Chalkduster" pt 18)
-//                - Action: remove last path (connect back to levelView)
-//                - Default padding
+                //            - Button: End (label: "End" with custom font "Chalkduster" pt 18)
+                //                - Action: remove last path (connect back to levelView)
+                //                - Default padding
                 Button {
                     // Connect to LevelView
                     path.removeLast()
+                    if !sudokus.isEmpty {
+                        modelContext.delete(sudokus[0])
+                    }
                 } label: {
                     Text(String(localized: "End"))
                         .font(.custom("Chalkduster", size: 18))
                 }
                 .padding()
-//            Button: Score (label: "Score" with custom font "Chalkduster" pt 18)
-//                - Action: toggle showScoreView(showing ScoreView sheet)
-//                - Default padding
-//                - .sheet to present ScoreView (must connect path)
+                //            Button: Score (label: "Score" with custom font "Chalkduster" pt 18)
+                //                - Action: toggle showScoreView(showing ScoreView sheet)
+                //                - Default padding
+                //                - .sheet to present ScoreView (must connect path)
                 Button {
                     showScoreView.toggle()
                 } label: {
