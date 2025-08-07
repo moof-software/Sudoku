@@ -5,9 +5,11 @@
 //  Created by Hungu Lim on 1/26/25.
 //
 
+import SwiftData
 import SwiftUI
 
 struct Block: View {
+    @Query var sudoku: [Sudoku]
     let boardGrid: Grid
 
     var body: some View {
@@ -23,9 +25,19 @@ struct Block: View {
                     HStack {
                         ForEach(0..<3) { col in
                             let blockGrid = Grid(row: row, col: col)
+                            let sudokuValue: [SudokuValue] =
+                                sudoku.first?.table[boardGrid.row * 3 + row]
+                                ?? Array(
+                                    repeating: SudokuValue(
+                                        value: 0,
+                                        visible: true
+                                    ),
+                                    count: 9
+                                )
                             Cell(
                                 data: CellData(
-                                    value: (row * 3) + col,
+                                    value: sudokuValue[boardGrid.col * 3 + col]
+                                        .value,
                                     board: boardGrid,
                                     block: blockGrid
                                 )

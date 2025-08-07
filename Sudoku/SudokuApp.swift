@@ -5,6 +5,7 @@
 //  Created by Hyunsu Lim on 7/14/25.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
@@ -29,5 +30,6 @@ struct SudokuApp: App {
                 .zIndex(2.0)
             }
         }
+        .modelContainer(for: Sudoku.self)
     }
 }
