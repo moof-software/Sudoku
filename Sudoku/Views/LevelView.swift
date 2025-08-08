@@ -31,6 +31,7 @@ import SwiftUI
 ///         - Action: Change GameBoardView `scoreText` to "Resumed Game", connect to GameBoardView
 struct LevelView: View {
     @Environment(\.modelContext) var modelContext
+    @Query var sudokus: [Sudoku]
     @Binding var path: [Screen]
     var body: some View {
         VStack {
@@ -43,11 +44,17 @@ struct LevelView: View {
                 // Connect to GameBoardView
                 path.append(.boardView)
 
-                var sample: Sudoku {
-                    let sudoku = Sudoku()
-                    return sudoku
+                if sudokus.isEmpty {
+                    var sample: Sudoku {
+                        let sudoku = Sudoku()
+                        return sudoku
+                    }
+                    modelContext.insert(sample)
+                } else {
+                    if let storedData = sudokus.last?.table {
+                        print(storedData)
+                    }
                 }
-                modelContext.insert(sample)
 
             } label: {
                 NameButtonView(title: String(localized: "Easy"), size: 32)
