@@ -28,7 +28,7 @@ struct SudokuCell: Equatable {
     var row: Int = 0
     var column: Int = 0
     var select: Bool = false
-    
+
     static func == (lhs: SudokuCell, rhs: SudokuCell) -> Bool {
         return lhs.row == rhs.row && lhs.column == rhs.column
     }
