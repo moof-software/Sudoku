@@ -1,8 +1,8 @@
 //
 //  Sudoku.swift
-//  moof_ios_sudoku
+//  SudokuProApp
 //
-//  Created by Hungu Lim on 7/23/22.
+//  Created by Hungu Lim on 8/08/25.
 //
 
 import Foundation
@@ -35,7 +35,6 @@ struct SudokuData {
 
 @Model
 class Sudoku {
-    var filled: Bool = false
     var table: [[SudokuValue]] = Array(
         repeating: Array(
             repeating: SudokuValue(value: 0, visible: true),
@@ -45,16 +44,15 @@ class Sudoku {
     )
 
     init() {
-        while filled != true {
-            seeding()
-            filled = setSudokuData()
-        }
+        seeding()
         print(table)
     }
 
     func seeding() {
         var seed: Int = 0
-        var dice: Set<Int> = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        var dice: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        dice.shuffle()
 
         table = Array(
             repeating: Array(
@@ -64,78 +62,38 @@ class Sudoku {
             count: 9
         )
 
-        for index in 0...8 {
-            let rowIndexCell = (index / 3)
-            let rowIndexData = (index % 3)
+        for row in 0...8 {
+            for col in 0...8 {
+                let valueIndex = (col + (row % 3) * 3 + (row / 3)) % 9
 
-            seed = Array(dice).randomElement()!
+                seed = dice[valueIndex]
 
-            table[rowIndexCell][rowIndexData].value = seed
-            dice.remove(seed)
+                table[row][col].value = seed
+            }
         }
+        sudokuDataSwapper()
     }
 
-    func setSudokuData() -> Bool {
-        for row in 1...8 {
-            for column in 0...8 {
-                if getCellData(cell: SudokuCell(row: row, column: column)).value == 0 {
-                    if setCellData(cell: SudokuCell(row: row, column: column)) != 0 {
-                        return false
+    func sudokuDataSwapper() {
+        let totalBlockRows: Int = 2
+        let totalSwap: Int = 6
+
+        for block in 0...totalBlockRows {
+            for swapCounter in 0..<(totalSwap * 2) {
+                var randSeed: Set<Int> = [0, 1, 2]
+
+                let idxi = (block * 3) + randSeed.randomElement()!
+                randSeed.remove(idxi)
+                let idxj = (block * 3) + randSeed.randomElement()!
+
+                if swapCounter % 2 == 0 {
+                    self.table.swapAt(idxi, idxj)
+                } else {
+                    for row in 0...8 {
+                        self.table[row].swapAt(idxi, idxj)
                     }
                 }
             }
         }
-        return true
     }
-
-    func checkCellRowColumn(cell: SudokuCell) -> (cell: [Int], row: [Int], column: [Int]) {
-        var cellData = Array(repeating: 0, count: 9)
-        var rowData = Array(repeating: 0, count: 9)
-        var columnData = Array(repeating: 0, count: 9)
-
-        for index in 0...8 {
-            let indexCell = ((cell.row / 3) * 3) + (cell.column / 3)
-            cellData[index] = table[indexCell][index].value
-        }
-
-        for index in 0...8 {
-            let rowIndexCell = ((cell.row / 3) * 3) + (index / 3)
-            let rowIndexData = ((cell.row % 3) * 3) + (index % 3)
-
-            let colIndexCell = ((index / 3) * 3) + (cell.column / 3)
-            let colIndexData = ((index % 3) * 3) + (cell.column % 3)
-
-            rowData[index] = table[rowIndexCell][rowIndexData].value
-            columnData[index] = table[colIndexCell][colIndexData].value
-        }
-
-        return (cellData, rowData, columnData)
-    }
-
-    func getCellData(cell: SudokuCell) -> SudokuValue {
-        let indexCell = ((cell.row / 3) * 3) + (cell.column / 3)
-        let indexData = ((cell.row % 3) * 3) + (cell.column % 3)
-
-        return table[indexCell][indexData]
-    }
-
-    func setCellData(cell: SudokuCell) -> Int {
-        let sudokuDice: Set<Int> = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-        let indexCell = ((cell.row / 3) * 3) + (cell.column / 3)
-        let indexData = ((cell.row % 3) * 3) + (cell.column % 3)
-
-        let cellData = checkCellRowColumn(cell: cell)
-        let subtDice1 = sudokuDice.subtracting(Set(cellData.0))
-        let subtDice2 = subtDice1.subtracting(Set(cellData.1))
-        let finalDice = subtDice2.subtracting(Set(cellData.2))
-
-        if finalDice.isEmpty {
-            return 1
-        } else {
-            table[indexCell][indexData].value = finalDice.randomElement()!
-            return 0
-        }
-    }
-
 }
