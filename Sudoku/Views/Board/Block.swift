@@ -21,27 +21,29 @@ struct Block: View {
                 .aspectRatio(1.0, contentMode: .fit)
 
             VStack {
-                ForEach(0..<3) { row in
-                    HStack {
-                        ForEach(0..<3) { col in
-                            let blockGrid = Grid(row: row, col: col)
-                            let sudokuValue: [SudokuValue] =
-                                sudoku.first?.table[boardGrid.row * 3 + row]
-                                ?? Array(
-                                    repeating: SudokuValue(
-                                        value: 0,
-                                        visible: true
-                                    ),
-                                    count: 9
-                                )
-                            Cell(
-                                data: CellData(
-                                    value: sudokuValue[boardGrid.col * 3 + col]
-                                        .value,
-                                    board: boardGrid,
-                                    block: blockGrid
-                                )
-                            )
+                if !sudoku.isEmpty {
+                    let sudokuData = sudoku.last
+
+                    ForEach(0..<3) { row in
+                        if let sudokuValue = sudokuData?.table[
+                            boardGrid.row * 3 + row
+                        ] {
+                            HStack {
+                                ForEach(0..<3) { col in
+                                    let blockGrid = Grid(row: row, col: col)
+
+                                    Cell(
+                                        data: CellData(
+                                            value: sudokuValue[
+                                                boardGrid.col * 3 + col
+                                            ]
+                                            .value,
+                                            board: boardGrid,
+                                            block: blockGrid
+                                        )
+                                    )
+                                }
+                            }
                         }
                     }
                 }
