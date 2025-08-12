@@ -407,7 +407,69 @@ showScoreView: Boolean, default set to false
     - Parameters: to (temporaray string), duration: 3(TimeInterval)
     - Action: Set scoreText to temporary string, use DispatchQueue to asyncAfter duration (seconds) and change back to default("Score")
 
+![GameBoardView UML 8.2](UML_Overview)
 
+*(Fig. 8.2) Sudoku Board UML Design Overview*
+
+### 8.2) UML Design Breakdown
+
+![GameBoardView UML 8.2.1](UML1)
+
+*(Fig. 8.2.1) Sudoku Class UML Design*
+
+Sudoku(Class)
+- Wrapped by @Model class wrapper
+- Contains the following properties:
+    - `table: [[CellProperty]]`
+    - `level: Int`
+    - `columnNote: [<Int>]`
+    - `rowNote: [<Int>]`
+    - `blockNote: [<Int>]`
+- Contains the following methods:
+    - `init(level:Int): void`
+    - `seeding(): void`
+    - `dataSwapper(): void`
+    - `makeTable(level:Int): void`
+    - `updateNotes(cell:cellLocation): void`
+
+![GameBoardView UML 8.2.2](UML2)
+
+*(Fig. 8.2.2) CellLocation Struct UML Design*
+
+CellLocation(Struct)
+- Contains the following properties:
+    - `board: Grid`
+    - `block: Grid`
+    - `cell: Grid`
+
+![GameBoardView UML 8.2.3](UML3)
+
+*(Fig. 8.2.2) CellProperty Struct UML Design*
+
+CellProperty(Struct)
+- Contains the following properties:
+    - `location: CellLocation`
+    - `visible: Bool`
+    - `value: Int`
+    - `select: Bool`
+    - `note: <Int>`
+
+![GameBoardView UML 8.2.4](UML4)
+
+*(Fig. 8.2.2) Grid Struct UML Design*
+
+Grid(Struct)
+- Contains the following properties:
+    - `row: Int`
+    - `column: Int`
+
+![GameBoardView UML 8.2.5](UML5)
+
+*(Fig. 8.2.2) Data Struct UML Design*
+
+Data(Struct)
+- Contains the following properties:
+    - `table: [[CellProperty]]`
 
 ## [UUID-010] SolverView detail
 
