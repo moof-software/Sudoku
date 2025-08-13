@@ -8,6 +8,49 @@
 import Foundation
 import SwiftData
 
+
+/// Represents the location of a Sudoku Board
+///  - Parameters:
+///     - row: a specific cell's location in its row as an integer(0~9)
+///     - column: a specific cell's location in its column as an integer(0~9)
+struct SudokuGrid {
+    var row: Int = 0
+    var column: Int = 0
+}
+
+/// Represents the location of a specific cell in the board, block, or cell
+/// - Parameters:
+///     - board: a SudokuGrid conforming to the selected cell's location on the board
+///     - block: a SudokuGrid conforming to the selected cell's location on the block
+///     - cell: a SudokuGrid conforming to the selected cell's location on the cell
+struct CellLocation {
+    var board: SudokuGrid
+    var block: SudokuGrid
+    var cell: SudokuGrid
+}
+
+/// All the properties of a cell.
+/// - Parameters:
+///     - location: CellLocation
+///     - visible: Boolean value conforming to showing the content of a cell
+///     - value: Integer value contained inside the cell
+///     - select: Boolean value conforming to if cell is selected or not
+///     - note: Set of integers containing all the numbers in a cell's note
+struct CellProperty {
+    var location: CellLocation
+    var visible: Bool
+    var value: Int
+    var select: Bool
+    var note: Set<Int>
+}
+
+/// A matrix of CellProperties conforming to data on a sudoku board
+/// - Parameters:
+///     - table: a 9x9 matrix of CellProperties.
+struct Data {
+    var table: [[CellProperty]]
+}
+
 /// Represents the value stored in a Sudoku cell, conformes to Codable
 /// - Parameters:
 ///     - value: Int variable set to 0
@@ -63,6 +106,12 @@ class Sudoku {
         ),
         count: 9
     )
+    // updated via UML
+    var umlTable: [[CellProperty]]
+    var level: Int
+    var columnNote: [Set<Int>]
+    var rowNote: [Set<Int>]
+    var blockNote: [Set<Int>]
 
     init() {
         seeding()
@@ -101,7 +150,7 @@ class Sudoku {
                 table[row][col].value = seed
             }
         }
-        sudokuDataSwapper()
+        dataSwapper()
     }
     /// Function for randomly swapping rows and columns
     /// - Logic:
@@ -110,7 +159,7 @@ class Sudoku {
     ///         - `totalSwap`: Integer variable set to 6
     ///     - First, loop over totalBlockRows and totalSwap x2 to swap the number of rows, columns, and blocks
     ///     - Second, swap selected row, column, and block with swapAt.
-    func sudokuDataSwapper() {
+    func dataSwapper() {
         let totalBlockRows: Int = 2
         let totalSwap: Int = 6
 
@@ -131,5 +180,13 @@ class Sudoku {
                 }
             }
         }
+    }
+    
+    // added methods according to UML
+    func makeTable(level: Int) {
+        // please update
+    }
+    func updateNotes(cell: CellLocation) {
+        // please update
     }
 }
