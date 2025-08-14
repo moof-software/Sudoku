@@ -15,11 +15,6 @@ import SwiftData
 struct GridInfo: Codable {
     var row: Int
     var col: Int
-
-    init(row: Int, col: Int) {
-        self.row = row
-        self.col = col
-    }
 }
 
 /// Represents the location of a specific cell in the board, block, or cell
