@@ -13,8 +13,8 @@ struct Board: View {
             ForEach(0..<3) { row in
                 HStack {
                     ForEach(0..<3) { col in
-                        let boardGrid = Grid(row: row, col: col)
-                        Block(boardGrid: boardGrid)
+                        let blockGrid = GridInfo(row: row, col: col)
+                        Block(blockGrid: blockGrid)
                             .padding(1)
                     }
                 }
