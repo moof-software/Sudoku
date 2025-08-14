@@ -13,8 +13,8 @@ import SwiftData
 ///     - row: a specific cell's position in its row as an integer(0~9)
 ///     - column: a specific cell's position in its column as an integer(0~9)
 struct GridInfo: Codable {
-    var row: Int
-    var col: Int
+    let row: Int
+    let col: Int
 }
 
 /// Represents the location of a specific cell in the board, block, or cell
