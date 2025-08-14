@@ -1,3 +1,4 @@
+import SwiftData
 //
 //  NumberPad.swift
 //  Sudoku
@@ -8,17 +9,22 @@ import SwiftUI
 
 // work in progress, will ask dad.
 struct NumberPad: View {
+    @Query var sudoku: [Sudoku]
+
     var body: some View {
-        HStack(spacing: 8) {
-            ForEach(0..<9) { index in
-                Cell(data: CellData(
-                    value: index + 1,
-                    board: Grid(row: 0, col: 0), // All in same cell
-                    block: Grid(row: 0, col: index)
-                ))
+        if !sudoku.isEmpty {
+            let sudokuData = sudoku.last
+
+            HStack(spacing: 8) {
+                ForEach(0..<9) { index in
+                    if let padData = sudokuData?.numberPad[index] {
+                        Cell(data: padData)
+                    }
+                }
             }
+            .padding()
         }
-        .padding()
+
     }
 }
 

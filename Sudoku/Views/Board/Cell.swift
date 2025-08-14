@@ -7,23 +7,12 @@
 
 import SwiftUI
 
-struct Grid {
-    let row: Int
-    let col: Int
-}
-
-struct CellData {
-    let value: Int
-    let board: Grid
-    let block: Grid
-}
-
 struct Cell: View {
-    let data: CellData
+    let data: CellProperty
 
     var body: some View {
         Button {
-            print("My value: \(data.value)")
+            print("My value: \(data.value) - position: \(data.position)")
         } label: {
             Text(data.value.formatted(.number))
                 .font(.system(size: 1000, weight: .bold))
@@ -43,11 +32,5 @@ struct Cell: View {
 }
 
 #Preview {
-    Cell(
-        data: CellData(
-            value: 0,
-            board: Grid(row: 0, col: 0),
-            block: Grid(row: 0, col: 0)
-        )
-    )
+    Cell(data: CellProperty())
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Block: View {
     @Query var sudoku: [Sudoku]
-    let boardGrid: Grid
+    let blockGrid: GridInfo
 
     var body: some View {
         ZStack(alignment: .center) {
@@ -25,22 +25,13 @@ struct Block: View {
                     let sudokuData = sudoku.last
 
                     ForEach(0..<3) { row in
-                        if let sudokuValue = sudokuData?.table[
-                            boardGrid.row * 3 + row
+                        if let cellData = sudokuData?.table[
+                            blockGrid.row * 3 + row
                         ] {
                             HStack {
                                 ForEach(0..<3) { col in
-                                    let blockGrid = Grid(row: row, col: col)
-
                                     Cell(
-                                        data: CellData(
-                                            value: sudokuValue[
-                                                boardGrid.col * 3 + col
-                                            ]
-                                            .value,
-                                            board: boardGrid,
-                                            block: blockGrid
-                                        )
+                                        data: cellData[blockGrid.col * 3 + col]
                                     )
                                 }
                             }
@@ -53,5 +44,5 @@ struct Block: View {
 }
 
 #Preview {
-    Block(boardGrid: Grid(row: 0, col: 0))
+    Block(blockGrid: GridInfo(row: 0, col: 0))
 }
