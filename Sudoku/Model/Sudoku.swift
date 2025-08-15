@@ -86,7 +86,7 @@ class Sudoku {
     var numberPad: [CellProperty] = Array(repeating: CellProperty(), count: 9)
 
     var level: Int = 0
-    var columnNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
+    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     var blockNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
 
@@ -94,6 +94,7 @@ class Sudoku {
         seeding()
         dataSwapper()
         updateCellGridInfo()
+        makeTable(level: 1)
         print(table)
 
         initNumberPadData()
@@ -121,6 +122,7 @@ class Sudoku {
                 seed = dice[valueIndex]
 
                 table[row][col].value = seed
+
             }
         }
     }
@@ -183,8 +185,45 @@ class Sudoku {
 
     // added methods according to UML
     func makeTable(level: Int) {
-        // please update
+        var noteCounter = 30
+
+        while noteCounter > 0 {
+            let row = Int.random(in: 0...8)
+            let col = Int.random(in: 0...8)
+
+            if table[row][col].visible {
+                table[row][col].visible = false
+                noteCounter -= 1
+
+                rowNote[row].insert(table[row][col].value)
+                colNote[col].insert(table[row][col].value)
+                blockNote[(row / 3) * 3 + (col / 3)].insert(
+                    table[row][col].value
+                )
+
+                for index in 0...8 {
+                    if !table[index][col].visible {
+                        if !colNote[col].isEmpty {
+                            if !rowNote[index].isEmpty {
+                                table[index][col].note = colNote[col]
+                                    .intersection(rowNote[index])
+                            }
+                        }
+                    }
+
+                    if !table[row][index].visible {
+                        if !rowNote[row].isEmpty {
+                            if !colNote[index].isEmpty {
+                                table[row][index].note = rowNote[row]
+                                    .intersection(colNote[index])
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+
     func updateNotes(cell: CellPosition) {
         // please update
     }
