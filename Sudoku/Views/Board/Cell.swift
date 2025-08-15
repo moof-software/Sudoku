@@ -9,15 +9,25 @@ import SwiftUI
 
 struct Cell: View {
     let data: CellProperty
+    let sudoku: Sudoku
 
     var body: some View {
         Button {
-            print("My value: \(data.value) - position: \(data.position)")
+            if data.visible {
+                print("My value: \(data.value) - position: \(data.position)")
+            } else {
+                print(
+                    "My Note: \(data.note), Note: \(sudoku.rowNote) \(sudoku.colNote) \(sudoku.blockNote)"
+                )
+            }
         } label: {
-            Text(data.value.formatted(.number))
-                .font(.system(size: 1000, weight: .bold))
-                .lineLimit(1)
-
+            if data.visible {
+                Text(data.value.formatted(.number))
+                    .font(.system(size: 1000, weight: .bold))
+                    .lineLimit(1)
+            } else {
+                Color.gray
+            }
         }
         #if os(macOS)
             .buttonStyle(.plain)
@@ -32,5 +42,5 @@ struct Cell: View {
 }
 
 #Preview {
-    Cell(data: CellProperty())
+    Cell(data: CellProperty(), sudoku: Sudoku())
 }

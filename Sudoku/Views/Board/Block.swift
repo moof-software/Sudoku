@@ -31,7 +31,8 @@ struct Block: View {
                             HStack {
                                 ForEach(0..<3) { col in
                                     Cell(
-                                        data: cellData[blockGrid.col * 3 + col]
+                                        data: cellData[blockGrid.col * 3 + col],
+                                        sudoku: sudokuData ?? Sudoku()
                                     )
                                 }
                             }

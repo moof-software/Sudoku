@@ -18,7 +18,7 @@ struct NumberPad: View {
             HStack(spacing: 8) {
                 ForEach(0..<9) { index in
                     if let padData = sudokuData?.numberPad[index] {
-                        Cell(data: padData)
+                        Cell(data: padData, sudoku: sudokuData ?? Sudoku())
                     }
                 }
             }
