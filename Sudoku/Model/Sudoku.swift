@@ -10,18 +10,18 @@ import SwiftData
 
 /// Represents the position of a Sudoku Board
 ///  - Parameters:
-///     - row: a specific cell's position in its row as an integer(0~9)
-///     - column: a specific cell's position in its column as an integer(0~9)
+///     - row: a specific cell's position in its row as an integer(0-8)
+///     - column: a specific cell's position in its column as an integer(0-8)
 struct GridInfo: Codable {
     let row: Int
     let col: Int
 }
 
-/// Represents the location of a specific cell in the board, block, or cell
+/// Represents the position of a specific cell in the board, block, or cell
 /// - Parameters:
-///     - board: a SudokuGrid conforming to the selected cell's location on the board
-///     - block: a SudokuGrid conforming to the selected cell's location on the block
-///     - cell: a SudokuGrid conforming to the selected cell's location on the cell
+///     - board: a GridInfo of the selected cell's position on the 9×9 board (row, col)
+///     - block: a GridInfo of the selected cell's position inside its 3×3 block (blockRow, blockCol)
+///     - cell: a GridInfo of the selected cell's position inside its 3×3 block cell (0...2, 0...2)
 struct CellPosition: Codable {
     var board: GridInfo
     var block: GridInfo
@@ -36,11 +36,19 @@ struct CellPosition: Codable {
 
 /// All the properties of a cell.
 /// - Parameters:
-///     - location: CellLocation
+///     - position: CellPosition
 ///     - visible: Boolean value conforming to showing the content of a cell
 ///     - value: Integer value contained inside the cell
 ///     - select: Boolean value conforming to if cell is selected or not
 ///     - note: Set of integers containing all the numbers in a cell's note
+/// - Methods:
+///     - `init()` : Sets parameters to
+///         - `position` =  A new CellPosition
+///         - `visible` = `true`
+///         - `value` = 0
+///         - `select` = `false`
+///         - `note` = Empty `set` of integers
+///     - `==` : compares rows' and columns' CellProperties to each other
 struct CellProperty: Codable, Equatable {
     var position: CellPosition
     var visible: Bool
@@ -72,10 +80,20 @@ struct Data {
 /// A SwiftData model representing a Sudoku puzzle.
 /// - Parameters:
 ///     - table: Array variable containing a 9x9 matrix of CellProperty equal to 0.
+///     - numberPad: Array of CellProperty length 9
+///     - level: initial integer set to 0, will change as levels change
+///     - colNote: An array containing sets of integers with length 9
+///     - rowNote: An array containing sets of integers with length 9
+///     - blockNote: An array containing sets of integers with length 9
+///
 /// - Methods:
-///     - init(): call seeding() and print table
-///     - seeding(): function that fills in the table row by row using a randomized dice and sudokuDataSwapper()
-///     - sudokuDataSwapper(): function that performs random row and column swaps for a number of totalSwaps
+///     - `init()`: calls seeding(), dataSwapper(), updateCellGridInfo(), makeTable(), and print table
+///     -  `seeding()` — builds a fully solved 9×9 grid by shuffling digits and laying them out with a base pattern.
+///     - `dataSwapper()` — randomizes the solved grid by swapping rows within bands and columns within stacks while preserving validity.
+///     - `updateCellGridInfo()` — writes board/block/cell coordinates into each `CellProperty.position`.
+///     - `makeTable(level:)` — hides a fixed number of cells (currently 30) to produce a playable puzzle and derives initial notes.
+///     -  `print(table)` — dumps the backing 2D array for debugging.
+///     - `initNumberPadData()` — populates the keypad model with values 1…9.
 @Model
 class Sudoku {
     var table: [[CellProperty]] = Array(
@@ -131,8 +149,11 @@ class Sudoku {
     ///     - Two variables
     ///         - `totalBlockRows`: Integer variable set to 2
     ///         - `totalSwap`: Integer variable set to 6
-    ///     - First, loop over totalBlockRows and totalSwap x2 to swap the number of rows, columns, and blocks
-    ///     - Second, swap selected row, column, and block with swapAt.
+    ///     - Loop over `totalBlockRows`:
+    ///         - Loop over `totalSwap` times two:
+    ///             - Set a random variable `randSeed`as a set of integers and
+    ///             randomly choose a row and column inside random seed
+    ///             - if the random element is even, swap, else, swap everything within the row.
     func dataSwapper() {
         let totalBlockRows: Int = 2
         let totalSwap: Int = 6
@@ -157,6 +178,12 @@ class Sudoku {
 
     }
 
+    /// Function that computes and assigns board, block, and in-block cell coordinates for every cell.
+    ///  - Logic:
+    ///     - For every cell, update the GridInfo.
+    ///         - For board, just update row and column
+    ///         - For block, update row and column by dividing it by 3
+    ///         - For call, update row and column with its remainder divided by 3.
     private func updateCellGridInfo() {
         for row in 0...8 {
             for col in 0...8 {
@@ -173,6 +200,10 @@ class Sudoku {
         }
     }
 
+    /// Function that creates the number pad
+    /// - Logic:
+    ///     - Set board and block's row and column to 0, only set cell to row 0 and column 0-8
+    ///     - Set the value of the number pad to 1-9
     private func initNumberPadData() {
         for index in 0...8 {
             numberPad[index].position.board = GridInfo(row: 0, col: 0)
@@ -183,7 +214,8 @@ class Sudoku {
         }
     }
 
-    // added methods according to UML
+    /// Function that removes a certain nuber of entries
+    ///  
     func makeTable(level: Int) {
         var noteCounter = 30
 
