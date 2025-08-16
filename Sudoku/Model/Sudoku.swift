@@ -88,10 +88,13 @@ struct Data {
 ///
 /// - Methods:
 ///     - `init()`: calls seeding(), dataSwapper(), updateCellGridInfo(), makeTable(), and print table
-///     -  `seeding()` — builds a fully solved 9×9 grid by shuffling digits and laying them out with a base pattern.
-///     - `dataSwapper()` — randomizes the solved grid by swapping rows within bands and columns within stacks while preserving validity.
+///     -  `seeding()` — builds a fully solved 9×9 grid by shuffling digits and laying them out with a 
+///        base pattern.
+///     - `dataSwapper()` — randomizes the solved grid by swapping rows within bands and columns within 
+///        stacks while preserving validity.
 ///     - `updateCellGridInfo()` — writes board/block/cell coordinates into each `CellProperty.position`.
-///     - `makeTable(level:)` — hides a fixed number of cells (currently 30) to produce a playable puzzle and derives initial notes.
+///     - `makeTable(level:)` — hides a fixed number of cells (currently 30) to produce a playable
+///        puzzle and derives initial notes.
 ///     -  `print(table)` — dumps the backing 2D array for debugging.
 ///     - `initNumberPadData()` — populates the keypad model with values 1…9.
 @Model
@@ -240,8 +243,7 @@ class Sudoku {
                                     .intersection(rowNote[index])
 
                                 if !blockNote[((index / 3) * 3) + (col / 3)]
-                                    .isEmpty
-                                {
+                                    .isEmpty {
                                     table[index][col].note = table[index][col]
                                         .note.intersection(
                                             blockNote[
@@ -260,8 +262,7 @@ class Sudoku {
                                     .intersection(colNote[index])
 
                                 if !blockNote[((row / 3) * 3) + (index / 3)]
-                                    .isEmpty
-                                {
+                                    .isEmpty {
                                     table[row][index].note = table[row][index]
                                         .note.intersection(
                                             blockNote[
