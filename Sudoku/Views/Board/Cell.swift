@@ -26,7 +26,7 @@ struct Cell: View {
                     .font(.system(size: 1000, weight: .bold))
                     .lineLimit(1)
             } else {
-                Color.gray
+                CellNoteView(note: data.note)
             }
         }
         #if os(macOS)
@@ -42,5 +42,5 @@ struct Cell: View {
 }
 
 #Preview {
-    Cell(data: CellProperty(), sudoku: Sudoku())
+    Cell(data: CellProperty(), sudoku: Sudoku(level: 12))
 }

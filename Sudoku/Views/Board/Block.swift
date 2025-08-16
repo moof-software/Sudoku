@@ -32,7 +32,7 @@ struct Block: View {
                                 ForEach(0..<3) { col in
                                     Cell(
                                         data: cellData[blockGrid.col * 3 + col],
-                                        sudoku: sudokuData ?? Sudoku()
+                                        sudoku: sudokuData ?? Sudoku(level: 0)
                                     )
                                 }
                             }

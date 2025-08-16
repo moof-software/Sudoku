@@ -103,16 +103,15 @@ class Sudoku {
 
     var numberPad: [CellProperty] = Array(repeating: CellProperty(), count: 9)
 
-    var level: Int = 0
     var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     var blockNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
 
-    init() {
+    init(level: Int) {
         seeding()
         dataSwapper()
         updateCellGridInfo()
-        makeTable(level: 1)
+        makeTable(level: level)
         print(table)
 
         initNumberPadData()
@@ -215,9 +214,9 @@ class Sudoku {
     }
 
     /// Function that removes a certain nuber of entries
-    ///  
+    ///
     func makeTable(level: Int) {
-        var noteCounter = 30
+        var noteCounter = level
 
         while noteCounter > 0 {
             let row = Int.random(in: 0...8)
@@ -239,6 +238,17 @@ class Sudoku {
                             if !rowNote[index].isEmpty {
                                 table[index][col].note = colNote[col]
                                     .intersection(rowNote[index])
+
+                                if !blockNote[((index / 3) * 3) + (col / 3)]
+                                    .isEmpty
+                                {
+                                    table[index][col].note = table[index][col]
+                                        .note.intersection(
+                                            blockNote[
+                                                ((index / 3) * 3) + (col / 3)
+                                            ]
+                                        )
+                                }
                             }
                         }
                     }
@@ -248,6 +258,17 @@ class Sudoku {
                             if !colNote[index].isEmpty {
                                 table[row][index].note = rowNote[row]
                                     .intersection(colNote[index])
+
+                                if !blockNote[((row / 3) * 3) + (index / 3)]
+                                    .isEmpty
+                                {
+                                    table[row][index].note = table[row][index]
+                                        .note.intersection(
+                                            blockNote[
+                                                ((row / 3) * 3) + (index / 3)
+                                            ]
+                                        )
+                                }
                             }
                         }
                     }

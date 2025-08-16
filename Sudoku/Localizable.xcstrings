@@ -4,6 +4,12 @@
     "" : {
 
     },
+    " " : {
+
+    },
+    "%lld" : {
+
+    },
     "%lld/%lld" : {
       "localizations" : {
         "en" : {
@@ -27,7 +33,14 @@
 
     },
     "Camera" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수도쿠 캡쳐"
+          }
+        }
+      }
     },
     "Clear" : {
 
@@ -172,7 +185,14 @@
       }
     },
     "Manual" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "직접 입력"
+          }
+        }
+      }
     },
     "Medium" : {
       "localizations" : {
