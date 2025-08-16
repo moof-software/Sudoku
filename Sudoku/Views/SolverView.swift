@@ -26,11 +26,11 @@ struct SolverView: View {
     var body: some View {
         VStack {
             Spacer()
-            Button("Manual") {
+            Button(String(localized: "Manual")) {
                 // Connect to Solution Screen
                 path.append(.solutionView)
             }
-            Button("Camera") {
+            Button(String(localized: "Camera")) {
                 // TBD
             }
             Spacer()

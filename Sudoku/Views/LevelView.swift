@@ -46,7 +46,7 @@ struct LevelView: View {
 
                 if sudokus.isEmpty {
                     var sample: Sudoku {
-                        let sudoku = Sudoku()
+                        let sudoku = Sudoku(level: 35)
                         return sudoku
                     }
                     modelContext.insert(sample)
@@ -55,7 +55,6 @@ struct LevelView: View {
                         print(storedData)
                     }
                 }
-
             } label: {
                 NameButtonView(title: String(localized: "Easy"), size: 32)
             }
@@ -65,6 +64,18 @@ struct LevelView: View {
                 // Change "score" text in GameBoard View to medium
                 // Connect to GameBoardView
                 path.append(.boardView)
+
+                if sudokus.isEmpty {
+                    var sample: Sudoku {
+                        let sudoku = Sudoku(level: 42)
+                        return sudoku
+                    }
+                    modelContext.insert(sample)
+                } else {
+                    if let storedData = sudokus.last?.table {
+                        print(storedData)
+                    }
+                }
             } label: {
                 NameButtonView(title: String(localized: "Medium"), size: 32)
             }
@@ -74,6 +85,17 @@ struct LevelView: View {
                 // Change "score" text in GameBoard View to hard
                 // Connect to GameBoardView
                 path.append(.boardView)
+                if sudokus.isEmpty {
+                    var sample: Sudoku {
+                        let sudoku = Sudoku(level: 51)
+                        return sudoku
+                    }
+                    modelContext.insert(sample)
+                } else {
+                    if let storedData = sudokus.last?.table {
+                        print(storedData)
+                    }
+                }
             } label: {
                 NameButtonView(title: String(localized: "Hard"), size: 32)
             }
