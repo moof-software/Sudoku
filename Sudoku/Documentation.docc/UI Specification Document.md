@@ -407,7 +407,7 @@ showScoreView: Boolean, default set to false
     - Parameters: to (temporaray string), duration: 3(TimeInterval)
     - Action: Set scoreText to temporary string, use DispatchQueue to asyncAfter duration (seconds) and change back to default("Score")
 
-![GameBoardView UML 8.2](UML_Overview)
+![GameBoardView UML 8.2](UML_updated)
 
 *(Fig. 8.2) Sudoku Board UML Design Overview*
 
