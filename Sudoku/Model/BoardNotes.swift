@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SudokuNote: Codable {
+class BoardNotes: Codable {
     var col: [Set<Int>]
     var row: [Set<Int>]
     var block: [Set<Int>]
