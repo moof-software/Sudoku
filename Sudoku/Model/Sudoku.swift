@@ -25,52 +25,11 @@ struct CellPosition: Codable {
     }
 }
 
-/// All the properties of a cell.
-/// - Parameters:
-///     - position: CellPosition
-///     - visible: Boolean value conforming to showing the content of a cell
-///     - value: Integer value contained inside the cell
-///     - select: Boolean value conforming to if cell is selected or not
-///     - note: Set of integers containing all the numbers in a cell's note
-/// - Methods:
-///     - `init()` : Sets parameters to
-///         - `position` =  A new CellPosition
-///         - `visible` = `true`
-///         - `value` = 0
-///         - `select` = `false`
-///         - `note` = Empty `set` of integers
-///     - `==` : compares rows' and columns' CellProperties to each other
-struct CellProperty: Codable, Equatable {
-    var position: CellPosition
-    var cell: SudokuCell
-    var select: Bool
-    var note: Set<Int>
-
-    init() {
-        self.position = CellPosition()
-        self.cell = SudokuCell(
-            value: 0,
-            noteInfo: SudokuNote(
-                col: Array(repeating: Set<Int>(), count: 9),
-                row: Array(repeating: Set<Int>(), count: 9),
-                block: Array(repeating: Set<Int>(), count: 9)
-            )
-        )
-        self.select = false
-        self.note = Set<Int>()
-    }
-
-    static func == (lhs: CellProperty, rhs: CellProperty) -> Bool {
-        return lhs.position.cell.row == rhs.position.cell.row
-            && lhs.position.cell.col == rhs.position.cell.col
-    }
-}
-
 /// A matrix of CellProperties conforming to data on a sudoku board
 /// - Parameters:
 ///     - table: a 9x9 matrix of CellProperties.
 struct Data {
-    var table: [[CellProperty]]
+    var table: [[SudokuCell]]
 }
 
 /// A SwiftData model representing a Sudoku puzzle.
@@ -95,23 +54,26 @@ struct Data {
 ///     - `initNumberPadData()` — populates the keypad model with values 1…9.
 @Model
 class Sudoku {
-    var table: [[CellProperty]] = Array(
-        repeating: Array(repeating: CellProperty(), count: 9),
-        count: 9
-    )
-
-    var numberPad: [CellProperty] = Array(repeating: CellProperty(), count: 9)
-
-    //    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
-    //    var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
-    //    var blockNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
-
     @Transient
-    var notes: SudokuNote = SudokuNote(
+    var notes: BoardNotes = BoardNotes(
         col: Array(repeating: Set<Int>(), count: 9),
         row: Array(repeating: Set<Int>(), count: 9),
         block: Array(repeating: Set<Int>(), count: 9)
     )
+
+    var table: [[SudokuCell]] = Array(
+        repeating: Array(repeating: SudokuCell(value: 0), count: 9),
+        count: 9
+    )
+
+    var numberPad: [SudokuCell] = Array(
+        repeating: SudokuCell(value: 0),
+        count: 9
+    )
+
+    //    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
+    //    var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
+    //    var blockNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
 
     init(level: Int) {
         seeding()
@@ -144,7 +106,7 @@ class Sudoku {
 
                 seed = dice[valueIndex]
 
-                table[row][col].cell = SudokuCell(value: seed, noteInfo: notes)
+                table[row][col] = SudokuCell(value: seed)
 
             }
         }
@@ -193,7 +155,7 @@ class Sudoku {
         for row in 0...8 {
             for col in 0...8 {
                 table[row][col].position.board = GridInfo(row: row, col: col)
-                table[row][col].cell.position.board = GridInfo(
+                table[row][col].position.board = GridInfo(
                     row: row,
                     col: col
                 )
@@ -202,7 +164,7 @@ class Sudoku {
                     row: row / 3,
                     col: col / 3
                 )
-                table[row][col].cell.position.block = GridInfo(
+                table[row][col].position.block = GridInfo(
                     row: row / 3,
                     col: col / 3
                 )
@@ -211,7 +173,7 @@ class Sudoku {
                     row: row % 3,
                     col: col % 3
                 )
-                table[row][col].cell.position.cell = GridInfo(
+                table[row][col].position.cell = GridInfo(
                     row: row % 3,
                     col: col % 3
                 )
@@ -229,14 +191,7 @@ class Sudoku {
             numberPad[index].position.block = GridInfo(row: 0, col: 0)
             numberPad[index].position.cell = GridInfo(row: 0, col: index)
 
-            numberPad[index].cell = SudokuCell(
-                value: index + 1,
-                noteInfo: SudokuNote(
-                    col: Array(repeating: Set<Int>(), count: 9),
-                    row: Array(repeating: Set<Int>(), count: 9),
-                    block: Array(repeating: Set<Int>(), count: 9)
-                )
-            )
+            numberPad[index] = SudokuCell(value: index + 1)
         }
     }
 
@@ -249,59 +204,31 @@ class Sudoku {
             let row = Int.random(in: 0...8)
             let col = Int.random(in: 0...8)
 
-            if table[row][col].cell.visible {
-                table[row][col].cell.visible = false
+            if table[row][col].visible {
+                table[row][col].visible = false
                 noteCounter -= 1
 
-                updateNotes(grid: GridInfo(row: row, col: col))
+                notes.updateNotes(
+                    position: GridInfo(row: row, col: col),
+                    value: table[row][col].value
+                )
+
+                refreshCellNotes(grid: GridInfo(row: row, col: col))
             }
         }
     }
 
-    func updateNotes(grid: GridInfo) {
+    func refreshCellNotes(grid: GridInfo) {
         let row = grid.row
         let col = grid.col
 
         for index in 0...8 {
-            if !table[index][col].cell.visible {
-                if !notes.col[col].isEmpty {
-                    if !notes.row[index].isEmpty {
-                        table[index][col].note = notes.col[col]
-                            .intersection(notes.row[index])
+            table[index][col].updateNote(boardNotes: notes)
+            table[row][index].updateNote(boardNotes: notes)
 
-                        if !notes.block[((index / 3) * 3) + (col / 3)]
-                            .isEmpty
-                        {
-                            table[index][col].note = table[index][col]
-                                .note.intersection(
-                                    notes.block[
-                                        ((index / 3) * 3) + (col / 3)
-                                    ]
-                                )
-                        }
-                    }
-                }
-            }
+            table[((row / 3) * 3) + (index / 3)][((col / 3) * 3) + (index % 3)]
+                .updateNote(boardNotes: notes)
 
-            if !table[row][index].cell.visible {
-                if !notes.row[row].isEmpty {
-                    if !notes.col[index].isEmpty {
-                        table[row][index].note = notes.row[row]
-                            .intersection(notes.col[index])
-
-                        if !notes.block[((row / 3) * 3) + (index / 3)]
-                            .isEmpty
-                        {
-                            table[row][index].note = table[row][index]
-                                .note.intersection(
-                                    notes.block[
-                                        ((row / 3) * 3) + (index / 3)
-                                    ]
-                                )
-                        }
-                    }
-                }
-            }
         }
     }
 }
