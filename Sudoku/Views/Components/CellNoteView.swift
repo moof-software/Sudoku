@@ -24,7 +24,7 @@ struct CellNoteView: View {
                         ForEach(0..<3, id: \.self) { col in
                             let data: Int = row * 3 + col + 1
 
-                            note.contains(data) ? Text("\(data)") : Text(" ")
+                            Text(note.contains(data) ? "\(data)" : " ")
                         }
                     }
                 }

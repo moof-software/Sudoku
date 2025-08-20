@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct Cell: View {
-    let data: CellProperty
+    let data: SudokuCell
     let sudoku: Sudoku
 
     var body: some View {
         Button {
-            if data.cell.visible {
+            if data.visible {
                 print(
-                    "My value: \(data.cell.value) - position: \(data.position)"
+                    "My value: \(data.value) - position: \(data.position)"
                 )
             } else {
                 print(
@@ -23,8 +23,8 @@ struct Cell: View {
                 )
             }
         } label: {
-            if data.cell.visible {
-                Text(data.cell.value.formatted(.number))
+            if data.visible {
+                Text(data.value.formatted(.number))
                     .font(.system(size: 1000, weight: .bold))
                     .lineLimit(1)
             } else {
@@ -44,5 +44,5 @@ struct Cell: View {
 }
 
 #Preview {
-    Cell(data: CellProperty(), sudoku: Sudoku(level: 12))
+    Cell(data: SudokuCell(value: 0), sudoku: Sudoku(level: 12))
 }
