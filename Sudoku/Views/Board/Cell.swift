@@ -13,16 +13,18 @@ struct Cell: View {
 
     var body: some View {
         Button {
-            if data.visible {
-                print("My value: \(data.value) - position: \(data.position)")
+            if data.cell.visible {
+                print(
+                    "My value: \(data.cell.value) - position: \(data.position)"
+                )
             } else {
                 print(
-                    "My Note: \(data.note), Note: \(sudoku.rowNote) \(sudoku.colNote) \(sudoku.blockNote)"
+                    "My Note: \(data.note)"
                 )
             }
         } label: {
-            if data.visible {
-                Text(data.value.formatted(.number))
+            if data.cell.visible {
+                Text(data.cell.value.formatted(.number))
                     .font(.system(size: 1000, weight: .bold))
                     .lineLimit(1)
             } else {
