@@ -208,10 +208,7 @@ class Sudoku {
                 table[row][col].visible = false
                 noteCounter -= 1
 
-                notes.updateNotes(
-                    position: GridInfo(row: row, col: col),
-                    value: table[row][col].value
-                )
+                notes.updateNotes(data: table[row][col])
 
                 refreshCellNotes(grid: GridInfo(row: row, col: col))
             }
@@ -222,12 +219,26 @@ class Sudoku {
         let row = grid.row
         let col = grid.col
 
-        for index in 0...8 {
-            table[index][col].updateNote(boardNotes: notes)
-            table[row][index].updateNote(boardNotes: notes)
+        let blockRow = ((row / 3) * 3)
+        let blockCol = ((col / 3) * 3)
 
-            table[((row / 3) * 3) + (index / 3)][((col / 3) * 3) + (index % 3)]
-                .updateNote(boardNotes: notes)
+        for index in 0...8 {
+            table[index][col].updateNote(
+                boardNotes: notes,
+                isVisible: table[index][col].visible
+            )
+            table[row][index].updateNote(
+                boardNotes: notes,
+                isVisible: table[row][index].visible
+            )
+
+            table[blockRow + (index / 3)][blockCol + (index % 3)]
+                .updateNote(
+                    boardNotes: notes,
+                    isVisible: table[blockRow + (index / 3)][
+                        blockCol + (index % 3)
+                    ].visible
+                )
 
         }
     }

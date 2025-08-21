@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 /// Represents the position of a Sudoku Board
 ///  - Parameters:
@@ -42,19 +43,28 @@ class SudokuCell: Codable {
         self.value = value
     }
 
-    func updateNote(boardNotes: BoardNotes) {
+    func selectCell() {
+        if note.count == 1 {
+            visible = true
+        }
+    }
+
+    func updateNote(boardNotes: BoardNotes, isVisible: Bool) {
         let row = position.board.row
         let col = position.board.col
+        let block = ((row / 3) * 3) + (col / 3)
 
-        if !visible {
+        if isVisible {
+            if !note.isEmpty {
+                note.removeAll()
+            }
+        } else {
             if !boardNotes.col[col].isEmpty {
                 if !boardNotes.row[row].isEmpty {
                     note = boardNotes.col[col].intersection(boardNotes.row[row])
 
-                    if !boardNotes.block[((row / 3) * 3) + (col / 3)].isEmpty {
-                        note = note.intersection(
-                            boardNotes.block[((row / 3) * 3) + (col / 3)]
-                        )
+                    if !boardNotes.block[block].isEmpty {
+                        note = note.intersection(boardNotes.block[block])
                     }
                 }
             }
