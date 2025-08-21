@@ -16,12 +16,12 @@ struct NumberPad: View {
             @Bindable var sudokuData = sudokuData
 
             HStack(spacing: 8) {
-                ForEach(0..<9, id: \.self) { index in
+                // ForEach(0..<9, id: \.self) { index in
                     //                    Cell(
                     //                        data: $sudokuData.numberPad[index],
                     //                        sudoku: sudokuData
                     //                    )
-                }
+                // }
             }
             .padding()
         }
