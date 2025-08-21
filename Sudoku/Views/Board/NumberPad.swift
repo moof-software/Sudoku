@@ -12,22 +12,19 @@ struct NumberPad: View {
     @Query var sudoku: [Sudoku]
 
     var body: some View {
-        if !sudoku.isEmpty {
-            let sudokuData = sudoku.last
+        if let sudokuData = sudoku.last {
+            @Bindable var sudokuData = sudokuData
 
             HStack(spacing: 8) {
-                ForEach(0..<9) { index in
-                    if let padData = sudokuData?.numberPad[index] {
-                        Cell(
-                            data: padData,
-                            sudoku: sudokuData ?? Sudoku(level: 0)
-                        )
-                    }
+                ForEach(0..<9, id: \.self) { index in
+                    //                    Cell(
+                    //                        data: $sudokuData.numberPad[index],
+                    //                        sudoku: sudokuData
+                    //                    )
                 }
             }
             .padding()
         }
-
     }
 }
 

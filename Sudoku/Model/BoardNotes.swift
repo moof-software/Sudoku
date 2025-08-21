@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BoardNotes: Codable {
+struct BoardNotes: Codable {
     var col: [Set<Int>]
     var row: [Set<Int>]
     var block: [Set<Int>]
@@ -18,7 +18,7 @@ class BoardNotes: Codable {
         self.block = block
     }
 
-    func updateNotes(data: SudokuCell) {
+    mutating func updateNotes(data: SudokuCell) {
         let position = data.position.board
 
         if data.visible {
