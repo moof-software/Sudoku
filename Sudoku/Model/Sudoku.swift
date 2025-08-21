@@ -54,7 +54,6 @@ struct Data {
 ///     - `refreshCellNotes(grid:GridInfo)` — reevalutates note values after actions.
 @Model
 class Sudoku {
-    @Transient
     var notes: BoardNotes = BoardNotes(
         col: Array(repeating: Set<Int>(), count: 9),
         row: Array(repeating: Set<Int>(), count: 9),

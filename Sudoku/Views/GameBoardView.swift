@@ -106,6 +106,10 @@ struct GameBoardView: View {
                 Button {
                     // change boardText to "Rewinding..." for 3 seconds
                     changeBoardText(to: String(localized: "Restart"))
+                    if let sudoku = sudokus.last {
+                        sudoku.table[0][0].value = 1
+                        sudoku.table[0][0].visible = true
+                    }
                 } label: {
                     Image(systemName: "arrow.counterclockwise")
                 }

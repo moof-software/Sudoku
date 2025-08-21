@@ -8,27 +8,30 @@
 import SwiftUI
 
 struct Cell: View {
-    let data: SudokuCell
-    let sudoku: Sudoku
-
+    @Bindable var sudoku: Sudoku
+    var row: Int
+    var col: Int
     var body: some View {
         Button {
-            if data.visible {
+            if sudoku.table[row][col].visible {
                 print(
-                    "My value: \(data.value) - position: \(data.position)"
+                    "My value: \(sudoku.table[row][col].value) - position: \(sudoku.table[row][col].position)"
                 )
             } else {
-                print(
-                    "My Note: \(data.note)"
+                sudoku.table[row][col].selectCell()
+                sudoku.notes.updateNotes(data: sudoku.table[row][col])
+                sudoku.refreshCellNotes(
+                    grid: sudoku.table[row][col].position.board
                 )
+                print("My note: \(sudoku.table[row][col].note)")
             }
         } label: {
-            if data.visible {
-                Text(data.value.formatted(.number))
+            if sudoku.table[row][col].visible {
+                Text(sudoku.table[row][col].value.formatted(.number))
                     .font(.system(size: 1000, weight: .bold))
                     .lineLimit(1)
             } else {
-                CellNoteView(note: data.note)
+                CellNoteView(note: sudoku.table[row][col].note)
             }
         }
         #if os(macOS)
@@ -44,5 +47,6 @@ struct Cell: View {
 }
 
 #Preview {
-    Cell(data: SudokuCell(value: 0), sudoku: Sudoku(level: 12))
+    @Previewable @State var data: Sudoku = Sudoku(level: 0)
+    Cell(sudoku: data, row: 0, col: 0)
 }

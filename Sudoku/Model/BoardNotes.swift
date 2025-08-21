@@ -25,7 +25,7 @@ import Foundation
 ///     - `updateNotes(position: CellPosition, value:Int)`
 ///         - Parameters: data of type `SudokuCell`
 ///         - Function: Checks if cell is visible and update its notes accordingly.
-class BoardNotes: Codable {
+struct BoardNotes: Codable {
     var col: [Set<Int>]
     var row: [Set<Int>]
     var block: [Set<Int>]
@@ -43,7 +43,7 @@ class BoardNotes: Codable {
     ///     of its row, column, and block `BoardNotes`.
     ///     - If `data` is not visible, insert its value to all
     ///     of its row, column, and block `BoardNotes`.
-    func updateNotes(data: SudokuCell) {
+    mutating func updateNotes(data: SudokuCell) {
         let position = data.position.board
 
         if data.visible {

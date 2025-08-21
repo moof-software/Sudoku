@@ -32,7 +32,7 @@ struct GridInfo: Codable {
 ///     -`updateNote()`: shows the intersection of the cell's boardNotes if visibility is false for the cell's
 ///     value, and empties the note if visibility is true.
 ///     - `==` : compares rows' and columns' SudokuCells to each other
-class SudokuCell: Codable {
+struct SudokuCell: Codable {
     var value: Int = 0
     var visible: Bool = true
     var position: CellPosition = CellPosition()
@@ -44,9 +44,11 @@ class SudokuCell: Codable {
     }
 
     /// Funtion that automatically shows the value when there's only one candidate left in the cell's note.
-    func selectCell() {
+    mutating func selectCell() {
+
         if note.count == 1 {
             visible = true
+            note.removeAll()
         }
     }
 
@@ -58,7 +60,7 @@ class SudokuCell: Codable {
     ///     - If the cell's visibiility is true, empty all values in the note if it is not empty.
     ///     - If the cell's visibility is false, retrieve the intersection of all the row, column, and blocks'
     ///     sets when none of the sets are empty.
-    func updateNote(boardNotes: BoardNotes, isVisible: Bool) {
+    mutating func updateNote(boardNotes: BoardNotes, isVisible: Bool) {
         let row = position.board.row
         let col = position.board.col
         let block = ((row / 3) * 3) + (col / 3)
