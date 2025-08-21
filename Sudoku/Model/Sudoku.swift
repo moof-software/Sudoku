@@ -54,7 +54,6 @@ struct Data {
 ///     - `initNumberPadData()` — populates the keypad model with values 1…9.
 @Model
 class Sudoku {
-    @Transient
     var notes: BoardNotes = BoardNotes(
         col: Array(repeating: Set<Int>(), count: 9),
         row: Array(repeating: Set<Int>(), count: 9),

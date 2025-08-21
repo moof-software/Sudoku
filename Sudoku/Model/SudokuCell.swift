@@ -32,7 +32,7 @@ struct GridInfo: Codable {
 ///         - `select` = `false`
 ///         - `note` = Empty `set` of integers
 ///     - `==` : compares rows' and columns' CellProperties to each other
-class SudokuCell: Codable {
+struct SudokuCell: Codable {
     var value: Int = 0
     var visible: Bool = true
     var position: CellPosition = CellPosition()
@@ -43,13 +43,14 @@ class SudokuCell: Codable {
         self.value = value
     }
 
-    func selectCell() {
+    mutating func selectCell() {
         if note.count == 1 {
             visible = true
+            note.removeAll()
         }
     }
 
-    func updateNote(boardNotes: BoardNotes, isVisible: Bool) {
+    mutating func updateNote(boardNotes: BoardNotes, isVisible: Bool) {
         let row = position.board.row
         let col = position.board.col
         let block = ((row / 3) * 3) + (col / 3)
