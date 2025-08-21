@@ -17,21 +17,21 @@ struct GridInfo: Codable {
     let col: Int
 }
 
-/// All the properties of a cell.
+/// All the properties of a cell as well as updating its note.
 /// - Parameters:
-///     - position: CellPosition
-///     - visible: Boolean value conforming to showing the content of a cell
-///     - value: Integer value contained inside the cell
-///     - select: Boolean value conforming to if cell is selected or not
-///     - note: Set of integers containing all the numbers in a cell's note
+///     - value: the cell's own value, as an integer
+///     - visible: Boolean value for its visibility
+///     - position: CellPosition that represents its position on the board
+///     - note: A set of integers containing possible candidates for its cell
+///     if the visibility is off
+///     - select: Boolean value representing if the cell's selected or not
 /// - Methods:
-///     - `init()` : Sets parameters to
-///         - `position` =  A new CellPosition
-///         - `visible` = `true`
-///         - `value` = 0
-///         - `select` = `false`
-///         - `note` = Empty `set` of integers
-///     - `==` : compares rows' and columns' CellProperties to each other
+///     - `init()` : Sets its value to its own value
+///     - `selectCell()`: Automatically sets a cell's visbility to true when there's only one candidate
+///     left in the cell's note
+///     -`updateNote()`: shows the intersection of the cell's boardNotes if visibility is false for the cell's
+///     value, and empties the note if visibility is true.
+///     - `==` : compares rows' and columns' SudokuCells to each other
 class SudokuCell: Codable {
     var value: Int = 0
     var visible: Bool = true
@@ -43,12 +43,21 @@ class SudokuCell: Codable {
         self.value = value
     }
 
+    /// Funtion that automatically shows the value when there's only one candidate left in the cell's note.
     func selectCell() {
         if note.count == 1 {
             visible = true
         }
     }
 
+    /// Function that updates the cell's note according to the cell's visibility.
+    /// - Parameters:
+    ///     - boardNotes: A collection of all the invisible cell's value for its row, column, and block.
+    ///     - isVisible: Boolean representing if cell's value is visible or not
+    /// - Logic:
+    ///     - If the cell's visibiility is true, empty all values in the note if it is not empty.
+    ///     - If the cell's visibility is false, retrieve the intersection of all the row, column, and blocks'
+    ///     sets when none of the sets are empty.
     func updateNote(boardNotes: BoardNotes, isVisible: Bool) {
         let row = position.board.row
         let col = position.board.col

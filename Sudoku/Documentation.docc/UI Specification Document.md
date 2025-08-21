@@ -407,7 +407,7 @@ showScoreView: Boolean, default set to false
     - Parameters: to (temporaray string), duration: 3(TimeInterval)
     - Action: Set scoreText to temporary string, use DispatchQueue to asyncAfter duration (seconds) and change back to default("Score")
 
-![GameBoardView UML 8.2](UML_updated)
+![GameBoardView UML 8.2](UML_Overview)
 
 *(Fig. 8.2) Sudoku Board UML Design Overview*
 
@@ -420,56 +420,82 @@ showScoreView: Boolean, default set to false
 Sudoku(Class)
 - Wrapped by @Model class wrapper
 - Contains the following properties:
-    - `table: [[CellProperty]]`
-    - `level: Int`
-    - `columnNote: [<Int>]`
-    - `rowNote: [<Int>]`
-    - `blockNote: [<Int>]`
+    - `notes` (@Transient): `BoardNotes` - Initialized to 9 empty sets.
+    - `table: [[SudokuCell]]` - 9x9 matrix
+    - `numberPad: [SudokuCell]` - An array of 9 SudokuCells, creates number pad.
 - Contains the following methods:
-    - `init(level:Int): void`
-    - `seeding(): void`
-    - `dataSwapper(): void`
-    - `makeTable(level:Int): void`
-    - `updateNotes(cell:cellLocation): void`
+    - `init(level:Int): void` - calls seeding(), dataSwapper(), updateCellGridInfo(), makeTable(),
+    print table, and initNumberPad()
+    - `seeding(): void` - builds a fully solved 9x9 grid
+    - `dataSwapper(): void` - randomizes solved grid based on `seeding()` by swapping rows, columns,
+    and blocks.
+    - `updateCellGridInfo(): void` - input GridInfo for each cell
+    - `makeTable(level:Int): void` - hides a number of cells based on level to produce a puzzle
+    - `initNumberPadData(): void` - populates keyboard pad from values 1~9
+    - `refreshCellNotes(grid:GridInfo)` - reevaluates note values after actions
 
 ![GameBoardView UML 8.2.2](UML2)
-
-*(Fig. 8.2.2) CellLocation Struct UML Design*
-
-CellLocation(Struct)
-- Contains the following properties:
-    - `board: Grid`
-    - `block: Grid`
-    - `cell: Grid`
-
-![GameBoardView UML 8.2.3](UML3)
-
-*(Fig. 8.2.2) CellProperty Struct UML Design*
-
-CellProperty(Struct)
-- Contains the following properties:
-    - `location: CellLocation`
-    - `visible: Bool`
-    - `value: Int`
-    - `select: Bool`
-    - `note: <Int>`
-
-![GameBoardView UML 8.2.4](UML4)
-
-*(Fig. 8.2.2) Grid Struct UML Design*
-
-Grid(Struct)
-- Contains the following properties:
-    - `row: Int`
-    - `column: Int`
-
-![GameBoardView UML 8.2.5](UML5)
 
 *(Fig. 8.2.2) Data Struct UML Design*
 
 Data(Struct)
 - Contains the following properties:
-    - `table: [[CellProperty]]`
+    - `table: [[SudokuCell]]`
+
+![GameBoardView UML 8.2.3](UML3)
+
+*(Fig. 8.2.3) GridInfo Struct UML Design*
+
+GridInfo(Struct)
+- Contains the following properties:
+    - `row: Int`
+    - `column: Int`
+
+![GameBoardView UML 8.2.4](UML4)
+
+*(Fig. 8.2.4) CellPosition Struct UML Design*
+
+CellPosition(Struct)
+- Contains the following properties:
+    - `board: Grid`
+    - `block: Grid`
+    - `cell: Grid`
+- Contains the following methods:
+    - `init(): void` - sets board, block, cell's GridInfo to 0
+
+![GameBoardView UML 8.2.5](UML5)
+
+*(Fig. 8.2.5) Data Struct UML Design*
+
+BoardNotes(Class)
+- Contains the following properties:
+    - `column: [Set<Int>]`
+    - `row: [Set<Int>]`
+    - `block: [Set<Int>]`
+- Contains the following methods:
+    - `init(col:[Set<Int>], row: [Set<Int>], block: [Set<Int>]): void` - sets column,
+    row, and block to its respective array
+    - `updateNotes(position: CellPosition, value: Int): void` - checks if cell is visible
+    and update its notes accordingly
+
+![GameBoardView UML 8.2.6](UML6)
+
+*(Fig. 8.2.6) SudokuCell Class UML Design*
+
+SudokuCell(Class)
+- Contains the following properties:
+    - `value: Int`
+    - `visible: Bool`
+    - `position: CellPosition`
+    - `select: Bool`
+    - `note: Set<Int>`
+- Contains the following methods:
+    - `init(value:Int): void` - sets value
+    - `selectCell(): void` - sets a cell's visibility to true when there's only one candidate
+    left in the cell's note
+    - `updateNote(boardNotes: BoardNotes, isVisible:Bool): void` - shows intersection of 
+    the cell's boardNotes if visibility is false, empties note if visibility is true
+    - `==` - compares rows' and columns' SudokuCells to each other
 
 ## [UUID-010] SolverView detail
 

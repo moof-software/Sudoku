@@ -13,6 +13,8 @@ import SwiftData
 ///     - board: a GridInfo of the selected cell's position on the 9×9 board (row, col)
 ///     - block: a GridInfo of the selected cell's position inside its 3×3 block (blockRow, blockCol)
 ///     - cell: a GridInfo of the selected cell's position inside its 3×3 block cell (0...2, 0...2)
+/// - Methods:
+///     - `init()` : set each parameter to its respective `GridInfo`
 struct CellPosition: Codable {
     var board: GridInfo
     var block: GridInfo
@@ -25,33 +27,31 @@ struct CellPosition: Codable {
     }
 }
 
-/// A matrix of CellProperties conforming to data on a sudoku board
+/// A matrix of SudokuCell conforming to data on a sudoku board
 /// - Parameters:
-///     - table: a 9x9 matrix of CellProperties.
+///     - table: a 9x9 matrix of SudokuCell.
 struct Data {
     var table: [[SudokuCell]]
 }
 
 /// A SwiftData model representing a Sudoku puzzle.
 /// - Parameters:
-///     - table: Array variable containing a 9x9 matrix of CellProperty equal to 0.
-///     - numberPad: Array of CellProperty length 9
-///     - level: initial integer set to 0, will change as levels change
-///     - colNote: An array containing sets of integers with length 9
-///     - rowNote: An array containing sets of integers with length 9
-///     - blockNote: An array containing sets of integers with length 9
+///     - notes(@Transient): `BoardNotes` type initialized to 9 empty sets.
+///     - table: a 9x9 matrix of `SudokuCell`s creating the table
+///     - numberPad: an array of `SudokuCell`s creating the number pad.
 ///
 /// - Methods:
-///     - `init()`: calls seeding(), dataSwapper(), updateCellGridInfo(), makeTable(), and print table
+///     - `init()`: calls seeding(), dataSwapper(), updateCellGridInfo(), makeTable(),
+///        print table, and initNumberPad().
 ///     -  `seeding()` — builds a fully solved 9×9 grid by shuffling digits and laying them out with a
 ///        base pattern.
-///     - `dataSwapper()` — randomizes the solved grid by swapping rows within bands and columns within
-///        stacks while preserving validity.
-///     - `updateCellGridInfo()` — writes board/block/cell coordinates into each `CellProperty.position`.
-///     - `makeTable(level:)` — hides a fixed number of cells (currently 30) to produce a playable
+///     - `dataSwapper()` — randomizes the solved grid by swapping rows within bands and columns
+///        within stacks while preserving validity.
+///     - `updateCellGridInfo()` — writes board/block/cell coordinates into each `GridInfo`.
+///     - `makeTable(level:Int)` — hides a fixed number of cells based on level  to produce a playable
 ///        puzzle and derives initial notes.
-///     -  `print(table)` — dumps the backing 2D array for debugging.
 ///     - `initNumberPadData()` — populates the keypad model with values 1…9.
+///     - `refreshCellNotes(grid:GridInfo)` — reevalutates note values after actions.
 @Model
 class Sudoku {
     @Transient
@@ -93,7 +93,6 @@ class Sudoku {
     ///     - First, shuffle dice.
     ///     - Second, create a 9x9 table with 0s
     ///     - Third, fill out each row with valueIndex as calculated below
-    ///     - Fourth, randomize rows and columns with sudokuDataSwapper
     func seeding() {
         var seed: Int = 0
         var dice: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -145,7 +144,7 @@ class Sudoku {
 
     }
 
-    /// Function that computes and assigns board, block, and in-block cell coordinates for every cell.
+    /// Function that computes and assigns board, block, and cell coordinates for every cell.
     ///  - Logic:
     ///     - For every cell, update the GridInfo.
     ///         - For board, just update row and column
@@ -195,8 +194,14 @@ class Sudoku {
         }
     }
 
-    /// Function that removes a certain nuber of entries
-    ///
+    /// Functiont that turns visibility off for random cells and updates and refreshes notes
+    /// according to that visibility.
+    ///  - Parameters:
+    ///     - level: an integer corresponding to the number of blank cells
+    ///     according to each level.
+    ///  - Logic:
+    ///     - Randomly decides on a row and column and turns off visibility for
+    ///     that cell. Updates and refreshes notes according to this.
     func makeTable(level: Int) {
         var noteCounter = level
 
@@ -215,6 +220,13 @@ class Sudoku {
         }
     }
 
+    /// Function that refreshes each and every cell note according to updates on BoardNotes
+    /// and SudokuCell's notes update.
+    /// - Parameters:
+    ///     - grid: A GridInfo that provides the function with the cell's row and column info
+    /// - Logic:
+    ///     - Calculate block's location, then use `SudokuCell`'s `updateNote()` function
+    ///     to refresh and reprint each cell note.
     func refreshCellNotes(grid: GridInfo) {
         let row = grid.row
         let col = grid.col
@@ -223,15 +235,17 @@ class Sudoku {
         let blockCol = ((col / 3) * 3)
 
         for index in 0...8 {
+            // updating each cell's note in its column
             table[index][col].updateNote(
                 boardNotes: notes,
                 isVisible: table[index][col].visible
             )
+            // updating each cell's note in its row
             table[row][index].updateNote(
                 boardNotes: notes,
                 isVisible: table[row][index].visible
             )
-
+            // updating each cell's note in its block
             table[blockRow + (index / 3)][blockCol + (index % 3)]
                 .updateNote(
                     boardNotes: notes,
