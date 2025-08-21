@@ -30,11 +30,6 @@ struct BoardNotes: Codable {
     var row: [Set<Int>]
     var block: [Set<Int>]
 
-    init(col: [Set<Int>], row: [Set<Int>], block: [Set<Int>]) {
-        self.col = col
-        self.row = row
-        self.block = block
-    }
     /// Function for updating notes based on the cell's visibility.
     /// - Parameters:
     ///     - data: selected cell of type `SudokuCell`
