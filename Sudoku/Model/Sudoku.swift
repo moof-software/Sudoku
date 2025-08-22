@@ -69,6 +69,8 @@ class Sudoku {
         repeating: NumberPad(value: 0),
         count: 9
     )
+    var selectedNumber: Int?
+    var selectedCell: GridInfo?
 
     //    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     //    var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
