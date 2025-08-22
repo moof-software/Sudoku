@@ -1,14 +1,25 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " " : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        }
+      }
     },
     "%lld" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld/%lld" : {
       "localizations" : {
@@ -17,20 +28,54 @@
             "state" : "new",
             "value" : "%1$lld/%2$lld"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld"
+          }
         }
       }
     },
     "1" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1"
+          }
+        }
+      }
     },
     "2" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2"
+          }
+        }
+      }
     },
     "3" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3"
+          }
+        }
+      }
     },
     "Ads" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고"
+          }
+        }
+      }
     },
     "Camera" : {
       "localizations" : {
@@ -42,8 +87,35 @@
         }
       }
     },
+    "Cancel" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        }
+      }
+    },
     "Clear" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "삭제"
+          }
+        }
+      }
+    },
+    "Create" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "생성"
+          }
+        }
+      }
     },
     "Developers :" : {
       "localizations" : {
@@ -66,7 +138,14 @@
       }
     },
     "Effect" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "특수효과"
+          }
+        }
+      }
     },
     "End" : {
       "localizations" : {
@@ -89,7 +168,14 @@
       }
     },
     "Final Score" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최종 점수"
+          }
+        }
+      }
     },
     "Game" : {
       "localizations" : {
@@ -214,6 +300,16 @@
         }
       }
     },
+    "Previous game exists, remove and create new?" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이전 게임을 삭제하고 새로 시작할까요?"
+          }
+        }
+      }
+    },
     "Redoing..." : {
       "localizations" : {
         "ko" : {
@@ -234,6 +330,16 @@
         }
       }
     },
+    "Resume" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계속하기"
+          }
+        }
+      }
+    },
     "Score" : {
       "localizations" : {
         "ko" : {
@@ -245,10 +351,24 @@
       }
     },
     "Scores:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수:"
+          }
+        }
+      }
     },
     "Solve it!" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동풀이"
+          }
+        }
+      }
     },
     "Solver" : {
       "localizations" : {
@@ -261,7 +381,14 @@
       }
     },
     "Sound" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "음량"
+          }
+        }
+      }
     },
     "Staffs" : {
       "localizations" : {
@@ -280,10 +407,24 @@
       }
     },
     "Sudoku" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sudoku"
+          }
+        }
+      }
     },
     "Tile Pattern" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타일 패턴"
+          }
+        }
+      }
     },
     "Time" : {
       "localizations" : {
@@ -296,7 +437,14 @@
       }
     },
     "Time:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간:"
+          }
+        }
+      }
     },
     "Undoing..." : {
       "localizations" : {

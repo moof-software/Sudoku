@@ -150,9 +150,11 @@ struct GameBoardView: View {
                 //            - Button: Memo (label: pencil)
                 //                - Action: Toggle memoToggled
                 //                - Padding: 10
-                Button("", systemImage: "pencil") {
+                Button {
                     // change numberpadText to "Memo"
                     memoToggled.toggle()
+                } label: {
+                    Image(systemName: "pencil")
                 }
                 .padding(10)
             }
