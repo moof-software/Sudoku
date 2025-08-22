@@ -1,5 +1,5 @@
 //
-//  Cell.swift
+//  BlockView.swift
 //  Sudoku
 //
 //  Created by Hungu Lim on 1/26/25.
@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct Block: View {
+struct BlockView: View {
     @Query var sudoku: [Sudoku]
     let blockGrid: GridInfo
 
@@ -26,7 +26,7 @@ struct Block: View {
                     ForEach(0..<3, id: \.self) { row in
                         HStack {
                             ForEach(0..<3, id: \.self) { col in
-                                Cell(
+                                CellView(
                                     sudoku: lastSudoku,
                                     row: blockGrid.row * 3 + row,
                                     col: blockGrid.col * 3 + col
@@ -41,5 +41,5 @@ struct Block: View {
 }
 
 #Preview {
-    Block(blockGrid: GridInfo(row: 0, col: 0))
+    BlockView(blockGrid: GridInfo(row: 0, col: 0))
 }

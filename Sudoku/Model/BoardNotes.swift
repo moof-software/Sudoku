@@ -38,7 +38,7 @@ struct BoardNotes: Codable {
     ///     of its row, column, and block `BoardNotes`.
     ///     - If `data` is not visible, insert its value to all
     ///     of its row, column, and block `BoardNotes`.
-    mutating func updateNotes(data: SudokuCell) {
+    mutating func updateNotes(data: Cell) {
         let position = data.position.board
 
         if data.visible {

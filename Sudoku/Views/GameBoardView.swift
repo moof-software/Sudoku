@@ -94,7 +94,7 @@ struct GameBoardView: View {
                     .foregroundStyle(Color.gray.opacity(0.2))
                     .aspectRatio(1.0, contentMode: .fit)
 
-                Board()
+                BoardView()
                     .padding(1)
             }
             .padding()
@@ -167,12 +167,21 @@ struct GameBoardView: View {
                     .frame(maxWidth: .infinity, maxHeight: 70)
                     .background(Color.gray.opacity(0.2))
             } else {
-                ZStack(alignment: .center) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .frame(maxWidth: .infinity, maxHeight: 70)
-                        .foregroundStyle(Color.gray.opacity(0.2))
-
-                    NumberPad()
+                if let lastSudoku = sudokus.last {
+                    ZStack(alignment: .center) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .frame(maxWidth: .infinity, maxHeight: 70)
+                            .foregroundStyle(Color.gray.opacity(0.2))
+                        HStack {
+                            ForEach(0..<9, id: \.self) { index in
+                                NumberPadView(
+                                    sudoku: lastSudoku,
+                                    index: index
+                                )
+                            }
+                        }
+                        .padding()
+                    }
                 }
             }
             Spacer()
