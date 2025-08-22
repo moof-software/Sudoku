@@ -10,7 +10,7 @@ import Foundation
 struct NumberPad: Codable {
     var value: Int = 0
     var visible: Bool = true
-    
+
     init(value: Int) {
         self.value = value
     }

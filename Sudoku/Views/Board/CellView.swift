@@ -19,18 +19,18 @@ struct CellView: View {
                 sudoku.refreshCellNotes(
                     grid: sudoku.table[row][col].position.board
                 )
-                
+
                 print(
                     "My value: \(sudoku.table[row][col].value) - position: \(sudoku.table[row][col].position)"
                 )
             } else {
-                
-                    sudoku.table[row][col].selectCell()
-                    sudoku.notes.updateNotes(data: sudoku.table[row][col])
-                    sudoku.refreshCellNotes(
-                        grid: sudoku.table[row][col].position.board
-                    )
-                
+
+                sudoku.table[row][col].selectCell()
+                sudoku.notes.updateNotes(data: sudoku.table[row][col])
+                sudoku.refreshCellNotes(
+                    grid: sudoku.table[row][col].position.board
+                )
+
                 print("My note: \(sudoku.table[row][col].note)")
             }
         } label: {

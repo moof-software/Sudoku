@@ -11,7 +11,7 @@ import SwiftUI
 struct NumberPadView: View {
     @Bindable var sudoku: Sudoku
     var index: Int
-    
+
     var body: some View {
         Button {
             if sudoku.numberPad[index].visible {
