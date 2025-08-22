@@ -1,12 +1,11 @@
 //
-//  SudokuCell.swift
+//  Cell.swift
 //  Sudoku
 //
 //  Created by Hungu Lim on 8/19/25.
 //
 
 import Foundation
-import SwiftData
 
 /// Represents the position of a Sudoku Board
 ///  - Parameters:
@@ -32,7 +31,7 @@ struct GridInfo: Codable {
 ///     -`updateNote()`: shows the intersection of the cell's boardNotes if visibility is false for the cell's
 ///     value, and empties the note if visibility is true.
 ///     - `==` : compares rows' and columns' SudokuCells to each other
-struct SudokuCell: Codable {
+struct Cell: Codable {
     var value: Int = 0
     var visible: Bool = true
     var position: CellPosition = CellPosition()
@@ -46,9 +45,14 @@ struct SudokuCell: Codable {
     /// Funtion that automatically shows the value when there's only one candidate left in the cell's note.
     mutating func selectCell() {
 
-        if note.count == 1 {
-            visible = true
-            note.removeAll()
+        if visible {
+            visible = false
+            note.insert(value)
+        } else {
+            if note.count == 1 {
+                visible = true
+                note.removeAll()
+            }
         }
     }
 
@@ -82,7 +86,7 @@ struct SudokuCell: Codable {
         }
     }
 
-    static func == (lhs: SudokuCell, rhs: SudokuCell) -> Bool {
+    static func == (lhs: Cell, rhs: Cell) -> Bool {
         return lhs.position.cell.row == rhs.position.cell.row
             && lhs.position.cell.col == rhs.position.cell.col
     }

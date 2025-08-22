@@ -31,7 +31,7 @@ struct CellPosition: Codable {
 /// - Parameters:
 ///     - table: a 9x9 matrix of SudokuCell.
 struct Data {
-    var table: [[SudokuCell]]
+    var table: [[Cell]]
 }
 
 /// A SwiftData model representing a Sudoku puzzle.
@@ -60,13 +60,13 @@ class Sudoku {
         block: Array(repeating: Set<Int>(), count: 9)
     )
 
-    var table: [[SudokuCell]] = Array(
-        repeating: Array(repeating: SudokuCell(value: 0), count: 9),
+    var table: [[Cell]] = Array(
+        repeating: Array(repeating: Cell(value: 0), count: 9),
         count: 9
     )
 
-    var numberPad: [SudokuCell] = Array(
-        repeating: SudokuCell(value: 0),
+    var numberPad: [NumberPad] = Array(
+        repeating: NumberPad(value: 0),
         count: 9
     )
 
@@ -104,7 +104,7 @@ class Sudoku {
 
                 seed = dice[valueIndex]
 
-                table[row][col] = SudokuCell(value: seed)
+                table[row][col] = Cell(value: seed)
 
             }
         }
@@ -185,11 +185,7 @@ class Sudoku {
     ///     - Set the value of the number pad to 1-9
     private func initNumberPadData() {
         for index in 0...8 {
-            numberPad[index].position.board = GridInfo(row: 0, col: 0)
-            numberPad[index].position.block = GridInfo(row: 0, col: 0)
-            numberPad[index].position.cell = GridInfo(row: 0, col: index)
-
-            numberPad[index] = SudokuCell(value: index + 1)
+            numberPad[index] = NumberPad(value: index + 1)
         }
     }
 

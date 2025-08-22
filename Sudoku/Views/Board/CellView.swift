@@ -1,5 +1,5 @@
 //
-//  Cell.swift
+//  CellView.swift
 //  Sudoku
 //
 //  Created by Hungu Lim on 1/26/25.
@@ -7,22 +7,30 @@
 
 import SwiftUI
 
-struct Cell: View {
+struct CellView: View {
     @Bindable var sudoku: Sudoku
     var row: Int
     var col: Int
     var body: some View {
         Button {
             if sudoku.table[row][col].visible {
-                print(
-                    "My value: \(sudoku.table[row][col].value) - position: \(sudoku.table[row][col].position)"
-                )
-            } else {
                 sudoku.table[row][col].selectCell()
                 sudoku.notes.updateNotes(data: sudoku.table[row][col])
                 sudoku.refreshCellNotes(
                     grid: sudoku.table[row][col].position.board
                 )
+                
+                print(
+                    "My value: \(sudoku.table[row][col].value) - position: \(sudoku.table[row][col].position)"
+                )
+            } else {
+                
+                    sudoku.table[row][col].selectCell()
+                    sudoku.notes.updateNotes(data: sudoku.table[row][col])
+                    sudoku.refreshCellNotes(
+                        grid: sudoku.table[row][col].position.board
+                    )
+                
                 print("My note: \(sudoku.table[row][col].note)")
             }
         } label: {
@@ -48,5 +56,5 @@ struct Cell: View {
 
 #Preview {
     @Previewable @State var data: Sudoku = Sudoku(level: 0)
-    Cell(sudoku: data, row: 0, col: 0)
+    CellView(sudoku: data, row: 0, col: 0)
 }
