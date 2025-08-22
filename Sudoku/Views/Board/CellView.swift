@@ -13,31 +13,27 @@ struct CellView: View {
     var col: Int
     var body: some View {
         Button {
+            if let selectedCell = sudoku.selectedCell {
+                sudoku.table[selectedCell.row][selectedCell.col].select = false
+                sudoku.selectedCell = nil
+            }
+
             if sudoku.table[row][col].visible {
-                sudoku.table[row][col].selectCell()
-                sudoku.notes.updateNotes(data: sudoku.table[row][col])
-                sudoku.refreshCellNotes(
-                    grid: sudoku.table[row][col].position.board
-                )
-
-                print(
-                    "My value: \(sudoku.table[row][col].value) - position: \(sudoku.table[row][col].position)"
-                )
+                sudoku.selectedNumber = sudoku.table[row][col].value
             } else {
-
-                sudoku.table[row][col].selectCell()
-                sudoku.notes.updateNotes(data: sudoku.table[row][col])
-                sudoku.refreshCellNotes(
-                    grid: sudoku.table[row][col].position.board
-                )
-
-                print("My note: \(sudoku.table[row][col].note)")
+                sudoku.selectedNumber = nil
+                sudoku.table[row][col].select = true
+                sudoku.selectedCell = GridInfo(row: row, col: col)
             }
         } label: {
             if sudoku.table[row][col].visible {
                 Text(sudoku.table[row][col].value.formatted(.number))
                     .font(.system(size: 1000, weight: .bold))
                     .lineLimit(1)
+                    .foregroundStyle(
+                        sudoku.selectedNumber == sudoku.table[row][col].value
+                            ? Color.green : Color.white
+                    )
             } else {
                 CellNoteView(note: sudoku.table[row][col].note)
             }
@@ -51,6 +47,13 @@ struct CellView: View {
         .foregroundColor(.white)
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .aspectRatio(1, contentMode: .fit)
+        .overlay {
+            if sudoku.table[row][col].select {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.red, lineWidth: 5)
+                    .opacity(0.5)
+            }
+        }
     }
 }
 

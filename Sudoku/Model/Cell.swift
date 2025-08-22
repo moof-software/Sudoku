@@ -14,6 +14,11 @@ import Foundation
 struct GridInfo: Codable {
     let row: Int
     let col: Int
+
+    static func == (lhs: GridInfo, rhs: GridInfo) -> Bool {
+        return lhs.row == rhs.row
+            && lhs.col == rhs.col
+    }
 }
 
 /// All the properties of a cell as well as updating its note.
