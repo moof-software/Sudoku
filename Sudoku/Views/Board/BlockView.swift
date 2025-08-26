@@ -26,10 +26,12 @@ struct BlockView: View {
                     ForEach(0..<3, id: \.self) { row in
                         HStack {
                             ForEach(0..<3, id: \.self) { col in
+                                let localRow = blockGrid.row * 3 + row
+                                let localCol = blockGrid.col * 3 + col
                                 CellView(
                                     sudoku: lastSudoku,
-                                    row: blockGrid.row * 3 + row,
-                                    col: blockGrid.col * 3 + col
+                                    row: localRow,
+                                    col: localCol
                                 )
                             }
                         }

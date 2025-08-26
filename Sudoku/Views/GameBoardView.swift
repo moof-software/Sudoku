@@ -55,6 +55,7 @@ struct GameBoardView: View {
     @State var scoreText: String = String(localized: "Score")
     // toggling ScoreView as a sheet (temp)
     @State private var showScoreView: Bool = false
+    // @State private var hintState: Bool = false
     // toggling Number Pad to Memo
     @State private var memoToggled: Bool = false
 
@@ -141,6 +142,10 @@ struct GameBoardView: View {
                 Button {
                     // change boardText to "Providing hint..." for 3 seconds
                     changeBoardText(to: String(localized: "Hint"))
+                    // hintState.toggle()
+                    if let lastSudoku = sudokus.last {
+                        lastSudoku.showHint.toggle()
+                    }
                 } label: {
                     Text(String(localized: "Hint"))
                         .font(.custom("Chalkduster", size: 18))

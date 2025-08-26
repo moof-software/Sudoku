@@ -16,6 +16,10 @@ struct NumberPadView: View {
         if sudoku.selectedCell != nil {
             Button {
                 if sudoku.numberPad[index].visible {
+
+                    sudoku.checkNumberPadData(
+                        data: sudoku.numberPad[index].value
+                    )
                     print(
                         "NumberPad value: \(sudoku.numberPad[index].value)"
                     )
