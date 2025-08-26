@@ -142,7 +142,7 @@ struct GameBoardView: View {
                 Button {
                     // change boardText to "Providing hint..." for 3 seconds
                     changeBoardText(to: String(localized: "Hint"))
-                    //hintState.toggle()
+                    // hintState.toggle()
                     if let lastSudoku = sudokus.last {
                         lastSudoku.showHint.toggle()
                     }
