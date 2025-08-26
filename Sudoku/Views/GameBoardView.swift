@@ -55,7 +55,7 @@ struct GameBoardView: View {
     @State var scoreText: String = String(localized: "Score")
     // toggling ScoreView as a sheet (temp)
     @State private var showScoreView: Bool = false
-    //@State private var hintState: Bool = false
+    // @State private var hintState: Bool = false
     // toggling Number Pad to Memo
     @State private var memoToggled: Bool = false
 
