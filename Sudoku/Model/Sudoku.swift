@@ -71,6 +71,7 @@ class Sudoku {
     )
     var selectedNumber: Int?
     var selectedCell: GridInfo?
+    var showHint: Bool = false
 
     //    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     //    var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
@@ -251,6 +252,26 @@ class Sudoku {
                     ].visible
                 )
 
+        }
+    }
+
+    func checkNumberPadData(data: Int) {
+        if let targetCell = selectedCell {
+            let row = targetCell.row
+            let col = targetCell.col
+
+            if table[row][col].value == data {
+                selectedCell = nil
+                selectedNumber = data
+                table[row][col].select = false
+                table[row][col].visible = true
+                notes.updateNotes(data: table[row][col])
+                table[row][col].updateNote(
+                    boardNotes: notes,
+                    isVisible: table[row][col].visible
+                )
+                refreshCellNotes(grid: targetCell)
+            }
         }
     }
 }

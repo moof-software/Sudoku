@@ -35,7 +35,17 @@ struct CellView: View {
                             ? Color.green : Color.white
                     )
             } else {
-                CellNoteView(note: sudoku.table[row][col].note)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 2)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.gray.opacity(0.2))
+                        .foregroundStyle(Color.gray.opacity(0.2))
+                        .aspectRatio(1.0, contentMode: .fit)
+
+                    if sudoku.showHint {
+                        CellNoteView(note: sudoku.table[row][col].note)
+                    }
+                }
             }
         }
         #if os(macOS)
