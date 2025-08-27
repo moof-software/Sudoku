@@ -177,9 +177,10 @@ struct GameBoardView: View {
                 if let lastSudoku = sudokus.last {
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 4)
-                            .frame(maxWidth: .infinity, maxHeight: 70)
+                            .frame(maxWidth: .infinity, maxHeight: 60)
                             .foregroundStyle(Color.gray.opacity(0.2))
-                        HStack {
+                            .padding(4)
+                        HStack(spacing: 2) {
                             ForEach(0..<9, id: \.self) { index in
                                 NumberPadView(
                                     sudoku: lastSudoku,

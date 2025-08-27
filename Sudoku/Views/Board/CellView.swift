@@ -28,11 +28,11 @@ struct CellView: View {
         } label: {
             if sudoku.table[row][col].visible {
                 Text(sudoku.table[row][col].value.formatted(.number))
-                    .font(.system(size: 1000, weight: .bold))
+                    .font(.system(size: 1000, weight: .black))
                     .lineLimit(1)
                     .foregroundStyle(
                         sudoku.selectedNumber == sudoku.table[row][col].value
-                            ? Color.green : Color.white
+                            ? Color.blue : Color.white
                     )
             } else {
                 ZStack {
@@ -59,8 +59,8 @@ struct CellView: View {
         .aspectRatio(1, contentMode: .fit)
         .overlay {
             if sudoku.table[row][col].select {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.red, lineWidth: 5)
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.blue, lineWidth: 5)
                     .opacity(0.5)
             }
         }

@@ -27,7 +27,7 @@ struct NumberPadView: View {
             } label: {
                 if sudoku.numberPad[index].visible {
                     Text(sudoku.numberPad[index].value.formatted(.number))
-                        .font(.system(size: 1000, weight: .bold))
+                        .font(.system(size: 1000, weight: .black))
                         .lineLimit(1)
                 }
             }
