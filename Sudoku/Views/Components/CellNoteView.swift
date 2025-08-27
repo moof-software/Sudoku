@@ -20,11 +20,12 @@ struct CellNoteView: View {
 
             VStack {
                 ForEach(0..<3, id: \.self) { row in
-                    HStack {
+                    HStack(alignment: .center) {
                         ForEach(0..<3, id: \.self) { col in
                             let data: Int = row * 3 + col + 1
 
                             Text(note.contains(data) ? "\(data)" : " ")
+                                .fontWeight(.bold)
                         }
                     }
                 }

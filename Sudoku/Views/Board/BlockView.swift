@@ -22,9 +22,9 @@ struct BlockView: View {
                 .aspectRatio(1.0, contentMode: .fit)
 
             if let lastSudoku = sudoku.last {
-                VStack {
+                VStack(spacing: 2) {
                     ForEach(0..<3, id: \.self) { row in
-                        HStack {
+                        HStack(spacing: 2) {
                             ForEach(0..<3, id: \.self) { col in
                                 let localRow = blockGrid.row * 3 + row
                                 let localCol = blockGrid.col * 3 + col

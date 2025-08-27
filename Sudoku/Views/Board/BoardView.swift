@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BoardView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 3) {
             ForEach(0..<3) { row in
-                HStack {
+                HStack(spacing: 3) {
                     ForEach(0..<3) { col in
                         let blockGrid = GridInfo(row: row, col: col)
                         BlockView(blockGrid: blockGrid)
