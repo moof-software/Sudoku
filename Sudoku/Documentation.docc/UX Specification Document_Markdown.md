@@ -19,23 +19,25 @@ Version: 1.0
 ## [UXID-001] Home Screen
 
 ### About Button
-- Connects to UXID-002
+- Connects to [UXID-002](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.dpoanieffg3k)
 - SRS Specification: [FR-12](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.fmuuu6hwk57s)
 
 ### Game Center Button
-- Connects to UXID-003
+- Connects to [UXID-003](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.9cwtax9jb0f0)
 - SRS Specification: [FR-13](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.50xp59pzd4z6)
 
 ### Help Button
-- Connects to UXID-004
+- Connects to [UXID-004](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.wgh1tju4ajc5)
 - SRS Specification: [FR-10](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.odm1es84wbfa)
 
 ### Game Button
-- Connects to UXID-005
+- Connects to [UXID-005](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.7p01o0qwqv16)
 
 ### Solver Button
-- Connects to UXID-009
+- Connects to [UXID-009](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.c1mlmt2yuhtz)
 - SRS Specification: [FR-17](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.zfwj258w69vy)
+- Version 1.0: Will be implemented using brute force(trying different numbers until it works), no camera.
+- Version 2.0: Implement ML and AI solution techinques for faster solving process, implement camera technique as well.
 
 ### Ads
 - SRS Specification: [FR-8](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.pwq3ze6fy2p)
@@ -52,7 +54,7 @@ Version: 1.0
 ## [UXID-002] About Screen [FR-12](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.fmuuu6hwk57s)
 
 ### Back Button 
-- Connects to UXID-001
+- Connects to [UXID-001](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.cf1ohv9768b3)
 
 ### Version Info Text
 - There will be information about version history
@@ -62,14 +64,10 @@ Version: 1.0
 - There will be information about developers
 - 개발자들의 정보가 나온다.
 
-### Easter Egg
-- There will be a separate page connecting to an easter egg when clicked
-- This will actually not be a button but disguised as a small logo on the bottom for example like a true “easter egg”
-- 버튼을 누르면 이스터 에그의 페이지로 넘어간다 (버튼 숨길 예정)
 
-### GNU License Info Text
-- There will be GNU license information
-- GNU License에 관한 정보가 나온다.
+### MIT License Info Text
+- There will be MIT license information
+- MIT License에 관한 정보가 나온다.
 
 
 ## [UXID-003] Game Center [FR-13](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.50xp59pzd4z6)
@@ -84,7 +82,7 @@ Version: 1.0
 ## [UXID-004] Help Screen [FR-10](https://docs.google.com/document/d/1xX3HZR1scRv5GxhuiEIKgagxRFud7o2wgEuFuMolt6w/edit?tab=t.0#heading=h.odm1es84wbfa)
 
 ### Back Button 
-- Connects to UXID-001
+- Connects to [UXID-001](https://docs.google.com/document/d/1u0TZvop8mj24Qc8F9U_8gmA_11DPu_a0_A2RHEuICnk/edit?tab=t.0#heading=h.cf1ohv9768b3)
 
 ### Next Button
 - Takes user to the next page of tutorial
@@ -95,7 +93,7 @@ Version: 1.0
 ### Home Button
 - Connects to UXID-001
 
-## [UXID-005] Game Screen (TBD, v2.0)
+## [UXID-005] Game Screen (TBD, v3.0)
 
 ### Back Button 
 - Connects to UXID-001
