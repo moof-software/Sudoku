@@ -5,6 +5,7 @@
 //  Created by Hyunsu Lim on 7/14/25.
 //
 
+import GameKit
 import SwiftUI
 
 /// View containing About, Help, Game, Solver, LeaderBoard, and Setting buttons.
@@ -73,9 +74,11 @@ struct GameHomeView: View {
                     }
                     .padding()
                     .sheet(
-                        isPresented: $showAboutView, content: {
+                        isPresented: $showAboutView,
+                        content: {
                             AboutView()
-                        })
+                        }
+                    )
 
                     Spacer()
 
@@ -83,7 +86,7 @@ struct GameHomeView: View {
                     NavigationLink {
                         HelpView()
                     } label: {
-//                        Image(systemName: "questionmark.circle")
+                        //                        Image(systemName: "questionmark.circle")
                         IconButtonView(iconName: "questionmark.circle")
                     }
                     .padding()
@@ -96,7 +99,10 @@ struct GameHomeView: View {
                     // Connect to Game page
                     path.append(.levelView)
                 } label: {
-                    IconNameButtonView(icon: "gamecontroller.fill", title: String(localized: "Game"))
+                    IconNameButtonView(
+                        icon: "gamecontroller.fill",
+                        title: String(localized: "Game")
+                    )
                 }
 
                 // Solver Button -> SolverView()
@@ -104,7 +110,10 @@ struct GameHomeView: View {
                     // Connect to Solver Page
                     path.append(.solverView)
                 } label: {
-                    IconNameButtonView(icon: "wand.and.sparkles", title: String(localized: "Solver"))
+                    IconNameButtonView(
+                        icon: "wand.and.sparkles",
+                        title: String(localized: "Solver")
+                    )
                 }
 
                 // Ads
@@ -122,9 +131,11 @@ struct GameHomeView: View {
                     }
                     .padding()
                     .sheet(
-                        isPresented: $showLeaderView, content: {
+                        isPresented: $showLeaderView,
+                        content: {
                             LeaderBoardView()
-                        })
+                        }
+                    )
 
                     Spacer()
 
@@ -137,25 +148,43 @@ struct GameHomeView: View {
                     }
                     .padding()
                     .sheet(
-                        isPresented: $showSettingView, content: {
+                        isPresented: $showSettingView,
+                        content: {
                             SettingView()
-                        })
+                        }
+                    )
                 }
             }
-            .navigationDestination(for: Screen.self, destination: { view in
-                switch view {
-                case .levelView:
-                    LevelView(path: $path)
-                case .solverView:
-                    SolverView(path: $path)
-                case .boardView:
-                    GameBoardView(path: $path)
-                        .navigationBarBackButtonHidden(true)
-                case.solutionView:
-                    SolutionView(path: $path)
-                        .navigationBarBackButtonHidden(true)
+            .navigationDestination(
+                for: Screen.self,
+                destination: { view in
+                    switch view {
+                    case .levelView:
+                        LevelView(path: $path)
+                    case .solverView:
+                        SolverView(path: $path)
+                    case .boardView:
+                        GameBoardView(path: $path)
+                            .navigationBarBackButtonHidden(true)
+                    case .solutionView:
+                        SolutionView(path: $path)
+                            .navigationBarBackButtonHidden(true)
+                    }
                 }
-            })
+            )
+            .onAppear {
+                athenticateGameCenter()
+            }
+        }
+    }
+
+    func athenticateGameCenter() {
+        let localPlayer = GKLocalPlayer.local
+        localPlayer.authenticateHandler = { vc, error in
+            guard error == nil else {
+                print(error?.localizedDescription ?? "")
+                return
+            }
         }
     }
 }
