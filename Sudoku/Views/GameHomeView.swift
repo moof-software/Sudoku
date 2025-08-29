@@ -180,7 +180,7 @@ struct GameHomeView: View {
 
     func athenticateGameCenter() {
         let localPlayer = GKLocalPlayer.local
-        localPlayer.authenticateHandler = { vc, error in
+        localPlayer.authenticateHandler = { _, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
                 return
