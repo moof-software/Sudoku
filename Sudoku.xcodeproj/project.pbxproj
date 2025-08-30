@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		553F5ED52E25C3FE00E6805B /* snippet-extract in Frameworks */ = {isa = PBXBuildFile; productRef = 553F5ED42E25C3FE00E6805B /* snippet-extract */; };
+		7708A8892E627FD5004B3B0A /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 7708A8882E627FD5004B3B0A /* GoogleMobileAds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +34,22 @@
 		553F5EAF2E25B5AF00E6805B /* SudokuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7708A88B2E628176004B3B0A /* Exceptions for "Sudoku" folder in "Sudoku" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 553F5E952E25B5AD00E6805B /* Sudoku */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		553F5E982E25B5AD00E6805B /* Sudoku */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7708A88B2E628176004B3B0A /* Exceptions for "Sudoku" folder in "Sudoku" target */,
+			);
 			path = Sudoku;
 			sourceTree = "<group>";
 		};
@@ -56,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7708A8892E627FD5004B3B0A /* GoogleMobileAds in Frameworks */,
 				553F5ED52E25C3FE00E6805B /* snippet-extract in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,6 +134,7 @@
 			name = Sudoku;
 			packageProductDependencies = (
 				553F5ED42E25C3FE00E6805B /* snippet-extract */,
+				7708A8882E627FD5004B3B0A /* GoogleMobileAds */,
 			);
 			productName = Sudoku;
 			productReference = 553F5E962E25B5AD00E6805B /* Sudoku.app */;
@@ -206,6 +222,7 @@
 			packageReferences = (
 				553F5ED02E25BC2300E6805B /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				553F5ED32E25C3FE00E6805B /* XCRemoteSwiftPackageReference "swift-docc-plugin" */,
+				7708A8872E627FD5004B3B0A /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 553F5E972E25B5AD00E6805B /* Products */;
@@ -418,6 +435,7 @@
 				DEVELOPMENT_TEAM = 8LFY5C5JCQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sudoku/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -448,6 +466,7 @@
 				DEVELOPMENT_TEAM = 8LFY5C5JCQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sudoku/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -594,6 +613,14 @@
 				minimumVersion = 1.4.5;
 			};
 		};
+		7708A8872E627FD5004B3B0A /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -606,6 +633,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 553F5ED32E25C3FE00E6805B /* XCRemoteSwiftPackageReference "swift-docc-plugin" */;
 			productName = "snippet-extract";
+		};
+		7708A8882E627FD5004B3B0A /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7708A8872E627FD5004B3B0A /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

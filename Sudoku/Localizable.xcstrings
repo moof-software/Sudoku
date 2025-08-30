@@ -82,7 +82,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "수도쿠 캡쳐"
+            "value" : "스도쿠 캡쳐"
           }
         }
       }
@@ -270,6 +270,16 @@
         }
       }
     },
+    "Loading your sudoku game data..." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스도쿠 게임 데이타를 불러오는 중…"
+          }
+        }
+      }
+    },
     "Manual" : {
       "localizations" : {
         "ko" : {
@@ -407,11 +417,22 @@
       }
     },
     "Sudoku" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sudoku"
+          }
+        }
+      }
+    },
+    "Sudoku Pro" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스도쿠 프로"
           }
         }
       }

@@ -21,7 +21,7 @@ struct StartUpView: View {
     @Binding var showStartUpView: Bool
 
     @State private var loadingString: [String] =
-        "Loading your sudoku game data...".map { String($0) }
+        String(localized: "Loading your sudoku game data...").map { String($0) }
     @State private var showLoadingString: Bool = false
     private let timer = Timer.publish(every: 0.1, on: .main, in: .common)
         .autoconnect()
@@ -31,7 +31,7 @@ struct StartUpView: View {
         ZStack {
             Color.white.ignoresSafeArea()
 
-            Text("Sudoku")
+            Text(String(localized: "Sudoku Pro"))
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(Color.black)
