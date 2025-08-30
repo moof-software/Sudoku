@@ -116,9 +116,6 @@ struct GameHomeView: View {
                     )
                 }
 
-                // Ads
-                Text("Ads")
-
                 Spacer()
 
                 HStack {
@@ -154,6 +151,9 @@ struct GameHomeView: View {
                         }
                     )
                 }
+
+                // Ads
+                AdBannerView()
             }
             .navigationDestination(
                 for: Screen.self,
