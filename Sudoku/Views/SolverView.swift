@@ -23,16 +23,31 @@ import SwiftUI
 ///         - Action: TBD
 struct SolverView: View {
     @Binding var path: [Screen]
+
     var body: some View {
         VStack {
             Spacer()
-            Button(String(localized: "Manual")) {
-                // Connect to Solution Screen
+            Button {
+                // Connect to Solution page
                 path.append(.solutionView)
+            } label: {
+                IconNameButtonView(
+                    icon: "square.grid.3x3.topleft.filled",
+                    title: String(localized: "Manual")
+                )
             }
-            Button(String(localized: "Camera")) {
-                // TBD
+
+            // Solver Button -> SolverView()
+            Button {
+                // Connect to Solver Page
+                path.append(.solutionView)
+            } label: {
+                IconNameButtonView(
+                    icon: "camera.fill",
+                    title: String(localized: "Camera")
+                )
             }
+            .disabled(true)
             Spacer()
         }
     }

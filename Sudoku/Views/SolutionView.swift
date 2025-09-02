@@ -5,6 +5,7 @@
 //  Created by Jisu Lim on 7/15/25.
 //
 
+import SwiftData
 import SwiftUI
 
 /// View that provides an empty or partially filled Sudoku board that can be solved with a button.
@@ -23,26 +24,72 @@ import SwiftUI
 struct SolutionView: View {
 
     @Binding var path: [Screen]
-
     @State private var solutionBoardText = "Board"
+    @Query var sudokus: [Sudoku]
 
     var body: some View {
         VStack {
             Spacer()
-            Text(solutionBoardText)
-                .frame(maxWidth: .infinity, maxHeight: 500)
-                .background(Color.gray.opacity(0.2))
+            //        - ZStack(alignment: center)
+            //            - Rounded Rectangle (cornerRadius 4)
+            //                - Frame: width and height infinity
+            //                - Background: gray, opacity 0.2
+            //                - ForegroundStyle: gray, opacity 0.2
+            //                - aspectRatio: 1.0, contentMode: fit
+            //        - Board() with padding 1
+            ZStack(alignment: .center) {
+                RoundedRectangle(cornerRadius: 4)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.gray.opacity(0.2))
+                    .foregroundStyle(Color.gray.opacity(0.2))
+                    .aspectRatio(1.0, contentMode: .fit)
+
+                BoardView()
+                    .padding(1)
+            }
+            .padding()
             Button("Solve it!") {
                 // Changes board text
                 solutionBoardText = "Solved!"
             }
             .buttonStyle(.bordered)
             Spacer()
-            Button("Home") {
+            if let lastSudoku = sudokus.last {
+                ZStack(alignment: .center) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .frame(maxWidth: .infinity, maxHeight: 60)
+                        .foregroundStyle(Color.gray.opacity(0.2))
+                        .padding(4)
+                    HStack(spacing: 2) {
+                        ForEach(0..<9, id: \.self) { index in
+                            NumberPadView(
+                                sudoku: lastSudoku,
+                                index: index
+                            )
+                        }
+                    }
+                    .padding()
+                }
+            }
+            Spacer()
+            Spacer()
+            Button {
                 // Connect to GameHomeView
                 path.removeAll()
+            } label: {
+                VStack(alignment: .center) {
+                    Image(systemName: "gamecontroller.fill")
+                        .renderingMode(.original)
+                    Text(String(localized: "Game Home"))
+                        .fontWeight(.semibold)
+                }
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color.accentColor, lineWidth: 4)
+                }
             }
-            .buttonStyle(.borderedProminent)
+            Spacer()
         }
     }
 }

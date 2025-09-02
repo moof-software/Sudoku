@@ -187,6 +187,9 @@
         }
       }
     },
+    "Game Home" : {
+
+    },
     "Game Title" : {
       "extractionState" : "manual",
       "localizations" : {
