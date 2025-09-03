@@ -188,7 +188,14 @@
       }
     },
     "Game Home" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 홈"
+          }
+        }
+      }
     },
     "Game Title" : {
       "extractionState" : "manual",
@@ -415,17 +422,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "moof software\n      팀리더 : 임헌구\n   기술문서 : 임지수\n품질관리자 : 임현수"
-          }
-        }
-      }
-    },
-    "Sudoku" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sudoku"
           }
         }
       }

@@ -23,10 +23,10 @@ import SwiftUI
 struct HelpView: View {
     @State private var scrolledID: Int? = 0
     private var images: [Image] = [
-        Image("HelpView"),
-        Image("HelpView"),
-        Image("HelpView"),
-        Image("HelpView")
+        Image("help1"),
+        Image("help2"),
+        Image("help3"),
+        Image("help4")
     ]
 
     var body: some View {

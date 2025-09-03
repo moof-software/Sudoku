@@ -187,21 +187,17 @@ Quality manager: Hyunsu Lim
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBb-bY-qFS" userLabel="helpPageScrollView">
-                                <rect key="frame" x="16" y="100" width="343" height="635"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDn-cE-KV9">
+                                <rect key="frame" x="0.0" y="100" width="375" height="644"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-d0-ilJ">
-                                        <rect key="frame" x="135" y="609" width="73" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </pageControl>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GameHomeView Help.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vu2-w5-l4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="635"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="help1" translatesAutoresizingMaskIntoConstraints="NO" id="esy-hW-I7E">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="644"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
-                                <viewLayoutGuide key="contentLayoutGuide" id="bEw-Q7-B7l"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="Myw-Kj-jks"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="abi-Kg-7kZ"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="ZQR-18-Pw1"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MLP-Ao-Jda"/>
@@ -210,7 +206,7 @@ Quality manager: Hyunsu Lim
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feD-vA-yBj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="4"/>
+            <point key="canvasLocation" x="860" y="3.6945812807881775"/>
         </scene>
         <!--LevelView-->
         <scene sceneID="drH-5v-zPR">
@@ -1910,7 +1906,6 @@ Quality manager: Hyunsu Lim
         </scene>
     </scenes>
     <resources>
-        <image name="GameHomeView Help.png" width="284" height="612.5"/>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="arrow.counterclockwise" catalog="system" width="110" height="128"/>
         <image name="arrow.forward" catalog="system" width="128" height="95"/>
@@ -1919,6 +1914,7 @@ Quality manager: Hyunsu Lim
         <image name="gamecontroller.circle" catalog="system" width="128" height="123"/>
         <image name="gamecontroller.fill" catalog="system" width="128" height="79"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
+        <image name="help1" width="942" height="1705"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="music.quarternote.3" catalog="system" width="128" height="102"/>
