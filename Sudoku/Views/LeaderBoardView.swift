@@ -38,10 +38,10 @@ struct LeaderBoardView: View {
                 // Leaderboard Screen
                 HStack {
                     VStack(alignment: .trailing) {
-                        Text("high score:")
-                        Text("games played:")
-                        Text("perfect games:")
-                        Text("playtime:")
+                        Text(String(localized: "high score:"))
+                        Text(String(localized: "games played:"))
+                        Text(String(localized: "perfect games:"))
+                        Text(String(localized: "playtime:"))
                     }
                     VStack(alignment: .leading) {
                         Text("\(highScore)")
@@ -59,7 +59,7 @@ struct LeaderBoardView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("reset") {
+                    Button(String(localized: "reset")) {
                         // please put action in
                     }
                     .padding(.horizontal)
@@ -67,21 +67,21 @@ struct LeaderBoardView: View {
             }
             Spacer()
             BestScoreView(
-                level: "Easy",
+                level: String(localized: "Easy"),
                 bestScore: bestScore,
                 bestRun: bestRun,
                 bestTime: bestTime
             )
             Spacer()
             BestScoreView(
-                level: "Medium",
+                level: String(localized: "Medium"),
                 bestScore: bestScore,
                 bestRun: bestRun,
                 bestTime: bestTime
             )
             Spacer()
             BestScoreView(
-                level: "Hard",
+                level: String(localized: "Hard"),
                 bestScore: 83498,
                 bestRun: 27,
                 bestTime: bestTime
