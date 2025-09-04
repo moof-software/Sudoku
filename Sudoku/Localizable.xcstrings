@@ -37,39 +37,6 @@
         }
       }
     },
-    "1" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1"
-          }
-        }
-      }
-    },
-    "2" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2"
-          }
-        }
-      }
-    },
-    "3" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3"
-          }
-        }
-      }
-    },
     "Ads" : {
       "localizations" : {
         "ko" : {
@@ -81,16 +48,74 @@
       }
     },
     "Advanced" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "추가 기능"
+          }
+        }
+      }
+    },
+    "After a tile match, auto-select all tiles with the same number" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "빈 스도쿠 칸의 값을 맞추면, 자동으로 같은 값을 화면에 표시해 주는 기능입니다 "
+          }
+        }
+      }
+    },
+    "Always show status bar when playing a game" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 실행 중 항상 상태바를 표시하는 기능입니다"
+          }
+        }
+      }
+    },
+    "At game end, compare scores using level best score instead of the overall best" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스도쿠 게임이 완료 될 때, 전체 최고 점수 기록 대신하여 난이도별 최고 점수를 기록하게 됩니다"
+          }
+        }
+      }
     },
     "best run:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기록 횟수:"
+          }
+        }
+      }
     },
     "best score:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최고 점수:"
+          }
+        }
+      }
     },
     "best time:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최단 시간:"
+          }
+        }
+      }
     },
     "Camera" : {
       "localizations" : {
@@ -108,17 +133,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "취소"
-          }
-        }
-      }
-    },
-    "Clear" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "삭제"
           }
         }
       }
@@ -153,13 +167,22 @@
         }
       }
     },
-    "Effect" : {
-      "extractionState" : "stale",
+    "Effects Volume" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "특수효과"
+            "value" : "효과음 음량"
+          }
+        }
+      }
+    },
+    "Enable the Game Center for leaderboards and score uploads" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 센터에 점수를 기록하고, 리더 보드를 사용하게 합니다 "
           }
         }
       }
@@ -204,6 +227,16 @@
         }
       }
     },
+    "Game Center" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 센터"
+          }
+        }
+      }
+    },
     "Game Home" : {
       "localizations" : {
         "ko" : {
@@ -232,7 +265,14 @@
       }
     },
     "games played:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 횟수"
+          }
+        }
+      }
     },
     "Hard" : {
       "localizations" : {
@@ -244,8 +284,35 @@
         }
       }
     },
+    "Hide Timer" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타이머 감추기"
+          }
+        }
+      }
+    },
+    "Hide timer while playing (total time shown at the end of session)" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 실행 중 타이머 숨김 ( 게임 종료시 총 소요 시간은 표시됨 )"
+          }
+        }
+      }
+    },
     "high score:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최고 점수"
+          }
+        }
+      }
     },
     "Hint" : {
       "localizations" : {
@@ -268,7 +335,14 @@
       }
     },
     "Interface" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용 편의 기능"
+          }
+        }
+      }
     },
     "Levels" : {
       "localizations" : {
@@ -336,6 +410,16 @@
         }
       }
     },
+    "Melody Volume" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배경음 음량"
+          }
+        }
+      }
+    },
     "Memo" : {
       "localizations" : {
         "ko" : {
@@ -346,14 +430,55 @@
         }
       }
     },
+    "Move slider to change the volume of the effects" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "슬라이더을 움직여서 효과음 음량을 조절하세요"
+          }
+        }
+      }
+    },
+    "Move slider to change the volume of the melody" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "슬라이더을 움직여서 배경음 음량을 조절하세요"
+          }
+        }
+      }
+    },
     "none" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "없음"
+          }
+        }
+      }
     },
     "perfect games:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "완료 게임수:"
+          }
+        }
+      }
     },
     "playtime:" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 시간:"
+          }
+        }
+      }
     },
     "Previous game exists, remove and create new?" : {
       "localizations" : {
@@ -376,7 +501,14 @@
       }
     },
     "reset" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "초기화"
+          }
+        }
+      }
     },
     "Restart" : {
       "localizations" : {
@@ -418,6 +550,16 @@
         }
       }
     },
+    "Show Status Bar" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "상태바 보이기"
+          }
+        }
+      }
+    },
     "Solve it!" : {
       "localizations" : {
         "ko" : {
@@ -438,19 +580,15 @@
         }
       }
     },
-    "Sound" : {
-      "extractionState" : "stale",
+    "Sounds" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "음량"
+            "value" : "소리 조절"
           }
         }
       }
-    },
-    "Sounds" : {
-
     },
     "Staffs" : {
       "localizations" : {
@@ -478,17 +616,6 @@
         }
       }
     },
-    "Tile Pattern" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "타일 패턴"
-          }
-        }
-      }
-    },
     "Time" : {
       "localizations" : {
         "ko" : {
@@ -510,7 +637,14 @@
       }
     },
     "toggle" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "toggle"
+          }
+        }
+      }
     },
     "Undoing..." : {
       "localizations" : {
@@ -518,6 +652,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "실행취소"
+          }
+        }
+      }
+    },
+    "Use Auto-Select" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동 선택 사용"
+          }
+        }
+      }
+    },
+    "Use Level Best Score" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "난이도 별 최고 점수 기록"
           }
         }
       }
@@ -533,7 +687,14 @@
       }
     },
     "Volume" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "음량"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -19,13 +19,13 @@ struct BestScoreView: View {
                 .frame(width: 150, alignment: .center)
                 .font(.custom("Chalkduster", size: 18))
             VStack(alignment: .trailing) {
-                Text("best score:")
-                Text("best run:")
-                Text("best time:")
+                Text(String(localized: "best score:"))
+                Text(String(localized: "best run:"))
+                Text(String(localized: "best time:"))
             }
             VStack(alignment: .leading) {
                 if bestScore == 0 {
-                    Text("none")
+                    Text(String(localized: "none"))
                         .foregroundStyle(Color.red)
                     Text(" ")
                     Text(" ")
@@ -46,5 +46,10 @@ struct BestScoreView: View {
 }
 
 #Preview {
-    BestScoreView(level: "Easy", bestScore: 0, bestRun: 0, bestTime: Date.now)
+    BestScoreView(
+        level: String(localized: "Easy"),
+        bestScore: 0,
+        bestRun: 0,
+        bestTime: Date.now
+    )
 }

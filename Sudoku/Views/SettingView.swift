@@ -43,62 +43,83 @@ struct SettingView: View {
             Section(String(localized: "Sounds")) {
                 SettingSlideBarView(
                     imageName: "music.quarternote.3",
-                    title: "Melody Volume",
+                    title: String(localized: "Melody Volume"),
                     description:
-                        "Move slider to change the volume of the melody",
+                        String(
+                            localized:
+                                "Move slider to change the volume of the melody"
+                        ),
                     sliderType: true
                 )
                 SettingSlideBarView(
                     imageName: "waveform.path",
-                    title: "Effects Volume",
+                    title: String(localized: "Effects Volume"),
                     description:
-                        "Move slider to change the volume of the effects",
+                        String(
+                            localized:
+                                "Move slider to change the volume of the effects"
+                        ),
                     sliderType: true
                 )
             }
             .padding(.vertical, 4)
             // Effect Section
-            Section("Game") {
+            Section(String(localized: "Game")) {
                 SettingSlideBarView(
                     imageName: "square",
-                    title: "Use Auto-Select",
+                    title: String(localized: "Use Auto-Select"),
                     description:
-                        "After a tile match, auto-select all tiles with the same number",
+                        String(
+                            localized:
+                                "After a tile match, auto-select all tiles with the same number"
+                        ),
                     sliderType: false
                 )
                 SettingSlideBarView(
                     imageName: "square.grid.3x3.middle.filled",
-                    title: "Use Level Best Score",
+                    title: String(localized: "Use Level Best Score"),
                     description:
-                        "At game end, compare scores using level best score instead of the overall best",
+                        String(
+                            localized:
+                                "At game end, compare scores using level best score instead of the overall best"
+                        ),
                     sliderType: false
                 )
             }
             .padding(.vertical, 4)
             // Tile Pattern Section
-            Section("Interface") {
+            Section(String(localized: "Interface")) {
                 SettingSlideBarView(
                     imageName: "battery.75percent",
-                    title: "Show Status Bar",
+                    title: String(localized: "Show Status Bar"),
                     description:
-                        "Always show status bar when playing a game",
+                        String(
+                            localized:
+                                "Always show status bar when playing a game"
+                        ),
                     sliderType: false
                 )
                 SettingSlideBarView(
                     imageName: "timer",
-                    title: "Hide Timer",
+                    title: String(localized: "Hide Timer"),
                     description:
-                        "Hide timer while playing (total time shown at the end of session)",
+                        String(
+                            localized:
+                                "Hide timer while playing (total time shown at the end of session)"
+                        ),
                     sliderType: false
                 )
             }
             .padding(.vertical, 4)
-            Section("Advanced") {
+            Section(String(localized: "Advanced")) {
                 SettingSlideBarView(
                     imageName: "gamecontroller.circle",
-                    title: "Game Center",
+                    title: String(localized: "Game Center"),
                     description:
-                        "Enable the Game Center for leaderboards and score uploads",
+                        String(
+                            localized:
+                                "Enable the Game Center for leaderboards and score uploads"
+                        ),
                     sliderType: false
                 )
             }
