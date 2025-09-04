@@ -40,7 +40,7 @@ struct SettingView: View {
     var body: some View {
         VStack {
             // Sound Section
-            Section("Sounds") {
+            Section(String(localized: "Sounds")) {
                 SettingSlideBarView(
                     imageName: "music.quarternote.3",
                     title: "Melody Volume",
