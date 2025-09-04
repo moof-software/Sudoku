@@ -38,6 +38,7 @@
       }
     },
     "1" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -48,6 +49,7 @@
       }
     },
     "2" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -58,6 +60,7 @@
       }
     },
     "3" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -76,6 +79,18 @@
           }
         }
       }
+    },
+    "Advanced" : {
+
+    },
+    "best run:" : {
+
+    },
+    "best score:" : {
+
+    },
+    "best time:" : {
+
     },
     "Camera" : {
       "localizations" : {
@@ -98,6 +113,7 @@
       }
     },
     "Clear" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -138,6 +154,7 @@
       }
     },
     "Effect" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -214,6 +231,9 @@
         }
       }
     },
+    "games played:" : {
+
+    },
     "Hard" : {
       "localizations" : {
         "ko" : {
@@ -223,6 +243,9 @@
           }
         }
       }
+    },
+    "high score:" : {
+
     },
     "Hint" : {
       "localizations" : {
@@ -243,6 +266,9 @@
           }
         }
       }
+    },
+    "Interface" : {
+
     },
     "Levels" : {
       "localizations" : {
@@ -320,6 +346,15 @@
         }
       }
     },
+    "none" : {
+
+    },
+    "perfect games:" : {
+
+    },
+    "playtime:" : {
+
+    },
     "Previous game exists, remove and create new?" : {
       "localizations" : {
         "ko" : {
@@ -339,6 +374,9 @@
           }
         }
       }
+    },
+    "reset" : {
+
     },
     "Restart" : {
       "localizations" : {
@@ -401,6 +439,7 @@
       }
     },
     "Sound" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -409,6 +448,9 @@
           }
         }
       }
+    },
+    "Sounds" : {
+
     },
     "Staffs" : {
       "localizations" : {
@@ -437,6 +479,7 @@
       }
     },
     "Tile Pattern" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -466,6 +509,9 @@
         }
       }
     },
+    "toggle" : {
+
+    },
     "Undoing..." : {
       "localizations" : {
         "ko" : {
@@ -485,6 +531,9 @@
           }
         }
       }
+    },
+    "Volume" : {
+
     }
   },
   "version" : "1.0"

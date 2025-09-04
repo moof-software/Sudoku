@@ -39,46 +39,70 @@ struct SettingView: View {
 
     var body: some View {
         VStack {
-            Spacer()
             // Sound Section
-            Section {
-                Toggle("Sound", isOn: $soundOn)
-                    .padding()
-                    .toggleStyle(SwitchToggleStyle(tint: .blue))
+            Section("Sounds") {
+                SettingSlideBarView(
+                    imageName: "music.quarternote.3",
+                    title: "Melody Volume",
+                    description:
+                        "Move slider to change the volume of the melody",
+                    sliderType: true
+                )
+                SettingSlideBarView(
+                    imageName: "waveform.path",
+                    title: "Effects Volume",
+                    description:
+                        "Move slider to change the volume of the effects",
+                    sliderType: true
+                )
             }
+            .padding(.vertical, 4)
             // Effect Section
-            Section {
-                Picker("Effect", selection: $selectedEffect) {
-                    Text("1").tag(1)
-                    Text("2").tag(2)
-                    Text("3").tag(3)
-                }
-                .padding(.horizontal)
-                .pickerStyle(.segmented)
-            } header: {
-                HStack {
-                    Text("Effect")
-                        .padding(.horizontal)
-                    Spacer()
-                }
+            Section("Game") {
+                SettingSlideBarView(
+                    imageName: "square",
+                    title: "Use Auto-Select",
+                    description:
+                        "After a tile match, auto-select all tiles with the same number",
+                    sliderType: false
+                )
+                SettingSlideBarView(
+                    imageName: "square.grid.3x3.middle.filled",
+                    title: "Use Level Best Score",
+                    description:
+                        "At game end, compare scores using level best score instead of the overall best",
+                    sliderType: false
+                )
             }
+            .padding(.vertical, 4)
             // Tile Pattern Section
-            Section {
-                Picker("Tile Pattern", selection: $selectedPattern) {
-                    Text("1").tag(1)
-                    Text("2").tag(2)
-                    Text("3").tag(3)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-            } header: {
-                HStack {
-                    Text("Tile Pattern")
-                        .padding(.horizontal)
-                    Spacer()
-                }
+            Section("Interface") {
+                SettingSlideBarView(
+                    imageName: "battery.75percent",
+                    title: "Show Status Bar",
+                    description:
+                        "Always show status bar when playing a game",
+                    sliderType: false
+                )
+                SettingSlideBarView(
+                    imageName: "timer",
+                    title: "Hide Timer",
+                    description:
+                        "Hide timer while playing (total time shown at the end of session)",
+                    sliderType: false
+                )
             }
-            Spacer()
+            .padding(.vertical, 4)
+            Section("Advanced") {
+                SettingSlideBarView(
+                    imageName: "gamecontroller.circle",
+                    title: "Game Center",
+                    description:
+                        "Enable the Game Center for leaderboards and score uploads",
+                    sliderType: false
+                )
+            }
+            .padding(.vertical, 4)
         }
     }
 }

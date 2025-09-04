@@ -22,22 +22,71 @@ import SwiftUI
 ///         - Default must be "Leaderboard Screen"
 
 struct LeaderBoardView: View {
-    @State private var displayedText = "Leaderboard Screen"
+    @State private var highScore = 83498
+    @State private var gamesPlayed = 122
+    @State private var perfectGames = 122
+    @State private var playTime = Date.now
+
+    @State private var bestScore = 0
+    @State private var bestRun = 0
+    @State private var bestTime = Date.now
 
     var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                // Clear Button
-                Button("Clear") {
-                    // Change text from "Leaderboard Screen" to "Cleared"
-                    displayedText = "Cleared"
+        NavigationStack {
+            Spacer()
+            VStack {
+                // Leaderboard Screen
+                HStack {
+                    VStack(alignment: .trailing) {
+                        Text("high score:")
+                        Text("games played:")
+                        Text("perfect games:")
+                        Text("playtime:")
+                    }
+                    VStack(alignment: .leading) {
+                        Text("\(highScore)")
+                            .foregroundStyle(Color.blue)
+                        Text("\(gamesPlayed)")
+                        Text("\(perfectGames)")
+                        Text(
+                            playTime,
+                            format: .dateTime.hour(.twoDigits(amPM: .omitted))
+                                .minute().second()
+                        )
+                    }
+                    .fontWeight(.bold)
                 }
-                .padding()
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("reset") {
+                        // please put action in
+                    }
+                    .padding(.horizontal)
+                }
             }
             Spacer()
-            // Leaderboard Screen
-            Text(displayedText)
+            BestScoreView(
+                level: "Easy",
+                bestScore: bestScore,
+                bestRun: bestRun,
+                bestTime: bestTime
+            )
+            Spacer()
+            BestScoreView(
+                level: "Medium",
+                bestScore: bestScore,
+                bestRun: bestRun,
+                bestTime: bestTime
+            )
+            Spacer()
+            BestScoreView(
+                level: "Hard",
+                bestScore: 83498,
+                bestRun: 27,
+                bestTime: bestTime
+            )
+            Spacer()
             Spacer()
         }
     }
