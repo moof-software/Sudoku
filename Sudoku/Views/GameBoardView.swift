@@ -227,7 +227,7 @@ struct GameBoardView: View {
                 )
             }
             Spacer()
-            Text("Ads")
+            AdBannerView()
         }
     }
     /// Temporarily change `boardText` to a message and revert back after 3 seconds.

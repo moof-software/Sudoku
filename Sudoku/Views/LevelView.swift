@@ -37,6 +37,7 @@ struct LevelView: View {
     @State var showResumeAlert: Bool = false
     var body: some View {
         VStack {
+            Spacer()
             Text(String(localized: "Levels"))
                 .font(.custom("Chalkduster", size: 28))
                 .bold()
@@ -96,6 +97,8 @@ struct LevelView: View {
                 }
                 .padding()
             }
+            Spacer()
+            AdBannerView()
 
         }
         .alert(
