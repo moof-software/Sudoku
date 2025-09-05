@@ -189,8 +189,8 @@ struct GameBoardView: View {
             Spacer()
             Text(
                 """
-                Completed RCB: 0 Combos: 0 Hints: 0 Undo: 0 
-                Basic Score: 0 Deductions: 0 
+                Completed RCB: 0 Combos: 0 Hints: 0 Undo: 0
+                Basic Score: 0 Deductions: 0
                 Add Score:0 Combo Score: 0
                 """
             )
