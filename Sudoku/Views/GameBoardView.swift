@@ -70,13 +70,14 @@ struct GameBoardView: View {
                 Spacer()
                 //            - Text: scoreText
                 //                - Font: Custom font "Chalkduster", size: 18
-                Text(scoreText)
+                Text(String(localized: "Time"))
                     .font(.custom("Chalkduster", size: 18))
-                    .padding()
+                Text(" x10")
+                    .font(.custom("Chalkduster", size: 18))
                 Spacer()
                 //            - Text: "Time"
                 //                - Font: Custom font "Chalkduster", size: 18
-                Text(String(localized: "Time"))
+                Text(scoreText)
                     .font(.custom("Chalkduster", size: 18))
                     .padding()
             }
@@ -114,7 +115,7 @@ struct GameBoardView: View {
                 } label: {
                     Image(systemName: "arrow.counterclockwise")
                 }
-                .padding(10)
+                .padding(20)
                 //            - Button: Undo (label: arrow.left)
                 //                - Action: changeBoardText("Undoing...")
                 //                - Padding: 10
@@ -139,6 +140,7 @@ struct GameBoardView: View {
                 //                "Chalkduster" pt 18)
                 //                - Action: changeBoardText("Providing Hint...")
                 //                - Padding: 10
+                Spacer()
                 Button {
                     // change boardText to "Providing hint..." for 3 seconds
                     changeBoardText(to: String(localized: "Hint"))
@@ -150,18 +152,10 @@ struct GameBoardView: View {
                     Text(String(localized: "Hint"))
                         .font(.custom("Chalkduster", size: 18))
                 }
-                .padding(10)
-                Spacer()
+                .padding(20)
                 //            - Button: Memo (label: pencil)
                 //                - Action: Toggle memoToggled
                 //                - Padding: 10
-                Button {
-                    // change numberpadText to "Memo"
-                    memoToggled.toggle()
-                } label: {
-                    Image(systemName: "pencil")
-                }
-                .padding(10)
             }
             //        - Text
             //            - Conditional operator relying on memoToggled
@@ -193,6 +187,15 @@ struct GameBoardView: View {
                 }
             }
             Spacer()
+            Text(
+                """
+                Completed RCB: 0 Combos: 0 Hints: 0 Undo: 0
+                Basic Score: 0 Deductions: 0
+                Add Score:0 Combo Score: 0
+                """
+            )
+            .multilineTextAlignment(.leading)
+            .padding(.horizontal)
             HStack {
                 //            - Button: End (label: "End" with custom font "Chalkduster" pt 18)
                 //                - Action: remove last path (connect back to levelView)
