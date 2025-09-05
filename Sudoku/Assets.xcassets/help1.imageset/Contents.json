@@ -14,6 +14,7 @@
       "scale" : "3x"
     },
     {
+      "filename" : "help1 1.png",
       "idiom" : "universal",
       "locale" : "en",
       "scale" : "1x"
@@ -26,6 +27,22 @@
     {
       "idiom" : "universal",
       "locale" : "en",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "help1k.png",
+      "idiom" : "universal",
+      "locale" : "ko",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "locale" : "ko",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "locale" : "ko",
       "scale" : "3x"
     }
   ],
