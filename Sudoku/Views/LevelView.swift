@@ -4,8 +4,6 @@
 //
 //  Created by Jisu Lim on 7/15/25.
 //
-
-import SwiftData
 import SwiftUI
 
 /// View that allows users to choose which level they are playing on or resume a current game.
@@ -31,10 +29,10 @@ import SwiftUI
 ///         - Action: Change GameBoardView `scoreText` to "Resumed Game", connect to GameBoardView
 struct LevelView: View {
     @Environment(\.modelContext) var modelContext
-    @Query var sudokus: [Sudoku]
+    @StateObject var sudoku: Sudoku = Sudoku()
     @Binding var path: [Screen]
 
-    @State var showResumeAlert: Bool = false
+//    @State var showResumeAlert: Bool = false
     var body: some View {
         VStack {
             Spacer()
@@ -45,12 +43,12 @@ struct LevelView: View {
             Button {
                 // Change "score" text in GameBoard View to easy
                 // Connect to GameBoardView
-                if sudokus.isEmpty {
-                    modelContext.insert(Sudoku(level: 35))
+//                if sudokus.isEmpty {
+                    sudoku.makeTable(level: 35)
                     path.append(.boardView)
-                } else {
-                    showResumeAlert.toggle()
-                }
+//                } else {
+//                    showResumeAlert.toggle()
+//                }
             } label: {
                 NameButtonView(title: String(localized: "Easy"), size: 32)
             }
@@ -59,12 +57,12 @@ struct LevelView: View {
             Button {
                 // Change "score" text in GameBoard View to medium
                 // Connect to GameBoardView
-                if sudokus.isEmpty {
-                    modelContext.insert(Sudoku(level: 42))
+//                if sudokus.isEmpty {
+                sudoku.makeTable(level: 42)
                     path.append(.boardView)
-                } else {
-                    showResumeAlert.toggle()
-                }
+//                } else {
+//                    showResumeAlert.toggle()
+//                }
             } label: {
                 NameButtonView(title: String(localized: "Medium"), size: 32)
             }
@@ -73,12 +71,12 @@ struct LevelView: View {
             Button {
                 // Change "score" text in GameBoard View to hard
                 // Connect to GameBoardView
-                if sudokus.isEmpty {
-                    modelContext.insert(Sudoku(level: 51))
+//                if sudokus.isEmpty {
+                    sudoku.makeTable(level: 51)
                     path.append(.boardView)
-                } else {
-                    showResumeAlert.toggle()
-                }
+//                } else {
+//                    showResumeAlert.toggle()
+//                }
             } label: {
                 NameButtonView(title: String(localized: "Hard"), size: 32)
             }
@@ -89,29 +87,29 @@ struct LevelView: View {
             //                // Connect to GameBoardView
             //                path.append(.boardView)
             //            }
-            if !sudokus.isEmpty {
-                Button {
-                    path.append(.boardView)
-                } label: {
-                    NameButtonView(title: String(localized: "Resume"), size: 32)
-                }
-                .padding()
-            }
+//            if !sudokus.isEmpty {
+//                Button {
+//                    path.append(.boardView)
+//                } label: {
+//                    NameButtonView(title: String(localized: "Resume"), size: 32)
+//                }
+//                .padding()
+//            }
             Spacer()
             AdBannerView()
 
         }
-        .alert(
-            "Previous game exists, remove and create new?",
-            isPresented: $showResumeAlert
-        ) {
-            Button("Create", role: .destructive) {
-                modelContext.delete(sudokus[0])
-                modelContext.insert(Sudoku(level: 35))
-                path.append(.boardView)
-            }
-            Button("Cancel", role: .cancel) {}
-        }
+//        .alert(
+//            "Previous game exists, remove and create new?",
+//            isPresented: $showResumeAlert
+//        ) {
+//            Button("Create", role: .destructive) {
+//                modelContext.delete(sudokus[0])
+//                modelContext.insert(Sudoku(level: 35))
+//                path.append(.boardView)
+//            }
+//            Button("Cancel", role: .cancel) {}
+//        }
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct BlockView: View {
-    @Query var sudoku: [Sudoku]
+    @EnvironmentObject var sudoku: Sudoku
     let blockGrid: GridInfo
 
     var body: some View {
@@ -21,7 +21,7 @@ struct BlockView: View {
                 .foregroundStyle(Color.gray.opacity(0.2))
                 .aspectRatio(1.0, contentMode: .fit)
 
-            if let lastSudoku = sudoku.last {
+//            if let lastSudoku = sudoku.last {
                 VStack(spacing: 2) {
                     ForEach(0..<3, id: \.self) { row in
                         HStack(spacing: 2) {
@@ -29,7 +29,6 @@ struct BlockView: View {
                                 let localRow = blockGrid.row * 3 + row
                                 let localCol = blockGrid.col * 3 + col
                                 CellView(
-                                    sudoku: lastSudoku,
                                     row: localRow,
                                     col: localCol
                                 )
@@ -37,7 +36,7 @@ struct BlockView: View {
                         }
                     }
                 }
-            }
+//            }
         }
     }
 }

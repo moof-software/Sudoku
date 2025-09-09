@@ -9,7 +9,7 @@ import SwiftUI
 
 // work in progress, will ask dad.
 struct NumberPadView: View {
-    @Bindable var sudoku: Sudoku
+    @EnvironmentObject var sudoku: Sudoku
     var index: Int
 
     var body: some View {
@@ -45,6 +45,5 @@ struct NumberPadView: View {
 }
 
 #Preview {
-    @Previewable @State var data: Sudoku = Sudoku(level: 0)
-    NumberPadView(sudoku: data, index: 0)
+    NumberPadView(index: 0)
 }

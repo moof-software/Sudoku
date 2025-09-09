@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftData
 
 /// Represents the position of a specific cell in the board, block, or cell
 /// - Parameters:
@@ -52,36 +51,39 @@ struct Data {
 ///        puzzle and derives initial notes.
 ///     - `initNumberPadData()` — populates the keypad model with values 1…9.
 ///     - `refreshCellNotes(grid:GridInfo)` — reevalutates note values after actions.
-@Model
-class Sudoku {
-    var notes: BoardNotes = BoardNotes(
+class Sudoku: ObservableObject {
+    @Published var notes: BoardNotes = BoardNotes(
         col: Array(repeating: Set<Int>(), count: 9),
         row: Array(repeating: Set<Int>(), count: 9),
         block: Array(repeating: Set<Int>(), count: 9)
     )
 
-    var table: [[Cell]] = Array(
+    @Published var table: [[Cell]] = Array(
         repeating: Array(repeating: Cell(value: 0), count: 9),
         count: 9
     )
 
-    var numberPad: [NumberPad] = Array(
+    @Published var numberPad: [NumberPad] = Array(
         repeating: NumberPad(value: 0),
         count: 9
     )
-    var selectedNumber: Int?
-    var selectedCell: GridInfo?
-    var showHint: Bool = false
+    @Published var selectedNumber: Int?
+    @Published var selectedCell: GridInfo?
+    @Published var showHint: Bool = false
 
     //    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     //    var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     //    var blockNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
 
-    init(level: Int) {
+    init() {
+        initSudoukuBoard()
+    }
+    
+    func initSudoukuBoard() {
         seeding()
         dataSwapper()
         updateCellGridInfo()
-        makeTable(level: level)
+        makeTable(level: 0)
         print(table)
 
         initNumberPadData()

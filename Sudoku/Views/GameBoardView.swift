@@ -4,8 +4,6 @@
 //
 //  Created by Jisu Lim on 7/15/25.
 //
-
-import SwiftData
 import SwiftUI
 
 /// View that contains the main gaming screen.
@@ -48,7 +46,7 @@ import SwiftUI
 ///         - Placeholder
 struct GameBoardView: View {
     @Environment(\.modelContext) var modelContext
-    @Query var sudokus: [Sudoku]
+    @EnvironmentObject var sudoku: Sudoku
     @Binding var path: [Screen]
 
     // Score text will change according to some buttons being pressed
@@ -108,10 +106,10 @@ struct GameBoardView: View {
                 Button {
                     // change boardText to "Rewinding..." for 3 seconds
                     changeBoardText(to: String(localized: "Restart"))
-                    if let sudoku = sudokus.last {
+//                    if let sudoku = sudokus.last {
                         sudoku.table[0][0].value = 1
                         sudoku.table[0][0].visible = true
-                    }
+//                    }
                 } label: {
                     Image(systemName: "arrow.counterclockwise")
                 }
@@ -145,9 +143,9 @@ struct GameBoardView: View {
                     // change boardText to "Providing hint..." for 3 seconds
                     changeBoardText(to: String(localized: "Hint"))
                     // hintState.toggle()
-                    if let lastSudoku = sudokus.last {
-                        lastSudoku.showHint.toggle()
-                    }
+//                    if let lastSudoku = sudokus.last {
+                        sudoku.showHint.toggle()
+//                    }
                 } label: {
                     Text(String(localized: "Hint"))
                         .font(.custom("Chalkduster", size: 18))
@@ -168,7 +166,7 @@ struct GameBoardView: View {
                     .frame(maxWidth: .infinity, maxHeight: 70)
                     .background(Color.gray.opacity(0.2))
             } else {
-                if let lastSudoku = sudokus.last {
+//                if let lastSudoku = sudokus.last {
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 4)
                             .frame(maxWidth: .infinity, maxHeight: 60)
@@ -177,14 +175,13 @@ struct GameBoardView: View {
                         HStack(spacing: 2) {
                             ForEach(0..<9, id: \.self) { index in
                                 NumberPadView(
-                                    sudoku: lastSudoku,
                                     index: index
                                 )
                             }
                         }
                         .padding()
                     }
-                }
+//                }
             }
             Spacer()
             Text(
@@ -203,9 +200,10 @@ struct GameBoardView: View {
                 Button {
                     // Connect to LevelView
                     path.removeLast()
-                    if !sudokus.isEmpty {
-                        modelContext.delete(sudokus[0])
-                    }
+//                    if !sudokus.isEmpty {
+//                        modelContext.delete(sudokus[0])
+//                    }
+                    sudoku.initSudoukuBoard()
                 } label: {
                     Text(String(localized: "End"))
                         .font(.custom("Chalkduster", size: 18))
@@ -232,6 +230,7 @@ struct GameBoardView: View {
             Spacer()
             AdBannerView()
         }
+        .environmentObject(sudoku)
     }
     /// Temporarily change `boardText` to a message and revert back after 3 seconds.
     /// - Parameters:

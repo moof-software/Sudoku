@@ -25,7 +25,7 @@ struct SolutionView: View {
 
     @Binding var path: [Screen]
     @State private var solutionBoardText = "Board"
-    @Query var sudokus: [Sudoku]
+    @EnvironmentObject var sudoku: Sudoku
 
     var body: some View {
         VStack {
@@ -54,7 +54,7 @@ struct SolutionView: View {
             }
             .buttonStyle(.bordered)
             Spacer()
-            if let lastSudoku = sudokus.last {
+//            if let lastSudoku = sudokus.last {
                 ZStack(alignment: .center) {
                     RoundedRectangle(cornerRadius: 4)
                         .frame(maxWidth: .infinity, maxHeight: 60)
@@ -63,14 +63,13 @@ struct SolutionView: View {
                     HStack(spacing: 2) {
                         ForEach(0..<9, id: \.self) { index in
                             NumberPadView(
-                                sudoku: lastSudoku,
                                 index: index
                             )
                         }
                     }
                     .padding()
                 }
-            }
+//            }
             Spacer()
             Spacer()
             Button {
