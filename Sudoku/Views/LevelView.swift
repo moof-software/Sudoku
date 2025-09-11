@@ -28,7 +28,6 @@ import SwiftUI
 ///         - Label: "Resume"
 ///         - Action: Change GameBoardView `scoreText` to "Resumed Game", connect to GameBoardView
 struct LevelView: View {
-    @Environment(\.modelContext) var modelContext
     @EnvironmentObject var sudoku: Sudoku
     @Binding var path: [Screen]
 
@@ -105,4 +104,5 @@ struct LevelView: View {
 #Preview {
     @Previewable @State var path = [Screen]()
     LevelView(path: $path)
+        .environmentObject(Sudoku())
 }

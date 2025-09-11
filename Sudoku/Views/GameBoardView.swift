@@ -45,7 +45,6 @@ import SwiftUI
 ///     - "Ads" Text
 ///         - Placeholder
 struct GameBoardView: View {
-    @Environment(\.modelContext) var modelContext
     @EnvironmentObject var sudoku: Sudoku
     @Binding var path: [Screen]
 
@@ -183,15 +182,16 @@ struct GameBoardView: View {
 
             }
             Spacer()
-            Text(
-                """
-                Completed RCB: 0 Combos: 0 Hints: 0 Undo: 0
-                Basic Score: 0 Deductions: 0
-                Add Score:0 Combo Score: 0
-                """
-            )
-            .multilineTextAlignment(.leading)
-            .padding(.horizontal)
+            //            Text(
+            //                """
+            //                Completed RCB: 0 Combos: 0 Hints: 0 Undo: 0
+            //                Basic Score: 0 Deductions: 0
+            //                Add Score:0 Combo Score: 0
+            //                """
+            //            )
+            //            .font(.caption)
+            //            .multilineTextAlignment(.leading)
+            //            .padding(.horizontal)
             HStack {
                 //            - Button: End (label: "End" with custom font "Chalkduster" pt 18)
                 //                - Action: remove last path (connect back to levelView)
@@ -243,4 +243,5 @@ struct GameBoardView: View {
 #Preview {
     @Previewable @State var path = [Screen]()
     GameBoardView(path: $path)
+        .environmentObject(Sudoku())
 }

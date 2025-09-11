@@ -69,4 +69,5 @@ struct CellView: View {
 
 #Preview {
     CellView(row: 0, col: 0)
+        .environmentObject(Sudoku())
 }
