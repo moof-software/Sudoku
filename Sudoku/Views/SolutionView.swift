@@ -4,8 +4,6 @@
 //
 //  Created by Jisu Lim on 7/15/25.
 //
-
-import SwiftData
 import SwiftUI
 
 /// View that provides an empty or partially filled Sudoku board that can be solved with a button.
@@ -54,22 +52,20 @@ struct SolutionView: View {
             }
             .buttonStyle(.bordered)
             Spacer()
-//            if let lastSudoku = sudokus.last {
-                ZStack(alignment: .center) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .frame(maxWidth: .infinity, maxHeight: 60)
-                        .foregroundStyle(Color.gray.opacity(0.2))
-                        .padding(4)
-                    HStack(spacing: 2) {
-                        ForEach(0..<9, id: \.self) { index in
-                            NumberPadView(
-                                index: index
-                            )
-                        }
+            ZStack(alignment: .center) {
+                RoundedRectangle(cornerRadius: 4)
+                    .frame(maxWidth: .infinity, maxHeight: 60)
+                    .foregroundStyle(Color.gray.opacity(0.2))
+                    .padding(4)
+                HStack(spacing: 2) {
+                    ForEach(0..<9, id: \.self) { index in
+                        NumberPadView(
+                            index: index
+                        )
                     }
-                    .padding()
                 }
-//            }
+                .padding()
+            }
             Spacer()
             Spacer()
             Button {

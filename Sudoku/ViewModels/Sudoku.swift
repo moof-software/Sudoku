@@ -78,11 +78,12 @@ class Sudoku: ObservableObject {
     init() {
         initSudoukuBoard()
     }
-    
+
     func initSudoukuBoard() {
         seeding()
         dataSwapper()
         updateCellGridInfo()
+        notes.initAllNotes()
         makeTable(level: 0)
         print(table)
 

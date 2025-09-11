@@ -106,10 +106,10 @@ struct GameBoardView: View {
                 Button {
                     // change boardText to "Rewinding..." for 3 seconds
                     changeBoardText(to: String(localized: "Restart"))
-//                    if let sudoku = sudokus.last {
-                        sudoku.table[0][0].value = 1
-                        sudoku.table[0][0].visible = true
-//                    }
+                    //                    if let sudoku = sudokus.last {
+                    sudoku.table[0][0].value = 1
+                    sudoku.table[0][0].visible = true
+                    //                    }
                 } label: {
                     Image(systemName: "arrow.counterclockwise")
                 }
@@ -143,9 +143,9 @@ struct GameBoardView: View {
                     // change boardText to "Providing hint..." for 3 seconds
                     changeBoardText(to: String(localized: "Hint"))
                     // hintState.toggle()
-//                    if let lastSudoku = sudokus.last {
-                        sudoku.showHint.toggle()
-//                    }
+                    //                    if let lastSudoku = sudokus.last {
+                    sudoku.showHint.toggle()
+                    //                    }
                 } label: {
                     Text(String(localized: "Hint"))
                         .font(.custom("Chalkduster", size: 18))
@@ -166,22 +166,21 @@ struct GameBoardView: View {
                     .frame(maxWidth: .infinity, maxHeight: 70)
                     .background(Color.gray.opacity(0.2))
             } else {
-//                if let lastSudoku = sudokus.last {
-                    ZStack(alignment: .center) {
-                        RoundedRectangle(cornerRadius: 4)
-                            .frame(maxWidth: .infinity, maxHeight: 60)
-                            .foregroundStyle(Color.gray.opacity(0.2))
-                            .padding(4)
-                        HStack(spacing: 2) {
-                            ForEach(0..<9, id: \.self) { index in
-                                NumberPadView(
-                                    index: index
-                                )
-                            }
+                ZStack(alignment: .center) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .frame(maxWidth: .infinity, maxHeight: 60)
+                        .foregroundStyle(Color.gray.opacity(0.2))
+                        .padding(4)
+                    HStack(spacing: 2) {
+                        ForEach(0..<9, id: \.self) { index in
+                            NumberPadView(
+                                index: index
+                            )
                         }
-                        .padding()
                     }
-//                }
+                    .padding()
+                }
+
             }
             Spacer()
             Text(
@@ -200,9 +199,6 @@ struct GameBoardView: View {
                 Button {
                     // Connect to LevelView
                     path.removeLast()
-//                    if !sudokus.isEmpty {
-//                        modelContext.delete(sudokus[0])
-//                    }
                     sudoku.initSudoukuBoard()
                 } label: {
                     Text(String(localized: "End"))
