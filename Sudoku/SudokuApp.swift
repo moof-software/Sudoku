@@ -4,14 +4,13 @@
 //
 //  Created by Hyunsu Lim on 7/14/25.
 //
-
-import SwiftData
 import SwiftUI
 
 @main
 struct SudokuApp: App {
     /// ``showStartUpView``를 bool type으로 선언하고 default 값으로 `true`값을 지정한 한다.
     @State private var showStartUpView: Bool = true
+    @StateObject var sudoku: Sudoku = Sudoku()
 
     /// ZStack으로 ``GameHomeView``와 ``StartUpView``를 화면에 표시한다.
     var body: some Scene {
@@ -20,6 +19,7 @@ struct SudokuApp: App {
             ZStack {
                 GameHomeView()
                     .toolbar(.hidden)
+                    .environmentObject(sudoku)
 
                 ZStack {
                     if showStartUpView {
@@ -30,6 +30,5 @@ struct SudokuApp: App {
                 .zIndex(2.0)
             }
         }
-        .modelContainer(for: Sudoku.self)
     }
 }

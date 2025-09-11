@@ -30,6 +30,14 @@ struct BoardNotes: Codable {
     var row: [Set<Int>]
     var block: [Set<Int>]
 
+    mutating func initAllNotes() {
+        for index in 0...8 {
+            self.col[index].removeAll()
+            self.row[index].removeAll()
+            self.block[index].removeAll()
+        }
+    }
+
     /// Function for updating notes based on the cell's visibility.
     /// - Parameters:
     ///     - data: selected cell of type `SudokuCell`

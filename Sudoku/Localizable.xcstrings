@@ -11,39 +11,15 @@
         }
       }
     },
+    " x10" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
-          }
-        }
-      }
-    },
-    "%lld/%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld/%2$lld"
-          }
-        }
-      }
-    },
-    "Ads" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "광고"
           }
         }
       }
@@ -129,6 +105,7 @@
       }
     },
     "Cancel" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -138,7 +115,11 @@
         }
       }
     },
+    "Completed RCB: 0 Combos: 0 Hints: 0 Undo: 0\nBasic Score: 0 Deductions: 0\nAdd Score:0 Combo Score: 0" : {
+
+    },
     "Create" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -482,6 +463,7 @@
       }
     },
     "Previous game exists, remove and create new?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -522,6 +504,7 @@
       }
     },
     "Resume" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {

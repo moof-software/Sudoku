@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CellView: View {
-    @Bindable var sudoku: Sudoku
+    @EnvironmentObject var sudoku: Sudoku
     var row: Int
     var col: Int
     var body: some View {
@@ -68,6 +68,5 @@ struct CellView: View {
 }
 
 #Preview {
-    @Previewable @State var data: Sudoku = Sudoku(level: 0)
-    CellView(sudoku: data, row: 0, col: 0)
+    CellView(row: 0, col: 0)
 }
