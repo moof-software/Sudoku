@@ -25,4 +25,5 @@ struct BoardView: View {
 
 #Preview {
     BoardView()
+        .environmentObject(Sudoku())
 }
