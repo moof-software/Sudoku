@@ -92,4 +92,5 @@ struct SolutionView: View {
 #Preview {
     @Previewable @State var path = [Screen]()
     SolutionView(path: $path)
+        .environmentObject(Sudoku())
 }

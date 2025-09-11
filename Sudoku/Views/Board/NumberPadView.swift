@@ -46,4 +46,5 @@ struct NumberPadView: View {
 
 #Preview {
     NumberPadView(index: 0)
+        .environmentObject(Sudoku())
 }
