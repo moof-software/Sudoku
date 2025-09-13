@@ -71,6 +71,17 @@ class Sudoku: ObservableObject {
     @Published var selectedCell: GridInfo?
     @Published var showHint: Bool = false
 
+    @Published var score: ScoreElements = ScoreElements(
+        isRunning: false,
+        level: 1,
+        total: 0,
+        time: 0,
+        errors: 0,
+        multiplier: 10
+    )
+
+    var gameTimer: Timer = Timer()
+
     //    var colNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     //    var rowNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
     //    var blockNote: [Set<Int>] = Array(repeating: Set<Int>(), count: 9)
@@ -275,6 +286,48 @@ class Sudoku: ObservableObject {
                 )
                 refreshCellNotes(grid: targetCell)
             }
+        }
+    }
+
+    func setScoreCounter(pause: Bool) {
+        if pause {
+            print("Game Paused!!!")
+            if gameTimer.isValid {
+                gameTimer.invalidate()
+            }
+        } else {
+            print("Game Resumed!!!")
+            gameTimer = Timer.scheduledTimer(
+                withTimeInterval: 1.0,
+                repeats: true,
+                block: { _ in
+                    self.timerAction()
+                }
+            )
+        }
+    }
+
+    func timerAction() {
+        score.time += 1
+    }
+
+    func startScoreCounter() {
+        score.total = 0
+        score.errors = 0
+        score.time = 0
+        score.multiplier = 10
+        score.isRunning = true
+
+        setScoreCounter(pause: false)
+    }
+
+    func stopScoreCounter() {
+        if score.isRunning {
+            print("Solved All Sudoku !!!")
+            if gameTimer.isValid {
+                gameTimer.invalidate()
+            }
+            score.isRunning = false
         }
     }
 }
