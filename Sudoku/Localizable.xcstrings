@@ -11,7 +11,7 @@
         }
       }
     },
-    " x10" : {
+    " x%lld" : {
 
     },
     "%lld" : {
@@ -111,17 +111,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "취소"
-          }
-        }
-      }
-    },
-    "Create" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "생성"
           }
         }
       }

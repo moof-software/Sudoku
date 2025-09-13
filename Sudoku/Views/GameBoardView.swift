@@ -45,11 +45,10 @@ import SwiftUI
 ///     - "Ads" Text
 ///         - Placeholder
 struct GameBoardView: View {
+    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var sudoku: Sudoku
     @Binding var path: [Screen]
 
-    // Score text will change according to some buttons being pressed
-    @State var scoreText: String = String(localized: "Score")
     // toggling ScoreView as a sheet (temp)
     @State private var showScoreView: Bool = false
     // @State private var hintState: Bool = false
@@ -58,26 +57,7 @@ struct GameBoardView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                //            - Text: "Errors"
-                //                - Font: Custom font "Chalkduster", size: 18
-                Text(String(localized: "Errors"))
-                    .font(.custom("Chalkduster", size: 18))
-                    .padding()
-                Spacer()
-                //            - Text: scoreText
-                //                - Font: Custom font "Chalkduster", size: 18
-                Text(String(localized: "Time"))
-                    .font(.custom("Chalkduster", size: 18))
-                Text(" x10")
-                    .font(.custom("Chalkduster", size: 18))
-                Spacer()
-                //            - Text: "Time"
-                //                - Font: Custom font "Chalkduster", size: 18
-                Text(scoreText)
-                    .font(.custom("Chalkduster", size: 18))
-                    .padding()
-            }
+            BoardHeaderView(statusText: "Score")
             Spacer()
             //        - ZStack(alignment: center)
             //            - Rounded Rectangle (cornerRadius 4)
@@ -227,15 +207,28 @@ struct GameBoardView: View {
             AdBannerView()
         }
         .environmentObject(sudoku)
+        .onAppear {
+            sudoku.startScoreCounter()
+        }
+        .onDisappear {
+            sudoku.setScoreCounter(pause: true)
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase == .active {
+                sudoku.setScoreCounter(pause: false)
+            } else {
+                sudoku.setScoreCounter(pause: true)
+            }
+        }
     }
     /// Temporarily change `boardText` to a message and revert back after 3 seconds.
     /// - Parameters:
     ///   - temporary: String user wants `boardText` to change into.
     ///   - duration: Number of delayed seconds (Default: 3 seconds)
     func changeBoardText(to temporary: String, duration: TimeInterval = 3) {
-        scoreText = temporary
+        BoardHeaderView(statusText: temporary)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            scoreText = String(localized: "Score")
+            BoardHeaderView(statusText: String(localized: "Score"))
         }
     }
 }
