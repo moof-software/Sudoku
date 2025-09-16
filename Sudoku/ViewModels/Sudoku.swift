@@ -73,11 +73,10 @@ class Sudoku: ObservableObject {
 
     @Published var score: ScoreElements = ScoreElements(
         isRunning: false,
-        level: 1,
+        level: .none,
         total: 0,
         time: 0,
-        errors: 0,
-        multiplier: 10
+        errors: 0
     )
 
     var gameTimer: Timer = Timer()
@@ -91,11 +90,24 @@ class Sudoku: ObservableObject {
     }
 
     func initSudoukuBoard() {
+        if selectedNumber != nil {
+            selectedNumber = nil
+        }
+
+        if selectedCell != nil {
+            selectedCell = nil
+        }
+
+        if showHint {
+            showHint = false
+        }
+
         seeding()
         dataSwapper()
         updateCellGridInfo()
         notes.initAllNotes()
-        makeTable(level: 0)
+        makeTable(level: .none)
+        initScore()
         print(table)
 
         initNumberPadData()
@@ -214,16 +226,32 @@ class Sudoku: ObservableObject {
     ///  - Logic:
     ///     - Randomly decides on a row and column and turns off visibility for
     ///     that cell. Updates and refreshes notes according to this.
-    func makeTable(level: Int) {
-        var noteCounter = level
+    func makeTable(level: Level) {
+        var invisibleCounter: Int = 0
+        score.level = level
 
-        while noteCounter > 0 {
+        switch score.level {
+        case .easy:
+            invisibleCounter = 35
+            score.time = 300
+        case .medium:
+            invisibleCounter = 41
+            score.time = 600
+        case .hard:
+            invisibleCounter = 52
+            score.time = 900
+        default:
+            invisibleCounter = 0
+            score.time = 0
+        }
+
+        while invisibleCounter > 0 {
             let row = Int.random(in: 0...8)
             let col = Int.random(in: 0...8)
 
             if table[row][col].visible {
                 table[row][col].visible = false
-                noteCounter -= 1
+                invisibleCounter -= 1
 
                 notes.updateNotes(data: table[row][col])
 
@@ -285,6 +313,8 @@ class Sudoku: ObservableObject {
                     isVisible: table[row][col].visible
                 )
                 refreshCellNotes(grid: targetCell)
+
+                score.getScore()
             }
         }
     }
@@ -308,17 +338,32 @@ class Sudoku: ObservableObject {
     }
 
     func timerAction() {
-        score.time += 1
+        if score.time > 0 {
+            score.time -= 1
+        } else {
+            if gameTimer.isValid {
+                gameTimer.invalidate()
+            }
+        }
     }
 
     func startScoreCounter() {
-        score.total = 0
-        score.errors = 0
-        score.time = 0
-        score.multiplier = 10
+        initScore()
         score.isRunning = true
 
         setScoreCounter(pause: false)
+    }
+
+    func initScore() {
+        score.total = 0
+        score.errors = 0
+
+        if score.isRunning {
+            if gameTimer.isValid {
+                gameTimer.invalidate()
+            }
+            score.isRunning = false
+        }
     }
 
     func stopScoreCounter() {

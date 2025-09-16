@@ -511,6 +511,7 @@
       }
     },
     "Scores:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -597,6 +598,7 @@
       }
     },
     "Time:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
