@@ -207,9 +207,9 @@ struct GameBoardView: View {
             AdBannerView()
         }
         .environmentObject(sudoku)
-        .onAppear {
-            sudoku.startScoreCounter()
-        }
+        //        .onAppear {
+        //            sudoku.startScoreCounter()
+        //        }
         .onDisappear {
             sudoku.setScoreCounter(pause: true)
         }

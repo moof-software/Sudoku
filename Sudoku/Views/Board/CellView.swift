@@ -25,6 +25,11 @@ struct CellView: View {
                 sudoku.table[row][col].select = true
                 sudoku.selectedCell = GridInfo(row: row, col: col)
             }
+
+            if !sudoku.score.isRunning {
+                sudoku.startScoreCounter()
+            }
+
         } label: {
             if sudoku.table[row][col].visible {
                 Text(sudoku.table[row][col].value.formatted(.number))

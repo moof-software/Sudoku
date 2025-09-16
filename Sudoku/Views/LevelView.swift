@@ -42,7 +42,7 @@ struct LevelView: View {
             Button {
                 // Change "score" text in GameBoard View to easy
                 // Connect to GameBoardView
-                sudoku.makeTable(level: 35)
+                sudoku.makeTable(level: .easy)
                 path.append(.boardView)
 
             } label: {
@@ -53,7 +53,7 @@ struct LevelView: View {
             Button {
                 // Change "score" text in GameBoard View to medium
                 // Connect to GameBoardView
-                sudoku.makeTable(level: 42)
+                sudoku.makeTable(level: .medium)
                 path.append(.boardView)
             } label: {
                 NameButtonView(title: String(localized: "Medium"), size: 32)
@@ -63,7 +63,7 @@ struct LevelView: View {
             Button {
                 // Change "score" text in GameBoard View to hard
                 // Connect to GameBoardView
-                sudoku.makeTable(level: 51)
+                sudoku.makeTable(level: .hard)
                 path.append(.boardView)
             } label: {
                 NameButtonView(title: String(localized: "Hard"), size: 32)
