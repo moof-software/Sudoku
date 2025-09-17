@@ -75,7 +75,7 @@ struct ScoreView: View {
                         )
                         ScoreListItemView(
                             title: "Completed R.C.B.",
-                            value: 0,
+                            value: sudoku.score.completedRCB,
                             bold: false
                         )
                         ScoreListItemView(
