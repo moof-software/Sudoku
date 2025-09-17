@@ -23,6 +23,7 @@ struct SolutionView: View {
 
     @Binding var path: [Screen]
     @State private var solutionBoardText = "Board"
+    @State private var isShow: Bool = false
     @EnvironmentObject var sudoku: Sudoku
 
     var body: some View {
@@ -60,7 +61,8 @@ struct SolutionView: View {
                 HStack(spacing: 2) {
                     ForEach(0..<9, id: \.self) { index in
                         NumberPadView(
-                            index: index
+                            index: index,
+                            isPresented: $isShow
                         )
                     }
                 }

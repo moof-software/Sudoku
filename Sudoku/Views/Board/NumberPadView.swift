@@ -11,6 +11,7 @@ import SwiftUI
 struct NumberPadView: View {
     @EnvironmentObject var sudoku: Sudoku
     var index: Int
+    @Binding var isPresented: Bool
 
     var body: some View {
         if sudoku.selectedCell != nil {
@@ -20,6 +21,11 @@ struct NumberPadView: View {
                     sudoku.checkNumberPadData(
                         data: sudoku.numberPad[index].value
                     )
+
+                    if sudoku.score.completedRCB == 27 {
+                        sudoku.stopScoreCounter()
+                        isPresented.toggle()
+                    }
                     print(
                         "NumberPad value: \(sudoku.numberPad[index].value)"
                     )
@@ -45,6 +51,7 @@ struct NumberPadView: View {
 }
 
 #Preview {
-    NumberPadView(index: 0)
+    @Previewable @State var isShow: Bool = false
+    NumberPadView(index: 0, isPresented: $isShow)
         .environmentObject(Sudoku())
 }

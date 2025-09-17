@@ -63,4 +63,23 @@ struct BoardNotes: Codable {
             )
         }
     }
+
+    mutating func getCompletedRCB() -> Int {
+        var rtn = 0
+        for index in 0...8 {
+            if self.col[index].count == 0 {
+                rtn += 1
+            }
+
+            if self.row[index].count == 0 {
+                rtn += 1
+            }
+
+            if self.block[index].count == 0 {
+                rtn += 1
+            }
+        }
+
+        return rtn
+    }
 }

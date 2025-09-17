@@ -153,7 +153,8 @@ struct GameBoardView: View {
                     HStack(spacing: 2) {
                         ForEach(0..<9, id: \.self) { index in
                             NumberPadView(
-                                index: index
+                                index: index,
+                                isPresented: $showScoreView
                             )
                         }
                     }

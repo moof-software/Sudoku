@@ -39,8 +39,9 @@ struct ScoreElements: Codable {
 
         return rtn
     }
+    var completedRCB: Int
 
     mutating func getScore() {
-        self.total = self.time * self.multiplier
+        self.total += (self.time * self.multiplier)
     }
 }

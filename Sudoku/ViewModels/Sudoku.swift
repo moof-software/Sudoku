@@ -76,7 +76,8 @@ class Sudoku: ObservableObject {
         level: .none,
         total: 0,
         time: 0,
-        errors: 0
+        errors: 0,
+        completedRCB: 0
     )
 
     var gameTimer: Timer = Timer()
@@ -232,7 +233,7 @@ class Sudoku: ObservableObject {
 
         switch score.level {
         case .easy:
-            invisibleCounter = 35
+            invisibleCounter = 9  // 35
             score.time = 300
         case .medium:
             invisibleCounter = 41
@@ -258,6 +259,8 @@ class Sudoku: ObservableObject {
                 refreshCellNotes(grid: GridInfo(row: row, col: col))
             }
         }
+
+        score.completedRCB = notes.getCompletedRCB()
     }
 
     /// Function that refreshes each and every cell note according to updates on BoardNotes
@@ -315,6 +318,9 @@ class Sudoku: ObservableObject {
                 refreshCellNotes(grid: targetCell)
 
                 score.getScore()
+                score.completedRCB = notes.getCompletedRCB()
+            } else {
+                score.errors += 1
             }
         }
     }
