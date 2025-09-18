@@ -14,10 +14,21 @@ enum Level: Int, Codable {
     case hard
 }
 
+struct Scores: Codable {
+    var basic: Int = 0
+    var deduction: Int = 0
+    var extra: Int = 0
+    var combo: Int = 0
+}
+
 struct ScoreElements: Codable {
     var isRunning: Bool
     var level: Level
-    var total: Int
+    var scores: Scores
+    var total: Int {
+        self.scores.basic - self.scores.deduction + self.scores.extra
+            + self.scores.combo
+    }
     var time: Int
     var errors: Int
     var multiplier: Int {
@@ -39,9 +50,21 @@ struct ScoreElements: Codable {
 
         return rtn
     }
-    var completedRCB: Int
+    var completedRCB: Int {
+        willSet(newValue) {
+            self.scores.extra += (newValue * 10)
+        }
+    }
+    var combos: Int
+    var hints: Int
 
     mutating func getScore() {
-        self.total += (self.time * self.multiplier)
+        self.scores.basic += (self.time * self.multiplier)
+
+        if self.combos >= 10 {
+            self.scores.combo += 200
+        } else if self.combos >= 5 {
+            self.scores.combo += 100
+        }
     }
 }

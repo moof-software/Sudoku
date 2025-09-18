@@ -23,6 +23,7 @@ struct NumberPadView: View {
                     )
 
                     if sudoku.score.completedRCB == 27 {
+                        sudoku.gameCompleted = true
                         sudoku.stopScoreCounter()
                         isPresented.toggle()
                     }
