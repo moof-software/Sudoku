@@ -17,7 +17,17 @@ struct ScoreListItemView: View {
             Text(title + ":")
                 .fontWeight(bold ? .semibold : .regular)
             Spacer()
-            Text("\(value)")
+            if title == "Time" {
+                Text(
+                    String(
+                        format: "%02d:%02d",
+                        value / 60,
+                        value % 60
+                    )
+                )
+            } else {
+                Text("\(value)")
+            }
         }
     }
 }

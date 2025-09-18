@@ -67,18 +67,39 @@ class Sudoku: ObservableObject {
         repeating: NumberPad(value: 0),
         count: 9
     )
-    @Published var selectedNumber: Int?
-    @Published var selectedCell: GridInfo?
-    @Published var showHint: Bool = false
-
     @Published var score: ScoreElements = ScoreElements(
         isRunning: false,
         level: .none,
-        total: 0,
+        scores: Scores(),
         time: 0,
         errors: 0,
-        completedRCB: 0
+        completedRCB: 0,
+        combos: 0,
+        hints: 0
     )
+    @Published var selectedNumber: Int?
+    @Published var selectedCell: GridInfo?
+    @Published var showHint: Bool = false {
+        willSet(newValue) {
+            if newValue {
+                score.hints += 1
+            }
+        }
+    }
+    @Published var gameCompleted: Bool = false {
+        willSet(newValue) {
+            if newValue {
+                score.scores.deduction =
+                    Int(
+                        Double(score.scores.basic)
+                            * Double(
+                                Double((score.hints < 5) ? score.hints : 5)
+                                    * 10.0 / 100.0
+                            )
+                    )
+            }
+        }
+    }
 
     var gameTimer: Timer = Timer()
 
@@ -99,9 +120,8 @@ class Sudoku: ObservableObject {
             selectedCell = nil
         }
 
-        if showHint {
-            showHint = false
-        }
+        showHint = false
+        gameCompleted = false
 
         seeding()
         dataSwapper()
@@ -233,7 +253,7 @@ class Sudoku: ObservableObject {
 
         switch score.level {
         case .easy:
-            invisibleCounter = 9  // 35
+            invisibleCounter = 35
             score.time = 300
         case .medium:
             invisibleCounter = 41
@@ -260,7 +280,9 @@ class Sudoku: ObservableObject {
             }
         }
 
-        score.completedRCB = notes.getCompletedRCB()
+        if gameCompleted {
+            gameCompleted = false
+        }
     }
 
     /// Function that refreshes each and every cell note according to updates on BoardNotes
@@ -317,10 +339,23 @@ class Sudoku: ObservableObject {
                 )
                 refreshCellNotes(grid: targetCell)
 
-                score.getScore()
-                score.completedRCB = notes.getCompletedRCB()
+                if !showHint {
+                    score.completedRCB = notes.getCompletedRCB()
+                    score.combos += 1
+
+                    score.getScore()
+                }
             } else {
                 score.errors += 1
+                score.combos = 0
+
+                if score.errors > 3 {
+                    if score.time > 10 {
+                        score.time -= 10
+                    } else {
+                        score.time = 0
+                    }
+                }
             }
         }
     }
@@ -361,7 +396,7 @@ class Sudoku: ObservableObject {
     }
 
     func initScore() {
-        score.total = 0
+        score.scores = Scores()
         score.errors = 0
 
         if score.isRunning {

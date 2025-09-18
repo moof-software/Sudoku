@@ -27,22 +27,22 @@ struct ScoreView: View {
                     Section {
                         ScoreListItemView(
                             title: "Basic Score",
-                            value: 0,
+                            value: sudoku.score.scores.basic,
                             bold: false
                         )
                         ScoreListItemView(
                             title: "Deductions",
-                            value: 0,
+                            value: sudoku.score.scores.deduction,
                             bold: false
                         )
                         ScoreListItemView(
                             title: "Extra Score",
-                            value: 0,
+                            value: sudoku.score.scores.extra,
                             bold: false
                         )
                         ScoreListItemView(
                             title: "Combo Score",
-                            value: 0,
+                            value: sudoku.score.scores.combo,
                             bold: false
                         )
 
@@ -80,12 +80,12 @@ struct ScoreView: View {
                         )
                         ScoreListItemView(
                             title: "Combos",
-                            value: 0,
+                            value: sudoku.score.combos,
                             bold: false
                         )
                         ScoreListItemView(
                             title: "Hints",
-                            value: 0,
+                            value: sudoku.score.hints,
                             bold: false
                         )
                         ScoreListItemView(

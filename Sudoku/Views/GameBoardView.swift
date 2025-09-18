@@ -123,7 +123,7 @@ struct GameBoardView: View {
                     changeBoardText(to: String(localized: "Hint"))
                     // hintState.toggle()
                     //                    if let lastSudoku = sudokus.last {
-                    sudoku.showHint.toggle()
+                    sudoku.showHint = sudoku.showHint ? false : true
                     //                    }
                 } label: {
                     Text(String(localized: "Hint"))
