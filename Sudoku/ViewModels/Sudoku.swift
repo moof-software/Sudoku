@@ -31,12 +31,7 @@ class Sudoku: ObservableObject {
         row: Array(repeating: Set<Int>(), count: 9),
         block: Array(repeating: Set<Int>(), count: 9)
     )
-
-    @Published var table: [[Cell]] = Array(
-        repeating: Array(repeating: Cell(value: 0), count: 9),
-        count: 9
-    )
-
+    @Published var table: Table = Table()
     @Published var numberPad: [NumberPad] = Array(
         repeating: NumberPad(value: 0),
         count: 9
@@ -91,106 +86,14 @@ class Sudoku: ObservableObject {
         showHint = false
         gameCompleted = false
 
-        seeding()
-        dataSwapper()
-        updateCellGridInfo()
+        table.seeding()
+        table.dataSwapper()
+        table.updateCellInfo()
+
         notes.initAllNotes()
         makeTable(level: .none)
         initScore()
-        print(table)
-
         initNumberPadData()
-    }
-
-    /// Function for generating a randomized 9x9 Sudoku board
-    /// - Logic:
-    ///     - Two variables
-    ///         - `seed`: Integer variable set to 0
-    ///         - `dice`: An array of Integers set to numbers 1~9
-    ///     - First, shuffle dice.
-    ///     - Second, create a 9x9 table with 0s
-    ///     - Third, fill out each row with valueIndex as calculated below
-    func seeding() {
-        var seed: Int = 0
-        var dice: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-        dice.shuffle()
-
-        for row in 0...8 {
-            for col in 0...8 {
-                let valueIndex = (col + (row % 3) * 3 + (row / 3)) % 9
-
-                seed = dice[valueIndex]
-
-                table[row][col] = Cell(value: seed)
-
-            }
-        }
-    }
-    /// Function for randomly swapping rows and columns
-    /// - Logic:
-    ///     - Two variables
-    ///         - `totalBlockRows`: Integer variable set to 2
-    ///         - `totalSwap`: Integer variable set to 6
-    ///     - Loop over `totalBlockRows`:
-    ///         - Loop over `totalSwap` times two:
-    ///             - Set a random variable `randSeed`as a set of integers and
-    ///             randomly choose a row and column inside random seed
-    ///             - if the random element is even, swap, else, swap everything within the row.
-    func dataSwapper() {
-        let totalBlockRows: Int = 2
-        let totalSwap: Int = 6
-
-        for block in 0...totalBlockRows {
-            for swapCounter in 0..<(totalSwap * 2) {
-                var randSeed: Set<Int> = [0, 1, 2]
-
-                let idxi = (block * 3) + randSeed.randomElement()!
-                randSeed.remove(idxi)
-                let idxj = (block * 3) + randSeed.randomElement()!
-
-                if swapCounter % 2 == 0 {
-                    self.table.swapAt(idxi, idxj)
-                } else {
-                    for row in 0...8 {
-                        self.table[row].swapAt(idxi, idxj)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Function that computes and assigns board, block, and cell coordinates for every cell.
-    ///  - Logic:
-    ///     - For every cell, update the GridInfo.
-    ///         - For board, just update row and column
-    ///         - For block, update row and column by dividing it by 3
-    ///         - For call, update row and column with its remainder divided by 3.
-    private func updateCellGridInfo() {
-        for row in 0...8 {
-            for col in 0...8 {
-                table[row][col].position.board = GridInfo(row: row, col: col)
-                table[row][col].position.board = GridInfo(row: row, col: col)
-
-                table[row][col].position.block = GridInfo(
-                    row: row / 3,
-                    col: col / 3
-                )
-                table[row][col].position.block = GridInfo(
-                    row: row / 3,
-                    col: col / 3
-                )
-
-                table[row][col].position.cell = GridInfo(
-                    row: row % 3,
-                    col: col % 3
-                )
-                table[row][col].position.cell = GridInfo(
-                    row: row % 3,
-                    col: col % 3
-                )
-            }
-        }
     }
 
     /// Function that creates the number pad
@@ -234,10 +137,10 @@ class Sudoku: ObservableObject {
             let row = Int.random(in: 0...8)
             let col = Int.random(in: 0...8)
 
-            if table[row][col].visible {
-                table[row][col].visible = false
+            if table.cell[row][col].visible {
+                table.cell[row][col].visible = false
                 invisibleCounter -= 1
-                notes.updateNotes(data: table[row][col])
+                notes.updateNotes(data: table.cell[row][col])
                 updateSolvedNumber()
                 refreshCellNotes(grid: GridInfo(row: row, col: col))
             }
@@ -263,20 +166,20 @@ class Sudoku: ObservableObject {
 
         for index in 0...8 {
             // updating each cell's note in its column
-            table[index][col].updateNote(
+            table.cell[index][col].updateNote(
                 boardNotes: notes,
-                isVisible: table[index][col].visible
+                isVisible: table.cell[index][col].visible
             )
             // updating each cell's note in its row
-            table[row][index].updateNote(
+            table.cell[row][index].updateNote(
                 boardNotes: notes,
-                isVisible: table[row][index].visible
+                isVisible: table.cell[row][index].visible
             )
             // updating each cell's note in its block
-            table[blockRow + (index / 3)][blockCol + (index % 3)]
+            table.cell[blockRow + (index / 3)][blockCol + (index % 3)]
                 .updateNote(
                     boardNotes: notes,
-                    isVisible: table[blockRow + (index / 3)][
+                    isVisible: table.cell[blockRow + (index / 3)][
                         blockCol + (index % 3)
                     ].visible
                 )
@@ -288,16 +191,16 @@ class Sudoku: ObservableObject {
             let row = targetCell.row
             let col = targetCell.col
 
-            if table[row][col].value == data {
+            if table.cell[row][col].value == data {
                 selectedCell = nil
                 selectedNumber = data
-                table[row][col].select = false
-                table[row][col].visible = true
-                notes.updateNotes(data: table[row][col])
+                table.cell[row][col].select = false
+                table.cell[row][col].visible = true
+                notes.updateNotes(data: table.cell[row][col])
                 updateSolvedNumber()
-                table[row][col].updateNote(
+                table.cell[row][col].updateNote(
                     boardNotes: notes,
-                    isVisible: table[row][col].visible
+                    isVisible: table.cell[row][col].visible
                 )
                 refreshCellNotes(grid: targetCell)
 
@@ -332,12 +235,10 @@ class Sudoku: ObservableObject {
 
     func setScoreCounter(pause: Bool) {
         if pause {
-            print("Game Paused!!!")
             if gameTimer.isValid {
                 gameTimer.invalidate()
             }
         } else {
-            print("Game Resumed!!!")
             gameTimer = Timer.scheduledTimer(
                 withTimeInterval: 1.0,
                 repeats: true,
@@ -378,7 +279,6 @@ class Sudoku: ObservableObject {
 
     func stopScoreCounter() {
         if score.isRunning {
-            print("Solved All Sudoku !!!")
             if gameTimer.isValid {
                 gameTimer.invalidate()
             }
