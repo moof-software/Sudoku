@@ -72,8 +72,7 @@ struct CellView: View {
                     if sudoku.table[row][col].position.board.row
                         == selectedCell.row
                         || sudoku.table[row][col].position.board.col
-                            == selectedCell.col
-                    {
+                            == selectedCell.col {
                         RoundedRectangle(cornerRadius: 4)
                             .foregroundStyle(Color.blue.opacity(0.1))
                             .allowsHitTesting(false)
