@@ -43,8 +43,98 @@ struct GridInfo: Codable {
 /// A matrix of SudokuCell conforming to data on a sudoku board
 /// - Parameters:
 ///     - table: a 9x9 matrix of SudokuCell.
-struct Data {
-    var table: [[Cell]]
+struct Table {
+    var cell: [[Cell]] = Array(
+        repeating: Array(repeating: Cell(value: 0), count: 9),
+        count: 9
+    )
+
+    /// Function for generating a randomized 9x9 Sudoku board
+    /// - Logic:
+    ///     - Two variables
+    ///         - `seed`: Integer variable set to 0
+    ///         - `dice`: An array of Integers set to numbers 1~9
+    ///     - First, shuffle dice.
+    ///     - Second, create a 9x9 table with 0s
+    ///     - Third, fill out each row with valueIndex as calculated below
+    mutating func seeding() {
+        var seed: Int = 0
+        var dice: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        dice.shuffle()
+
+        for row in 0...8 {
+            for col in 0...8 {
+                let valueIndex = (col + (row % 3) * 3 + (row / 3)) % 9
+                seed = dice[valueIndex]
+                cell[row][col] = Cell(value: seed)
+            }
+        }
+    }
+
+    /// Function for randomly swapping rows and columns
+    /// - Logic:
+    ///     - Two variables
+    ///         - `totalBlockRows`: Integer variable set to 2
+    ///         - `totalSwap`: Integer variable set to 6
+    ///     - Loop over `totalBlockRows`:
+    ///         - Loop over `totalSwap` times two:
+    ///             - Set a random variable `randSeed`as a set of integers and
+    ///             randomly choose a row and column inside random seed
+    ///             - if the random element is even, swap, else, swap everything within the row.
+    mutating func dataSwapper() {
+        let totalBlockRows: Int = 2
+        let totalSwap: Int = 6
+
+        for block in 0...totalBlockRows {
+            for swapCounter in 0..<(totalSwap * 2) {
+                var randSeed: Set<Int> = [0, 1, 2]
+                let idxi = (block * 3) + randSeed.randomElement()!
+                randSeed.remove(idxi)
+                let idxj = (block * 3) + randSeed.randomElement()!
+
+                if swapCounter % 2 == 0 {
+                    cell.swapAt(idxi, idxj)
+                } else {
+                    for row in 0...8 {
+                        cell[row].swapAt(idxi, idxj)
+                    }
+                }
+            }
+        }
+    }
+    /// Function that computes and assigns board, block, and cell coordinates for every cell.
+    ///  - Logic:
+    ///     - For every cell, update the GridInfo.
+    ///         - For board, just update row and column
+    ///         - For block, update row and column by dividing it by 3
+    ///         - For call, update row and column with its remainder divided by 3.
+    mutating func updateCellInfo() {
+        for row in 0...8 {
+            for col in 0...8 {
+                cell[row][col].position.board = GridInfo(row: row, col: col)
+                cell[row][col].position.board = GridInfo(row: row, col: col)
+
+                cell[row][col].position.block = GridInfo(
+                    row: row / 3,
+                    col: col / 3
+                )
+                cell[row][col].position.block = GridInfo(
+                    row: row / 3,
+                    col: col / 3
+                )
+
+                cell[row][col].position.cell = GridInfo(
+                    row: row % 3,
+                    col: col % 3
+                )
+                cell[row][col].position.cell = GridInfo(
+                    row: row % 3,
+                    col: col % 3
+                )
+            }
+        }
+    }
 }
 
 /// All the properties of a cell as well as updating its note.

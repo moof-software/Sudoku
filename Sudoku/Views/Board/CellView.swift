@@ -14,15 +14,16 @@ struct CellView: View {
     var body: some View {
         Button {
             if let selectedCell = sudoku.selectedCell {
-                sudoku.table[selectedCell.row][selectedCell.col].select = false
+                sudoku.table.cell[selectedCell.row][selectedCell.col].select =
+                    false
                 sudoku.selectedCell = nil
             }
 
-            if sudoku.table[row][col].visible {
-                sudoku.selectedNumber = sudoku.table[row][col].value
+            if sudoku.table.cell[row][col].visible {
+                sudoku.selectedNumber = sudoku.table.cell[row][col].value
             } else {
                 sudoku.selectedNumber = nil
-                sudoku.table[row][col].select = true
+                sudoku.table.cell[row][col].select = true
                 sudoku.selectedCell = GridInfo(row: row, col: col)
             }
 
@@ -31,12 +32,13 @@ struct CellView: View {
             }
 
         } label: {
-            if sudoku.table[row][col].visible {
-                Text(sudoku.table[row][col].value.formatted(.number))
+            if sudoku.table.cell[row][col].visible {
+                Text(sudoku.table.cell[row][col].value.formatted(.number))
                     .font(.system(size: 1000, weight: .black))
                     .lineLimit(1)
                     .foregroundStyle(
-                        sudoku.selectedNumber == sudoku.table[row][col].value
+                        sudoku.selectedNumber
+                            == sudoku.table.cell[row][col].value
                             ? Color.blue : Color.white
                     )
             } else {
@@ -48,7 +50,7 @@ struct CellView: View {
                         .aspectRatio(1.0, contentMode: .fit)
 
                     if sudoku.showHint {
-                        CellNoteView(note: sudoku.table[row][col].note)
+                        CellNoteView(note: sudoku.table.cell[row][col].note)
                     }
                 }
             }
@@ -63,16 +65,16 @@ struct CellView: View {
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .aspectRatio(1, contentMode: .fit)
         .overlay {
-            if sudoku.table[row][col].select {
+            if sudoku.table.cell[row][col].select {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(.blue, lineWidth: 5)
                     .opacity(0.5)
             } else {
                 if let selectedCell = sudoku.selectedCell {
-                    if sudoku.table[row][col].position.board.row
-                        == selectedCell.row
-                        || sudoku.table[row][col].position.board.col
-                            == selectedCell.col {
+                    if (sudoku.table.cell[row][col].position.board.row
+                        == selectedCell.row)
+                        || (sudoku.table.cell[row][col].position.board.col
+                            == selectedCell.col) {
                         RoundedRectangle(cornerRadius: 4)
                             .foregroundStyle(Color.blue.opacity(0.1))
                             .allowsHitTesting(false)

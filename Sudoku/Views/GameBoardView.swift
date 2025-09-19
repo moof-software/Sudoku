@@ -85,8 +85,8 @@ struct GameBoardView: View {
                 Button {
 
                     //                    if let sudoku = sudokus.last {
-                    sudoku.table[0][0].value = 1
-                    sudoku.table[0][0].visible = true
+                    sudoku.table.cell[0][0].value = 1
+                    sudoku.table.cell[0][0].visible = true
                     //                    }
                 } label: {
                     Image(systemName: "arrow.counterclockwise")

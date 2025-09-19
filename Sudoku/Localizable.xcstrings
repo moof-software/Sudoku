@@ -460,6 +460,7 @@
       }
     },
     "Redoing..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -480,6 +481,7 @@
       }
     },
     "Restart" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -619,6 +621,7 @@
       }
     },
     "Undoing..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
