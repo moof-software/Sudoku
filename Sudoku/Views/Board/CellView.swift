@@ -67,6 +67,18 @@ struct CellView: View {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(.blue, lineWidth: 5)
                     .opacity(0.5)
+            } else {
+                if let selectedCell = sudoku.selectedCell {
+                    if sudoku.table[row][col].position.board.row
+                        == selectedCell.row
+                        || sudoku.table[row][col].position.board.col
+                            == selectedCell.col
+                    {
+                        RoundedRectangle(cornerRadius: 4)
+                            .foregroundStyle(Color.blue.opacity(0.1))
+                            .allowsHitTesting(false)
+                    }
+                }
             }
         }
     }

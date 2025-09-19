@@ -40,7 +40,7 @@ struct StartUpView: View {
             ZStack {
                 if showLoadingString {
                     HStack(spacing: 0) {
-                        ForEach(loadingString.indices) { index in
+                        ForEach(loadingString.indices, id: \.self) { index in
                             Text(loadingString[index])
                                 .font(.headline)
                                 .fontWeight(.heavy)

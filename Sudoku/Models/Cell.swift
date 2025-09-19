@@ -7,6 +7,25 @@
 
 import Foundation
 
+/// Represents the position of a specific cell in the board, block, or cell
+/// - Parameters:
+///     - board: a GridInfo of the selected cell's position on the 9×9 board (row, col)
+///     - block: a GridInfo of the selected cell's position inside its 3×3 block (blockRow, blockCol)
+///     - cell: a GridInfo of the selected cell's position inside its 3×3 block cell (0...2, 0...2)
+/// - Methods:
+///     - `init()` : set each parameter to its respective `GridInfo`
+struct CellPosition: Codable {
+    var board: GridInfo
+    var block: GridInfo
+    var cell: GridInfo
+
+    init() {
+        self.board = GridInfo(row: 0, col: 0)
+        self.block = GridInfo(row: 0, col: 0)
+        self.cell = GridInfo(row: 0, col: 0)
+    }
+}
+
 /// Represents the position of a Sudoku Board
 ///  - Parameters:
 ///     - row: a specific cell's position in its row as an integer(0-8)
@@ -19,6 +38,13 @@ struct GridInfo: Codable {
         return lhs.row == rhs.row
             && lhs.col == rhs.col
     }
+}
+
+/// A matrix of SudokuCell conforming to data on a sudoku board
+/// - Parameters:
+///     - table: a 9x9 matrix of SudokuCell.
+struct Data {
+    var table: [[Cell]]
 }
 
 /// All the properties of a cell as well as updating its note.
