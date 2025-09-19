@@ -29,6 +29,7 @@ struct BoardNotes: Codable {
     var col: [Set<Int>]
     var row: [Set<Int>]
     var block: [Set<Int>]
+    var solved: Set<Int> = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     mutating func initAllNotes() {
         for index in 0...8 {
@@ -48,6 +49,7 @@ struct BoardNotes: Codable {
     ///     of its row, column, and block `BoardNotes`.
     mutating func updateNotes(data: Cell) {
         let position = data.position.board
+        var solvedNote: Set<Int> = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
         if data.visible {
             row[position.row].remove(data.value)
@@ -62,6 +64,10 @@ struct BoardNotes: Codable {
                 data.value
             )
         }
+        for index in 0...8 {
+            solvedNote = solvedNote.subtracting(self.block[index])
+        }
+        solved = solvedNote
     }
 
     mutating func getCompletedRCB() -> Int {

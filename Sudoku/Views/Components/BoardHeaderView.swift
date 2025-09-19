@@ -9,11 +9,6 @@ import SwiftUI
 
 struct BoardHeaderView: View {
     @EnvironmentObject var sudoku: Sudoku
-    var statusText: String
-
-    init(statusText: String) {
-        self.statusText = statusText
-    }
 
     var body: some View {
         HStack {
@@ -51,7 +46,7 @@ struct BoardHeaderView: View {
             VStack {
                 //            - Text: "Time"
                 //                - Font: Custom font "Chalkduster", size: 18
-                Text(statusText)
+                Text(String(localized: "Score"))
                     .font(.custom("Chalkduster", size: 18))
                 Text("\(sudoku.score.total)")
                     .font(.custom("Chalkduster", size: 25))
@@ -62,6 +57,6 @@ struct BoardHeaderView: View {
 }
 
 #Preview {
-    BoardHeaderView(statusText: "Score")
+    BoardHeaderView()
         .environmentObject(Sudoku())
 }

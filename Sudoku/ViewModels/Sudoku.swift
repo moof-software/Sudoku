@@ -7,32 +7,6 @@
 
 import Foundation
 
-/// Represents the position of a specific cell in the board, block, or cell
-/// - Parameters:
-///     - board: a GridInfo of the selected cell's position on the 9×9 board (row, col)
-///     - block: a GridInfo of the selected cell's position inside its 3×3 block (blockRow, blockCol)
-///     - cell: a GridInfo of the selected cell's position inside its 3×3 block cell (0...2, 0...2)
-/// - Methods:
-///     - `init()` : set each parameter to its respective `GridInfo`
-struct CellPosition: Codable {
-    var board: GridInfo
-    var block: GridInfo
-    var cell: GridInfo
-
-    init() {
-        self.board = GridInfo(row: 0, col: 0)
-        self.block = GridInfo(row: 0, col: 0)
-        self.cell = GridInfo(row: 0, col: 0)
-    }
-}
-
-/// A matrix of SudokuCell conforming to data on a sudoku board
-/// - Parameters:
-///     - table: a 9x9 matrix of SudokuCell.
-struct Data {
-    var table: [[Cell]]
-}
-
 /// A SwiftData model representing a Sudoku puzzle.
 /// - Parameters:
 ///     - notes(@Transient): `BoardNotes` type initialized to 9 empty sets.
@@ -89,14 +63,13 @@ class Sudoku: ObservableObject {
     @Published var gameCompleted: Bool = false {
         willSet(newValue) {
             if newValue {
-                score.scores.deduction =
-                    Int(
-                        Double(score.scores.basic)
-                            * Double(
-                                Double((score.hints < 5) ? score.hints : 5)
-                                    * 10.0 / 100.0
-                            )
-                    )
+                score.scores.deduction = Int(
+                    Double(score.scores.basic)
+                        * Double(
+                            Double((score.hints < 5) ? score.hints : 5) * 10.0
+                                / 100.0
+                        )
+                )
             }
         }
     }
@@ -265,6 +238,7 @@ class Sudoku: ObservableObject {
                 table[row][col].visible = false
                 invisibleCounter -= 1
                 notes.updateNotes(data: table[row][col])
+                updateSolvedNumber()
                 refreshCellNotes(grid: GridInfo(row: row, col: col))
             }
         }
@@ -320,6 +294,7 @@ class Sudoku: ObservableObject {
                 table[row][col].select = false
                 table[row][col].visible = true
                 notes.updateNotes(data: table[row][col])
+                updateSolvedNumber()
                 table[row][col].updateNote(
                     boardNotes: notes,
                     isVisible: table[row][col].visible
@@ -341,6 +316,16 @@ class Sudoku: ObservableObject {
                         score.time = 0
                     }
                 }
+            }
+        }
+    }
+
+    func updateSolvedNumber() {
+        for index in 0...8 {
+            if notes.solved.contains(index + 1) {
+                numberPad[index].visible = false
+            } else {
+                numberPad[index].visible = true
             }
         }
     }

@@ -57,7 +57,7 @@ struct GameBoardView: View {
 
     var body: some View {
         VStack {
-            BoardHeaderView(statusText: "Score")
+            BoardHeaderView()
             Spacer()
             //        - ZStack(alignment: center)
             //            - Rounded Rectangle (cornerRadius 4)
@@ -83,8 +83,7 @@ struct GameBoardView: View {
                 //                - Action: changeBoardText("Rewinding...")
                 //                - Padding: 10
                 Button {
-                    // change boardText to "Rewinding..." for 3 seconds
-                    changeBoardText(to: String(localized: "Restart"))
+
                     //                    if let sudoku = sudokus.last {
                     sudoku.table[0][0].value = 1
                     sudoku.table[0][0].visible = true
@@ -97,8 +96,7 @@ struct GameBoardView: View {
                 //                - Action: changeBoardText("Undoing...")
                 //                - Padding: 10
                 Button {
-                    // change boardText to "Undoing..." for 3 seconds
-                    changeBoardText(to: String(localized: "Undoing..."))
+
                 } label: {
                     Image(systemName: "arrow.left")
                 }
@@ -107,8 +105,7 @@ struct GameBoardView: View {
                 //                - Action: changeBoardText("Redoing...")
                 //                - Padding: 10
                 Button {
-                    // change boardText to "Redoing..." for 3 seconds
-                    changeBoardText(to: String(localized: "Redoing..."))
+
                 } label: {
                     Image(systemName: "arrow.right")
                 }
@@ -119,8 +116,7 @@ struct GameBoardView: View {
                 //                - Padding: 10
                 Spacer()
                 Button {
-                    // change boardText to "Providing hint..." for 3 seconds
-                    changeBoardText(to: String(localized: "Hint"))
+
                     // hintState.toggle()
                     //                    if let lastSudoku = sudokus.last {
                     sudoku.showHint = sudoku.showHint ? false : true
@@ -220,16 +216,6 @@ struct GameBoardView: View {
             } else {
                 sudoku.setScoreCounter(pause: true)
             }
-        }
-    }
-    /// Temporarily change `boardText` to a message and revert back after 3 seconds.
-    /// - Parameters:
-    ///   - temporary: String user wants `boardText` to change into.
-    ///   - duration: Number of delayed seconds (Default: 3 seconds)
-    func changeBoardText(to temporary: String, duration: TimeInterval = 3) {
-        BoardHeaderView(statusText: temporary)
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            BoardHeaderView(statusText: String(localized: "Score"))
         }
     }
 }
