@@ -185,6 +185,7 @@ struct GameHomeView: View {
                 print(error?.localizedDescription ?? "")
                 return
             }
+            print("\(GKLocalPlayer.local.alias) is ready to play!")
         }
     }
 }
