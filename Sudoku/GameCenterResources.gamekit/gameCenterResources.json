@@ -1,0 +1,36 @@
+{
+  "meta" : {
+    "version" : "2024-11-15"
+  },
+  "resources" : {
+    "leaderboards" : [
+      {
+        "archived" : false,
+        "defaultFormatter" : "INTEGER",
+        "referenceName" : "HighestScore",
+        "scoreRangeEnd" : null,
+        "scoreRangeStart" : null,
+        "scoreSortType" : "DESC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "sudokupro.leaderboard.highest.score",
+        "visibility" : "SHOW_FOR_ALL"
+      }
+    ],
+    "leaderboardSetMemberships" : {
+      "sudokupro.leaderboard.easylevel.score" : [
+        {
+          "leaderboardLocalIDs" : [
+            "sudokupro.leaderboard.highest.score"
+          ],
+          "localID" : "sudokupro.leaderboard.easylevel.score"
+        }
+      ]
+    },
+    "leaderboardSets" : [
+      {
+        "referenceName" : "EasyLevelScore",
+        "vendorIdentifier" : "sudokupro.leaderboard.easylevel.score"
+      }
+    ]
+  }
+}

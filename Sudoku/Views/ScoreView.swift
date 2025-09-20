@@ -5,6 +5,7 @@
 //  Created by Jisu Lim on 7/15/25.
 //
 
+import GameKit
 import SwiftUI
 
 /// View that shows the final scores.
@@ -106,6 +107,33 @@ struct ScoreView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Final Score")
+        }
+        .onAppear {
+            if sudoku.score.total != 0 {
+                sumitScoreToGameCenter(points: sudoku.score.total)
+            }
+        }
+    }
+
+    func sumitScoreToGameCenter(points: Int) {
+        let localPlayer = GKLocalPlayer.local
+        let leaderboardID = "sudokupro.leaderboard.highest.score"
+        guard GKLocalPlayer.local.isAuthenticated else {
+            print("Local player not authenticated. Cannot submit score.")
+            return
+        }
+        // Submit score
+        GKLeaderboard.submitScore(
+            points,
+            context: 0,
+            player: localPlayer,
+            leaderboardIDs: [leaderboardID]
+        ) { error in
+            if let error = error {
+                print("Error submitting score: \(error.localizedDescription)")
+            } else {
+                print("Score submitted successfully!")
+            }
         }
     }
 }
