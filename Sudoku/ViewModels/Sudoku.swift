@@ -7,24 +7,19 @@
 
 import Foundation
 
-/// A SwiftData model representing a Sudoku puzzle.
+/// ObservableObject class for Sudoku data.
 /// - Parameters:
-///     - notes(@Transient): `BoardNotes` type initialized to 9 empty sets.
-///     - table: a 9x9 matrix of `SudokuCell`s creating the table
-///     - numberPad: an array of `SudokuCell`s creating the number pad.
-///
-/// - Methods:
-///     - `init()`: calls seeding(), dataSwapper(), updateCellGridInfo(), makeTable(),
-///        print table, and initNumberPad().
-///     -  `seeding()` — builds a fully solved 9×9 grid by shuffling digits and laying them out with a
-///        base pattern.
-///     - `dataSwapper()` — randomizes the solved grid by swapping rows within bands and columns
-///        within stacks while preserving validity.
-///     - `updateCellGridInfo()` — writes board/block/cell coordinates into each `GridInfo`.
-///     - `makeTable(level:Int)` — hides a fixed number of cells based on level  to produce a playable
-///        puzzle and derives initial notes.
-///     - `initNumberPadData()` — populates the keypad model with values 1…9.
-///     - `refreshCellNotes(grid:GridInfo)` — reevalutates note values after actions.
+///     - Published variables
+///         - notes: collection of BoardNotes representing each note within a cell.
+///         - table: Table value representing a fully genereated sudoku board
+///         - numberPad: an array of NumberPad values.
+///         - score: initialized ScoreElements
+///         - selectedNumber: Integer value indicating the selected value in board.
+///         - selectedCell: GridInfo value indicating the selected value in board.
+///         - showHint: Boolean value keeping track of when hint is shown and how many times.
+///         - gameCompleted: Boolean value keeping track of if the game is finished.
+///     - Variables:
+///         - gameTimer: Timer value
 class Sudoku: ObservableObject {
     @Published var notes: BoardNotes = BoardNotes(
         col: Array(repeating: Set<Int>(), count: 9),
@@ -49,6 +44,7 @@ class Sudoku: ObservableObject {
     @Published var selectedNumber: Int?
     @Published var selectedCell: GridInfo?
     @Published var showHint: Bool = false {
+        // Counts number of times hints has been viewed.
         willSet(newValue) {
             if newValue {
                 score.hints += 1
@@ -56,6 +52,8 @@ class Sudoku: ObservableObject {
         }
     }
     @Published var gameCompleted: Bool = false {
+        // deduct points from basic if hints has been viewed.
+        // deduction will take a certain percentage of basic score
         willSet(newValue) {
             if newValue {
                 score.scores.deduction = Int(
@@ -74,6 +72,7 @@ class Sudoku: ObservableObject {
         initSudoukuBoard()
     }
 
+    /// Function that initializes the sudoku board. Called in init.
     func initSudoukuBoard() {
         if selectedNumber != nil {
             selectedNumber = nil
@@ -106,14 +105,14 @@ class Sudoku: ObservableObject {
         }
     }
 
-    /// Functiont that turns visibility off for random cells and updates and refreshes notes
-    /// according to that visibility.
+    /// Function that generates a complete sudoku board.
     ///  - Parameters:
-    ///     - level: an integer corresponding to the number of blank cells
-    ///     according to each level.
+    ///     - invisibleCounter: Integer value counting every non-filled cell.
     ///  - Logic:
-    ///     - Randomly decides on a row and column and turns off visibility for
-    ///     that cell. Updates and refreshes notes according to this.
+    ///     - Starts with different cases for each level. Sets time and invisibility to
+    ///       respective level(enum)
+    ///     - Randomly selects cells for its value to be invisible and updates notes accordingly.
+    ///     - checks to refresh gameCompleted to false.
     func makeTable(level: Level) {
         var invisibleCounter: Int = 0
         score.level = level
@@ -151,13 +150,14 @@ class Sudoku: ObservableObject {
         }
     }
 
-    /// Function that refreshes each and every cell note according to updates on BoardNotes
-    /// and SudokuCell's notes update.
+    /// Function that refreshes each and every cell note based on changes made to board.
     /// - Parameters:
-    ///     - grid: A GridInfo that provides the function with the cell's row and column info
+    ///     - row: row info
+    ///     - col: column info
+    ///     - blockRow: calculation of block's row position using `row`
+    ///     - blockCol: calculation of block's column position using `col`
     /// - Logic:
-    ///     - Calculate block's location, then use `SudokuCell`'s `updateNote()` function
-    ///     to refresh and reprint each cell note.
+    ///     - checks each cell's notes according to every cells' visibility
     func refreshCellNotes(grid: GridInfo) {
         let row = grid.row
         let col = grid.col
@@ -185,7 +185,13 @@ class Sudoku: ObservableObject {
                 )
         }
     }
-
+    /// Function for updating various values tied with input from number pad
+    /// - Logic:
+    ///     - Pulls in the selected cell's row and column info.
+    ///     - If the input from number pad matches the selected cell's value,
+    ///       deselect cell, show value, update notes to delete any values associated
+    ///       with value, and update score if solved without hints.
+    ///     - If incorrect, increment error count and reset combo to 0.
     func checkNumberPadData(data: Int) {
         if let targetCell = selectedCell {
             let row = targetCell.row
@@ -212,6 +218,8 @@ class Sudoku: ObservableObject {
             } else {
                 score.errors += 1
                 score.combos = 0
+                // if error count goes beyond 3,
+                // start taking 10 seconds away per error count.
                 if score.errors > 3 {
                     if score.time > 10 {
                         score.time -= 10
@@ -223,6 +231,9 @@ class Sudoku: ObservableObject {
         }
     }
 
+    /// Function for turning off number pad values if solved.
+    /// - Logic:
+    ///     - checks each index and turn off visibility for number that has been used up.
     func updateSolvedNumber() {
         for index in 0...8 {
             if notes.solved.contains(index + 1) {
@@ -233,6 +244,9 @@ class Sudoku: ObservableObject {
         }
     }
 
+    /// Function for timer
+    /// - Logic:
+    ///     - invalidate timer if game is paused. if not, create timer.
     func setScoreCounter(pause: Bool) {
         if pause {
             if gameTimer.isValid {
@@ -249,6 +263,9 @@ class Sudoku: ObservableObject {
         }
     }
 
+    /// Function for running time
+    /// - Logic:
+    ///     - Keep timer running until time runs out. Invalid if so.
     func timerAction() {
         if score.time > 0 {
             score.time -= 1
@@ -258,13 +275,19 @@ class Sudoku: ObservableObject {
             }
         }
     }
-
+    /// Function for starting score count (turning on game progress)
+    /// - Logic:
+    ///     - Initialize score, set isRunning to true, and start timer.
     func startScoreCounter() {
         initScore()
         score.isRunning = true
         setScoreCounter(pause: false)
     }
 
+    /// Function for initializing scores
+    /// - Logic:
+    ///     - Create new instance of `Scores()` and reset errors to 0.
+    ///     - reset isRunning to false and invalidate timer.
     func initScore() {
         score.scores = Scores()
         score.errors = 0
@@ -277,6 +300,9 @@ class Sudoku: ObservableObject {
         }
     }
 
+    /// Function for stopping score counting.
+    /// - Logic:
+    ///     - invalidate timer if score is running, then set it to false.
     func stopScoreCounter() {
         if score.isRunning {
             if gameTimer.isValid {

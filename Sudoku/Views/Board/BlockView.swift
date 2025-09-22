@@ -8,6 +8,23 @@
 import SwiftData
 import SwiftUI
 
+/// View that contains 3x3 sudoku block.
+///
+/// - Parameters;
+///     - sudoku: an EnvironmentObject for sudoku data
+///     - blockGrid: GridInfo element containing grid information.
+/// Contains:
+/// - ZStack (alignment: .center)
+///     - Rounded rectangle with corner radius of 10
+///         - Modifications:
+///             - frame with maxWidth and maxHeight to infinity
+///             - background with color gray, opacity 0.2
+///             - foregroundStyle also with color gray, opacity 0.2
+///             - aspect ratio for scale of 1.0, contentMode set to fit.
+///     - VStack (spacing 2)
+///         - 3 Hstacks each containing 3 CellView.
+///              - Must set each row and column to grid's row/col x 3 + row/col
+
 struct BlockView: View {
     @EnvironmentObject var sudoku: Sudoku
     let blockGrid: GridInfo

@@ -19,9 +19,9 @@ import Foundation
 ///     candidates for a certain cell based on its block
 ///
 /// - Methods:
-///     - `init(col: [Set<Int>], row: [Set<Int>], block: [Set<Int>])`
+///     - `initAllNotes()`
 ///         - Parameters: col, row, block of type `[Set<Int>]`
-///         - Function: Sets each parameter to its respective array
+///         - Function: Removes all column, row, block values.
 ///     - `updateNotes(position: CellPosition, value:Int)`
 ///         - Parameters: data of type `SudokuCell`
 ///         - Function: Checks if cell is visible and update its notes accordingly.
