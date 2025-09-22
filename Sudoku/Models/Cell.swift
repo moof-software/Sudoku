@@ -163,7 +163,8 @@ struct Cell: Codable {
         self.value = value
     }
 
-    /// Funtion that automatically shows the value when there's only one candidate left in the cell's note.
+    /// Function adding values to note if value is not visible, else if note only contains one,
+    /// set visibility to true and empty notes.
     mutating func selectCell() {
 
         if visible {
