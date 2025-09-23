@@ -130,7 +130,9 @@ struct GameHomeView: View {
                     .sheet(
                         isPresented: $showLeaderView,
                         content: {
-                            LeaderBoardView()
+                            LeaderBoardView(
+                                gameCenterViewControllerState: .leaderboards
+                            )
                         }
                     )
 

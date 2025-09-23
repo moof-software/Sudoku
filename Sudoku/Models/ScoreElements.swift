@@ -61,6 +61,7 @@ struct ScoreElements: Codable {
             + self.scores.combo
     }
     var time: Int
+    var playtime: Int
     var errors: Int
     var multiplier: Int {
         var rtn = 1
