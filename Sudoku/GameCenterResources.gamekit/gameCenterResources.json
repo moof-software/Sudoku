@@ -14,6 +14,17 @@
         "submissionType" : "BEST_SCORE",
         "vendorIdentifier" : "sudokupro.leaderboard.highest.score",
         "visibility" : "SHOW_FOR_ALL"
+      },
+      {
+        "archived" : false,
+        "defaultFormatter" : "ELAPSED_TIME_MINUTE",
+        "referenceName" : "FastestTime",
+        "scoreRangeEnd" : null,
+        "scoreRangeStart" : null,
+        "scoreSortType" : "ASC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "sudokupro.leaderboard.fastest.time",
+        "visibility" : "SHOW_FOR_ALL"
       }
     ],
     "leaderboardSetMemberships" : {

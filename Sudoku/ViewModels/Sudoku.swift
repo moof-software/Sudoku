@@ -41,6 +41,7 @@ class Sudoku: ObservableObject {
         level: .none,
         scores: Scores(),
         time: 0,
+        playtime: 0,
         errors: 0,
         completedRCB: 0,
         combos: 0,
@@ -250,6 +251,7 @@ class Sudoku: ObservableObject {
     }
 
     func timerAction() {
+        score.playtime += 1
         if score.time > 0 {
             score.time -= 1
         } else {
@@ -268,6 +270,7 @@ class Sudoku: ObservableObject {
     func initScore() {
         score.scores = Scores()
         score.errors = 0
+        score.playtime = 0
 
         if score.isRunning {
             if gameTimer.isValid {

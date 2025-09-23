@@ -112,6 +112,9 @@ struct ScoreView: View {
             if sudoku.score.total != 0 {
                 sumitScoreToGameCenter(points: sudoku.score.total)
             }
+            if sudoku.score.playtime != 0 {
+                sumitTimeToGameCenter(playtime: sudoku.score.playtime)
+            }
         }
     }
 
@@ -133,6 +136,28 @@ struct ScoreView: View {
                 print("Error submitting score: \(error.localizedDescription)")
             } else {
                 print("Score submitted successfully!")
+            }
+        }
+    }
+
+    func sumitTimeToGameCenter(playtime: Int) {
+        let localPlayer = GKLocalPlayer.local
+        let leaderboardID = "sudokupro.leaderboard.fastest.time"
+        guard GKLocalPlayer.local.isAuthenticated else {
+            print("Local player not authenticated. Cannot submit time.")
+            return
+        }
+        // Submit time
+        GKLeaderboard.submitScore(
+            playtime,
+            context: 0,
+            player: localPlayer,
+            leaderboardIDs: [leaderboardID]
+        ) { error in
+            if let error = error {
+                print("Error submitting time: \(error.localizedDescription)")
+            } else {
+                print("Time submitted successfully!")
             }
         }
     }
