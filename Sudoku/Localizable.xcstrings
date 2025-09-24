@@ -233,7 +233,6 @@
       }
     },
     "games played:" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -274,7 +273,6 @@
       }
     },
     "high score:" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -431,7 +429,6 @@
       }
     },
     "perfect games:" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -442,7 +439,6 @@
       }
     },
     "playtime:" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -475,7 +471,6 @@
       }
     },
     "reset" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {

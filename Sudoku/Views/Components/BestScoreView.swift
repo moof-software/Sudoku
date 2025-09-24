@@ -8,35 +8,51 @@
 import SwiftUI
 
 struct BestScoreView: View {
-    var level: String
-    var bestScore: Int
-    var bestRun: Int
-    var bestTime: Date
+    var level: Level
+    var best: RecordedBest
 
     var body: some View {
         HStack {
-            Text(level)
-                .frame(width: 150, alignment: .center)
-                .font(.custom("Chalkduster", size: 18))
+            switch level {
+            case .easy:
+                Text(String(localized: "Easy"))
+                    .frame(width: 150, alignment: .center)
+                    .font(.custom("Chalkduster", size: 18))
+            case .medium:
+                Text(String(localized: "Medium"))
+                    .frame(width: 150, alignment: .center)
+                    .font(.custom("Chalkduster", size: 18))
+            case .hard:
+                Text(String(localized: "Hard"))
+                    .frame(width: 150, alignment: .center)
+                    .font(.custom("Chalkduster", size: 18))
+            default:
+                Text(String(localized: "Easy"))
+                    .frame(width: 150, alignment: .center)
+                    .font(.custom("Chalkduster", size: 18))
+            }
+
             VStack(alignment: .trailing) {
                 Text(String(localized: "best score:"))
                 Text(String(localized: "best run:"))
                 Text(String(localized: "best time:"))
             }
             VStack(alignment: .leading) {
-                if bestScore == 0 {
+                if best.score == 0 {
                     Text(String(localized: "none"))
                         .foregroundStyle(Color.red)
                     Text(" ")
                     Text(" ")
                 } else {
-                    Text("\(bestScore)")
+                    Text("\(best.score)")
                         .foregroundStyle(Color.blue)
-                    Text("\(bestRun)")
+                    Text("\(best.run)")
                     Text(
-                        bestTime,
-                        format: .dateTime.hour(.twoDigits(amPM: .omitted))
-                            .minute()
+                        String(
+                            format: "%02d:%02d",
+                            best.time / 60,
+                            best.time % 60
+                        )
                     )
                 }
             }
@@ -47,9 +63,7 @@ struct BestScoreView: View {
 
 #Preview {
     BestScoreView(
-        level: String(localized: "Easy"),
-        bestScore: 0,
-        bestRun: 0,
-        bestTime: Date.now
+        level: .easy,
+        best: RecordedBest()
     )
 }

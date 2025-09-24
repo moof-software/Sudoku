@@ -7,40 +7,111 @@
       {
         "archived" : false,
         "defaultFormatter" : "INTEGER",
-        "referenceName" : "HighestScore",
+        "referenceName" : "EasyLevelScore",
         "scoreRangeEnd" : null,
         "scoreRangeStart" : null,
         "scoreSortType" : "DESC",
         "submissionType" : "BEST_SCORE",
-        "vendorIdentifier" : "sudokupro.leaderboard.highest.score",
+        "vendorIdentifier" : "sudokupro.easylevel.leaderboard.score",
         "visibility" : "SHOW_FOR_ALL"
       },
       {
         "archived" : false,
         "defaultFormatter" : "ELAPSED_TIME_MINUTE",
-        "referenceName" : "FastestTime",
+        "referenceName" : "EasyLevelTime",
         "scoreRangeEnd" : null,
         "scoreRangeStart" : null,
         "scoreSortType" : "ASC",
         "submissionType" : "BEST_SCORE",
-        "vendorIdentifier" : "sudokupro.leaderboard.fastest.time",
+        "vendorIdentifier" : "sudokupro.easylevel.leaderboard.time",
+        "visibility" : "SHOW_FOR_ALL"
+      },
+      {
+        "archived" : false,
+        "defaultFormatter" : "INTEGER",
+        "referenceName" : "MediumLevelScore",
+        "scoreRangeEnd" : null,
+        "scoreRangeStart" : null,
+        "scoreSortType" : "DESC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "sudokupro.mediumlevel.leaderboard.score",
+        "visibility" : "SHOW_FOR_ALL"
+      },
+      {
+        "archived" : false,
+        "defaultFormatter" : "ELAPSED_TIME_MINUTE",
+        "referenceName" : "MediumLevelTime",
+        "scoreRangeEnd" : null,
+        "scoreRangeStart" : null,
+        "scoreSortType" : "ASC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "sudokupro.mediumlevel.leaderboard.time",
+        "visibility" : "SHOW_FOR_ALL"
+      },
+      {
+        "archived" : false,
+        "defaultFormatter" : "INTEGER",
+        "referenceName" : "HardLevelScore",
+        "scoreRangeEnd" : null,
+        "scoreRangeStart" : null,
+        "scoreSortType" : "DESC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "sudokupro.hardlevel.leaderboard.score",
+        "visibility" : "SHOW_FOR_ALL"
+      },
+      {
+        "archived" : false,
+        "defaultFormatter" : "INTEGER",
+        "referenceName" : "HardLevelTime",
+        "scoreRangeEnd" : null,
+        "scoreRangeStart" : null,
+        "scoreSortType" : "ASC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "sudokupro.hardlevel.leaderboard.time",
         "visibility" : "SHOW_FOR_ALL"
       }
     ],
     "leaderboardSetMemberships" : {
-      "sudokupro.leaderboard.easylevel.score" : [
+      "sudokupro.easylevel.leaderboardSets" : [
         {
           "leaderboardLocalIDs" : [
-            "sudokupro.leaderboard.highest.score"
+            "sudokupro.easylevel.leaderboard.score",
+            "sudokupro.easylevel.leaderboard.time"
           ],
-          "localID" : "sudokupro.leaderboard.easylevel.score"
+          "localID" : "sudokupro.easylevel.leaderboardSets"
+        }
+      ],
+      "sudokupro.hardlevel.leaderboardSets" : [
+        {
+          "leaderboardLocalIDs" : [
+            "sudokupro.mediumlevel.leaderboard.score",
+            "sudokupro.mediumlevel.leaderboard.time"
+          ],
+          "localID" : "sudokupro.hardlevel.leaderboardSets"
+        }
+      ],
+      "sudokupro.mediumlevel.leaderboardSets" : [
+        {
+          "leaderboardLocalIDs" : [
+            "sudokupro.mediumlevel.leaderboard.score",
+            "sudokupro.mediumlevel.leaderboard.time"
+          ],
+          "localID" : "sudokupro.mediumlevel.leaderboardSets"
         }
       ]
     },
     "leaderboardSets" : [
       {
-        "referenceName" : "EasyLevelScore",
-        "vendorIdentifier" : "sudokupro.leaderboard.easylevel.score"
+        "referenceName" : "EasyLevelSets",
+        "vendorIdentifier" : "sudokupro.easylevel.leaderboardSets"
+      },
+      {
+        "referenceName" : "MediumLevelSets",
+        "vendorIdentifier" : "sudokupro.mediumlevel.leaderboardSets"
+      },
+      {
+        "referenceName" : "HardLevelSets",
+        "vendorIdentifier" : "sudokupro.hardlevel.leaderboardSets"
       }
     ]
   }

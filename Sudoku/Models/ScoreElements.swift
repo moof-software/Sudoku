@@ -33,6 +33,12 @@ struct Scores: Codable {
     var combo: Int = 0
 }
 
+struct RecordedBest {
+    var score = 0
+    var run = 0
+    var time = 0
+}
+
 /// Codable struct containing properties of score.
 /// - Parameters:
 ///     - isRunning: Boolean value indicating whether game is in progress or not.
