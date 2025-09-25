@@ -30,7 +30,7 @@ struct LeaderBoardView: View {
         RecordedBest(score: 0, run: 0, time: 0),
         RecordedBest(score: 0, run: 0, time: 0),
         RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0),
+        RecordedBest(score: 0, run: 0, time: 0)
     ]
 
     var body: some View {
@@ -105,9 +105,9 @@ struct LeaderBoardView: View {
 
     func getLeaderboardData(level: Level) {
         var leaderboards: [GKLeaderboard] = []
-
         var levelString: String = ""
         var levelLeaderboardTitle: String = ""
+
         switch level {
         case .medium:
             levelString = "mediumlevel"
@@ -122,12 +122,10 @@ struct LeaderBoardView: View {
         // Replace with your actual leaderboard IDs from App Store Connect
         let leaderboardIDs = [
             "sudokupro." + levelString + ".leaderboard.score",
-            "sudokupro." + levelString + ".leaderboard.time",
+            "sudokupro." + levelString + ".leaderboard.time"
         ]
 
-        GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) {
-            loadedboards,
-            error in
+        GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) { loadedboards, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print(
@@ -135,84 +133,120 @@ struct LeaderBoardView: View {
                     )
                 } else if let loadedLeaderboards = loadedboards {
                     leaderboards = loadedLeaderboards
-                    print(
-                        "Leaderboards loaded successfully: \(loadedLeaderboards.count)"
-                    )
 
                     for leaderboard in leaderboards {
-                        print(
-                            "Leaderboard title: \(leaderboard.title ?? "None")"
-                        )
-                        leaderboard.loadEntries(
-                            for: .global,
-                            timeScope: .allTime,
-                            range: NSRange(location: 1, length: 10)
-                        ) {
-                            localPlayerEntry,
-                            entries,
-                            totalPlayerCount,
-                            error in
-                            if let error = error {
-                                print(
-                                    "Error loading entries: \(error.localizedDescription)"
+                        if let leaderboardTitle = leaderboard.title {
+                            if leaderboardTitle == levelLeaderboardTitle {
+                                readLeaderboard(
+                                    level: level,
+                                    leaderboard: leaderboard,
+                                    scoreType: true
                                 )
-                                return
-                            }
-
-                            if let leaderboardTitle = leaderboard.title {
-                                if leaderboardTitle == levelLeaderboardTitle {
-                                    if let localEntry = localPlayerEntry {
-                                        print(
-                                            "Local player score: \(localEntry.score)"
-                                        )
-                                        self.leaderboard[0].score =
-                                            localEntry.score
-                                                > self.leaderboard[0].score
-                                            ? localEntry.score
-                                            : self.leaderboard[0].score
-                                    }
-
-                                    if let leader = entries?.first {
-                                        print(
-                                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                                        )
-                                        self.leaderboard[level.rawValue].score =
-                                            leader.score
-                                    }
-                                } else {
-                                    if let localEntry = localPlayerEntry {
-                                        print(
-                                            "Local player time: \(localEntry.score)"
-                                        )
-                                        self.leaderboard[0].time =
-                                            localEntry.score
-                                                < self.leaderboard[0].score
-                                            ? localEntry.score
-                                            : self.leaderboard[0].score
-                                    }
-
-                                    if let leader = entries?.first {
-                                        print(
-                                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                                        )
-                                        self.leaderboard[level.rawValue].time =
-                                            leader.score
-                                    }
-                                }
+                            } else {
+                                readLeaderboard(
+                                    level: level,
+                                    leaderboard: leaderboard,
+                                    scoreType: false
+                                )
                             }
                         }
+
                     }
                 }
             }
         }
     }
+
+    func readLeaderboard(
+        level: Level,
+        leaderboard: GKLeaderboard,
+        scoreType: Bool
+    ) {
+        leaderboard.loadEntries(
+            for: .global,
+            timeScope: .allTime,
+            range: NSRange(location: 1, length: 10)
+        ) { localPlayerEntry, entries, _, error in
+            if let error = error {
+                print(
+                    "Error loading entries: \(error.localizedDescription)"
+                )
+                return
+            }
+
+            if scoreType {
+                if let localEntry = localPlayerEntry {
+                    self.leaderboard[0].score =
+                        localEntry.score
+                            > self.leaderboard[0].score
+                        ? localEntry.score
+                        : self.leaderboard[0].score
+                }
+
+                if let leader = entries?.first {
+                    self.leaderboard[level.rawValue].score =
+                        leader.score
+                }
+            } else {
+                if let localEntry = localPlayerEntry {
+                    self.leaderboard[0].time =
+                        localEntry.score
+                            < self.leaderboard[0].time
+                        ? localEntry.score
+                        : self.leaderboard[0].time
+                }
+
+                if let leader = entries?.first {
+                    self.leaderboard[level.rawValue].time =
+                        leader.score
+                }
+            }
+
+        }
+    }
+
+    //    func readEntries(
+    //        level: Level,
+    //        scoreType: Bool,
+    //        localPlayer: GKLeaderboard.Entry?,
+    //        entries: [GKLeaderboard.Entry]
+    //    ) {
+    //        if scoreType {
+    //            if let localEntry = localPlayer {
+    //                self.leaderboard[0].score =
+    //                    localEntry.score
+    //                        > self.leaderboard[0].score
+    //                    ? localEntry.score
+    //                    : self.leaderboard[0].score
+    //            }
+    //
+    //            if let leader = entries.first {
+    //                self.leaderboard[level.rawValue].score =
+    //                    leader.score
+    //            }
+    //        } else {
+    //            if let localEntry = localPlayer {
+    //                self.leaderboard[0].time =
+    //                    localEntry.score
+    //                        < self.leaderboard[0].time
+    //                    ? localEntry.score
+    //                    : self.leaderboard[0].time
+    //            }
+    //
+    //            if let leader = entries.first {
+    //                self.leaderboard[level.rawValue].time =
+    //                    leader.score
+    //            }
+    //        }
+    //
+    //    }
 }
 
 #Preview {
     LeaderBoardView()
 }
 //
-//{
+// {
 //    let gameCenterViewControllerState: GKGameCenterViewControllerState?
 //
 //    func makeUIViewController(context: Context) -> GKGameCenterViewController {
@@ -229,4 +263,4 @@ struct LeaderBoardView: View {
 //        // Update the view controller if needed, e.g., changing the state
 //        // uiViewController.setViewControllerState(gameCenterViewControllerState, animated: false)
 //    }
-//}
+// }

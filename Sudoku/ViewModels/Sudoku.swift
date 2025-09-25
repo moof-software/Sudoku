@@ -68,6 +68,7 @@ class Sudoku: ObservableObject {
         }
     }
     var gameTimer: Timer = Timer()
+    var gameCenterAccess: Bool = false
 
     init() {
         initSudoukuBoard()

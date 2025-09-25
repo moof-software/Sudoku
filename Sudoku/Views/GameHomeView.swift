@@ -42,7 +42,7 @@ enum Screen {
 }
 
 struct GameHomeView: View {
-
+    @EnvironmentObject var sudoku: Sudoku
     @State private var path: [Screen] = []
 
     @State private var showAboutView: Bool = false
@@ -133,6 +133,7 @@ struct GameHomeView: View {
                             LeaderBoardView()
                         }
                     )
+                    .disabled(sudoku.gameCenterAccess ? false : true)
 
                     Spacer()
 
@@ -186,10 +187,12 @@ struct GameHomeView: View {
                 return
             }
             print("\(GKLocalPlayer.local.alias) is ready to play!")
+            sudoku.gameCenterAccess = true
         }
     }
 }
 
 #Preview {
     GameHomeView()
+        .environmentObject(Sudoku())
 }
