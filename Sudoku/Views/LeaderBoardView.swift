@@ -30,7 +30,7 @@ struct LeaderBoardView: View {
         RecordedBest(score: 0, run: 0, time: 0),
         RecordedBest(score: 0, run: 0, time: 0),
         RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0),
+        RecordedBest(score: 0, run: 0, time: 0)
     ]
 
     var body: some View {
