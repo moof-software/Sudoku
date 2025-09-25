@@ -122,12 +122,10 @@ struct LeaderBoardView: View {
         // Replace with your actual leaderboard IDs from App Store Connect
         let leaderboardIDs = [
             "sudokupro." + levelString + ".leaderboard.score",
-            "sudokupro." + levelString + ".leaderboard.time",
+            "sudokupro." + levelString + ".leaderboard.time"
         ]
 
-        GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) {
-            loadedboards,
-            error in
+        GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) { loadedboards, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print(
@@ -248,7 +246,7 @@ struct LeaderBoardView: View {
     LeaderBoardView()
 }
 //
-//{
+// {
 //    let gameCenterViewControllerState: GKGameCenterViewControllerState?
 //
 //    func makeUIViewController(context: Context) -> GKGameCenterViewController {
@@ -265,4 +263,4 @@ struct LeaderBoardView: View {
 //        // Update the view controller if needed, e.g., changing the state
 //        // uiViewController.setViewControllerState(gameCenterViewControllerState, animated: false)
 //    }
-//}
+// }
