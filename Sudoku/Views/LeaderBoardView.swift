@@ -106,14 +106,18 @@ struct LeaderBoardView: View {
     func getLeaderboardData(level: Level) {
         var leaderboards: [GKLeaderboard] = []
         var levelString: String = ""
+        var levelLeaderboardTitle: String = ""
 
         switch level {
         case .medium:
             levelString = "mediumlevel"
+            levelLeaderboardTitle = "MediumLevelScore"
         case .hard:
             levelString = "hardlevel"
+            levelLeaderboardTitle = "HardLevelScore"
         default:
             levelString = "easylevel"
+            levelLeaderboardTitle = "EasyLevelScore"
         }
         // Replace with your actual leaderboard IDs from App Store Connect
         let leaderboardIDs = [
@@ -131,29 +135,35 @@ struct LeaderBoardView: View {
                     )
                 } else if let loadedLeaderboards = loadedboards {
                     leaderboards = loadedLeaderboards
-                    print(
-                        "Leaderboards loaded successfully: \(loadedLeaderboards.count)"
-                    )
 
                     for leaderboard in leaderboards {
-                        readLeaderboard(level: level, leaderboard: leaderboard)
+                        if let leaderboardTitle = leaderboard.title {
+                            if leaderboardTitle == levelLeaderboardTitle {
+                                readLeaderboard(
+                                    level: level,
+                                    leaderboard: leaderboard,
+                                    scoreType: true
+                                )
+                            } else {
+                                readLeaderboard(
+                                    level: level,
+                                    leaderboard: leaderboard,
+                                    scoreType: false
+                                )
+                            }
+                        }
+
                     }
                 }
             }
         }
     }
 
-    func readLeaderboard(level: Level, leaderboard: GKLeaderboard) {
-        var levelLeaderboardTitle: String = ""
-        switch level {
-        case .medium:
-            levelLeaderboardTitle = "MediumLevelScore"
-        case .hard:
-            levelLeaderboardTitle = "HardLevelScore"
-        default:
-            levelLeaderboardTitle = "EasyLevelScore"
-        }
-
+    func readLeaderboard(
+        level: Level,
+        leaderboard: GKLeaderboard,
+        scoreType: Bool
+    ) {
         leaderboard.loadEntries(
             for: .global,
             timeScope: .allTime,
@@ -166,37 +176,72 @@ struct LeaderBoardView: View {
                 return
             }
 
-            if let leaderboardTitle = leaderboard.title {
-                if leaderboardTitle == levelLeaderboardTitle {
-                    if let localEntry = localPlayerEntry {
-                        self.leaderboard[0].score =
-                            localEntry.score
-                                > self.leaderboard[0].score
-                            ? localEntry.score
-                            : self.leaderboard[0].score
-                    }
+            if scoreType {
+                if let localEntry = localPlayerEntry {
+                    self.leaderboard[0].score =
+                        localEntry.score
+                            > self.leaderboard[0].score
+                        ? localEntry.score
+                        : self.leaderboard[0].score
+                }
 
-                    if let leader = entries?.first {
-                        self.leaderboard[level.rawValue].score =
-                            leader.score
-                    }
-                } else {
-                    if let localEntry = localPlayerEntry {
-                        self.leaderboard[0].time =
-                            localEntry.score
-                                < self.leaderboard[0].time
-                            ? localEntry.score
-                            : self.leaderboard[0].time
-                    }
+                if let leader = entries?.first {
+                    self.leaderboard[level.rawValue].score =
+                        leader.score
+                }
+            } else {
+                if let localEntry = localPlayerEntry {
+                    self.leaderboard[0].time =
+                        localEntry.score
+                            < self.leaderboard[0].time
+                        ? localEntry.score
+                        : self.leaderboard[0].time
+                }
 
-                    if let leader = entries?.first {
-                        self.leaderboard[level.rawValue].time =
-                            leader.score
-                    }
+                if let leader = entries?.first {
+                    self.leaderboard[level.rawValue].time =
+                        leader.score
                 }
             }
+
         }
     }
+
+    //    func readEntries(
+    //        level: Level,
+    //        scoreType: Bool,
+    //        localPlayer: GKLeaderboard.Entry?,
+    //        entries: [GKLeaderboard.Entry]
+    //    ) {
+    //        if scoreType {
+    //            if let localEntry = localPlayer {
+    //                self.leaderboard[0].score =
+    //                    localEntry.score
+    //                        > self.leaderboard[0].score
+    //                    ? localEntry.score
+    //                    : self.leaderboard[0].score
+    //            }
+    //
+    //            if let leader = entries.first {
+    //                self.leaderboard[level.rawValue].score =
+    //                    leader.score
+    //            }
+    //        } else {
+    //            if let localEntry = localPlayer {
+    //                self.leaderboard[0].time =
+    //                    localEntry.score
+    //                        < self.leaderboard[0].time
+    //                    ? localEntry.score
+    //                    : self.leaderboard[0].time
+    //            }
+    //
+    //            if let leader = entries.first {
+    //                self.leaderboard[level.rawValue].time =
+    //                    leader.score
+    //            }
+    //        }
+    //
+    //    }
 }
 
 #Preview {
