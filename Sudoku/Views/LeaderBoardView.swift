@@ -105,24 +105,20 @@ struct LeaderBoardView: View {
 
     func getLeaderboardData(level: Level) {
         var leaderboards: [GKLeaderboard] = []
-
         var levelString: String = ""
-        var levelLeaderboardTitle: String = ""
+
         switch level {
         case .medium:
             levelString = "mediumlevel"
-            levelLeaderboardTitle = "MediumLevelScore"
         case .hard:
             levelString = "hardlevel"
-            levelLeaderboardTitle = "HardLevelScore"
         default:
             levelString = "easylevel"
-            levelLeaderboardTitle = "EasyLevelScore"
         }
         // Replace with your actual leaderboard IDs from App Store Connect
         let leaderboardIDs = [
             "sudokupro." + levelString + ".leaderboard.score",
-            "sudokupro." + levelString + ".leaderboard.time",
+            "sudokupro." + levelString + ".leaderboard.time"
         ]
 
         GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) {
@@ -140,67 +136,76 @@ struct LeaderBoardView: View {
                     )
 
                     for leaderboard in leaderboards {
+                        readLeaderboard(level: level, leaderboard: leaderboard)
+                    }
+                }
+            }
+        }
+    }
+
+    func readLeaderboard(level: Level, leaderboard: GKLeaderboard) {
+        var levelLeaderboardTitle: String = ""
+        switch level {
+        case .medium:
+            levelLeaderboardTitle = "MediumLevelScore"
+        case .hard:
+            levelLeaderboardTitle = "HardLevelScore"
+        default:
+            levelLeaderboardTitle = "EasyLevelScore"
+        }
+        print(
+            "Leaderboard title: \(leaderboard.title ?? "None")"
+        )
+        leaderboard.loadEntries(
+            for: .global,
+            timeScope: .allTime,
+            range: NSRange(location: 1, length: 10)
+        ) { localPlayerEntry, entries, _, error in
+            if let error = error {
+                print(
+                    "Error loading entries: \(error.localizedDescription)"
+                )
+                return
+            }
+
+            if let leaderboardTitle = leaderboard.title {
+                if leaderboardTitle == levelLeaderboardTitle {
+                    if let localEntry = localPlayerEntry {
                         print(
-                            "Leaderboard title: \(leaderboard.title ?? "None")"
+                            "Local player score: \(localEntry.score)"
                         )
-                        leaderboard.loadEntries(
-                            for: .global,
-                            timeScope: .allTime,
-                            range: NSRange(location: 1, length: 10)
-                        ) {
-                            localPlayerEntry,
-                            entries,
-                            totalPlayerCount,
-                            error in
-                            if let error = error {
-                                print(
-                                    "Error loading entries: \(error.localizedDescription)"
-                                )
-                                return
-                            }
+                        self.leaderboard[0].score =
+                            localEntry.score
+                                > self.leaderboard[0].score
+                            ? localEntry.score
+                            : self.leaderboard[0].score
+                    }
 
-                            if let leaderboardTitle = leaderboard.title {
-                                if leaderboardTitle == levelLeaderboardTitle {
-                                    if let localEntry = localPlayerEntry {
-                                        print(
-                                            "Local player score: \(localEntry.score)"
-                                        )
-                                        self.leaderboard[0].score =
-                                            localEntry.score
-                                                > self.leaderboard[0].score
-                                            ? localEntry.score
-                                            : self.leaderboard[0].score
-                                    }
+                    if let leader = entries?.first {
+                        print(
+                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
+                        )
+                        self.leaderboard[level.rawValue].score =
+                            leader.score
+                    }
+                } else {
+                    if let localEntry = localPlayerEntry {
+                        print(
+                            "Local player time: \(localEntry.score)"
+                        )
+                        self.leaderboard[0].time =
+                            localEntry.score
+                                < self.leaderboard[0].time
+                            ? localEntry.score
+                            : self.leaderboard[0].time
+                    }
 
-                                    if let leader = entries?.first {
-                                        print(
-                                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                                        )
-                                        self.leaderboard[level.rawValue].score =
-                                            leader.score
-                                    }
-                                } else {
-                                    if let localEntry = localPlayerEntry {
-                                        print(
-                                            "Local player time: \(localEntry.score)"
-                                        )
-                                        self.leaderboard[0].time =
-                                            localEntry.score
-                                                < self.leaderboard[0].score
-                                            ? localEntry.score
-                                            : self.leaderboard[0].score
-                                    }
-
-                                    if let leader = entries?.first {
-                                        print(
-                                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                                        )
-                                        self.leaderboard[level.rawValue].time =
-                                            leader.score
-                                    }
-                                }
-                            }
-                        }
+                    if let leader = entries?.first {
+                        print(
+                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
+                        )
+                        self.leaderboard[level.rawValue].time =
+                            leader.score
                     }
                 }
             }
