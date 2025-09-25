@@ -118,7 +118,7 @@ struct LeaderBoardView: View {
         // Replace with your actual leaderboard IDs from App Store Connect
         let leaderboardIDs = [
             "sudokupro." + levelString + ".leaderboard.score",
-            "sudokupro." + levelString + ".leaderboard.time"
+            "sudokupro." + levelString + ".leaderboard.time",
         ]
 
         GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) {
@@ -153,9 +153,7 @@ struct LeaderBoardView: View {
         default:
             levelLeaderboardTitle = "EasyLevelScore"
         }
-        print(
-            "Leaderboard title: \(leaderboard.title ?? "None")"
-        )
+
         leaderboard.loadEntries(
             for: .global,
             timeScope: .allTime,
@@ -171,9 +169,6 @@ struct LeaderBoardView: View {
             if let leaderboardTitle = leaderboard.title {
                 if leaderboardTitle == levelLeaderboardTitle {
                     if let localEntry = localPlayerEntry {
-                        print(
-                            "Local player score: \(localEntry.score)"
-                        )
                         self.leaderboard[0].score =
                             localEntry.score
                                 > self.leaderboard[0].score
@@ -182,17 +177,11 @@ struct LeaderBoardView: View {
                     }
 
                     if let leader = entries?.first {
-                        print(
-                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                        )
                         self.leaderboard[level.rawValue].score =
                             leader.score
                     }
                 } else {
                     if let localEntry = localPlayerEntry {
-                        print(
-                            "Local player time: \(localEntry.score)"
-                        )
                         self.leaderboard[0].time =
                             localEntry.score
                                 < self.leaderboard[0].time
@@ -201,9 +190,6 @@ struct LeaderBoardView: View {
                     }
 
                     if let leader = entries?.first {
-                        print(
-                            "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                        )
                         self.leaderboard[level.rawValue].time =
                             leader.score
                     }
