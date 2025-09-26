@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GameKit
 
 /// Codable enumeration for sudoku levels.
 ///  - Parameters:
@@ -104,5 +105,34 @@ struct ScoreElements: Codable {
         } else if self.combos >= 5 {
             self.scores.combo += 100
         }
+    }
+
+    func getLeaderboardIDs(level: Level) -> [String] {
+        var levelString: String = ""
+        switch level {
+        case .medium:
+            levelString = "mediumlevel"
+        case .hard:
+            levelString = "hardlevel"
+        default:
+            levelString = "easylevel"
+        }
+        return [
+            "sudokupro." + levelString + ".leaderboard.score",
+            "sudokupro." + levelString + ".leaderboard.time"
+        ]
+    }
+
+    func getLevelLeaderboardTitle(level: Level) -> String {
+        var titleString: String = ""
+        switch level {
+        case .medium:
+            titleString = "MediumLevelScore"
+        case .hard:
+            titleString = "HardLevelScore"
+        default:
+            titleString = "EasyLevelScore"
+        }
+        return titleString
     }
 }

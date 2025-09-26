@@ -33,11 +33,13 @@ struct BoardHeaderView: View {
                         .font(.custom("Chalkduster", size: 18))
                 }
                 Text(
-                    String(
-                        format: "%02d:%02d",
-                        sudoku.score.time / 60,
-                        sudoku.score.time % 60
-                    )
+                    sudoku.setting.hideTimer
+                        ? ""
+                        : String(
+                            format: "%02d:%02d",
+                            sudoku.score.time / 60,
+                            sudoku.score.time % 60
+                        )
                 )
                 .font(.custom("Chalkduster", size: 25))
             }

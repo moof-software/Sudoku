@@ -203,6 +203,7 @@ struct GameBoardView: View {
             Spacer()
             AdBannerView()
         }
+        .statusBarHidden(sudoku.setting.showStatusBar ? false : true)
         .environmentObject(sudoku)
         //        .onAppear {
         //            sudoku.startScoreCounter()

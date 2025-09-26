@@ -67,8 +67,16 @@ class Sudoku: ObservableObject {
             }
         }
     }
+    @Published var setting: SettingPreference = SettingPreference()
+    @Published var gameCenterAccess: Bool = false
+    @Published var leaderboard: [RecordedBest] = [
+        RecordedBest(score: 0, run: 0, time: 0),
+        RecordedBest(score: 0, run: 0, time: 0),
+        RecordedBest(score: 0, run: 0, time: 0),
+        RecordedBest(score: 0, run: 0, time: 0)
+    ]
+
     var gameTimer: Timer = Timer()
-    var gameCenterAccess: Bool = false
 
     init() {
         initSudoukuBoard()
@@ -201,7 +209,11 @@ class Sudoku: ObservableObject {
 
             if table.cell[row][col].value == data {
                 selectedCell = nil
-                selectedNumber = data
+                if setting.autoSelect {
+                    selectedNumber = data
+                } else {
+                    selectedNumber = nil
+                }
                 table.cell[row][col].select = false
                 table.cell[row][col].visible = true
                 notes.updateNotes(data: table.cell[row][col])

@@ -15,6 +15,7 @@ struct SettingSlideBarView: View {
     var title: String
     var description: String
     var sliderType: Bool
+    @Binding var data: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -36,7 +37,7 @@ struct SettingSlideBarView: View {
                     }
                 } else {
                     Spacer()
-                    Toggle("toggle", isOn: $toggle)
+                    Toggle("toggle", isOn: $data)
                         .labelsHidden()
                 }
             }
@@ -54,10 +55,13 @@ struct SettingSlideBarView: View {
 }
 
 #Preview {
+    @Previewable @State var toggle = true
     SettingSlideBarView(
         imageName: "music.quarternote.3",
         title: "Melody Volume",
         description: "Move slider to change the volume of the melody",
-        sliderType: false
+        sliderType: false,
+        data: $toggle
     )
+    .environmentObject(Sudoku())
 }
