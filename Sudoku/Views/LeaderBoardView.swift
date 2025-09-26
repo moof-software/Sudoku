@@ -23,20 +23,24 @@ import SwiftUI
 ///         - Default must be "Leaderboard Screen"
 
 struct LeaderBoardView: View {
+    @EnvironmentObject var sudoku: Sudoku
+    @State private var isShowingGameCenter = false
     @State private var gamesPlayed = 122
     @State private var perfectGames = 122
-
-    @State var leaderboard: [RecordedBest] = [
-        RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0)
-    ]
 
     var body: some View {
         NavigationStack {
             Spacer()
+
             VStack {
+                Button {
+                    isShowingGameCenter.toggle()
+                } label: {
+                    Image("GameCenter")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                }
+
                 // Leaderboard Screen
                 HStack {
                     VStack(alignment: .trailing) {
@@ -46,15 +50,15 @@ struct LeaderBoardView: View {
                         Text(String(localized: "playtime:"))
                     }
                     VStack(alignment: .leading) {
-                        Text("\(leaderboard[0].score)")
+                        Text("\(sudoku.leaderboard[0].score)")
                             .foregroundStyle(Color.blue)
                         Text("\(gamesPlayed)")
                         Text("\(perfectGames)")
                         Text(
                             String(
                                 format: "%02d:%02d",
-                                leaderboard[0].time / 60,
-                                leaderboard[0].time % 60
+                                sudoku.leaderboard[0].time / 60,
+                                sudoku.leaderboard[0].time % 60
                             )
                         )
                     }
@@ -72,23 +76,26 @@ struct LeaderBoardView: View {
             Spacer()
             BestScoreView(
                 level: .easy,
-                best: leaderboard[Level.easy.rawValue]
+                best: sudoku.leaderboard[Level.easy.rawValue]
             )
             Spacer()
             BestScoreView(
                 level: .medium,
-                best: leaderboard[Level.medium.rawValue]
+                best: sudoku.leaderboard[Level.medium.rawValue]
             )
             Spacer()
             BestScoreView(
                 level: .hard,
-                best: leaderboard[Level.hard.rawValue]
+                best: sudoku.leaderboard[Level.hard.rawValue]
             )
             Spacer()
             Spacer()
         }
         .onAppear {
             loadGameLeaderboards()
+        }
+        .sheet(isPresented: $isShowingGameCenter) {
+            GameCenterView(state: .leaderboards)  // Or .leaderboard for
         }
     }
 
@@ -105,25 +112,9 @@ struct LeaderBoardView: View {
 
     func getLeaderboardData(level: Level) {
         var leaderboards: [GKLeaderboard] = []
-        var levelString: String = ""
-        var levelLeaderboardTitle: String = ""
 
-        switch level {
-        case .medium:
-            levelString = "mediumlevel"
-            levelLeaderboardTitle = "MediumLevelScore"
-        case .hard:
-            levelString = "hardlevel"
-            levelLeaderboardTitle = "HardLevelScore"
-        default:
-            levelString = "easylevel"
-            levelLeaderboardTitle = "EasyLevelScore"
-        }
         // Replace with your actual leaderboard IDs from App Store Connect
-        let leaderboardIDs = [
-            "sudokupro." + levelString + ".leaderboard.score",
-            "sudokupro." + levelString + ".leaderboard.time"
-        ]
+        let leaderboardIDs = sudoku.score.getLeaderboardIDs(level: level)
 
         GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) { loadedboards, error in
             DispatchQueue.main.async {
@@ -136,7 +127,10 @@ struct LeaderBoardView: View {
 
                     for leaderboard in leaderboards {
                         if let leaderboardTitle = leaderboard.title {
-                            if leaderboardTitle == levelLeaderboardTitle {
+                            if leaderboardTitle
+                                == sudoku.score.getLevelLeaderboardTitle(
+                                    level: level
+                                ) {
                                 readLeaderboard(
                                     level: level,
                                     leaderboard: leaderboard,
@@ -176,91 +170,37 @@ struct LeaderBoardView: View {
 
             if scoreType {
                 if let localEntry = localPlayerEntry {
-                    self.leaderboard[0].score =
+                    sudoku.leaderboard[0].score =
                         localEntry.score
-                            > self.leaderboard[0].score
+                            > sudoku.leaderboard[0].score
                         ? localEntry.score
-                        : self.leaderboard[0].score
+                        : sudoku.leaderboard[0].score
                 }
 
                 if let leader = entries?.first {
-                    self.leaderboard[level.rawValue].score =
+                    sudoku.leaderboard[level.rawValue].score =
                         leader.score
                 }
             } else {
                 if let localEntry = localPlayerEntry {
-                    self.leaderboard[0].time =
+                    sudoku.leaderboard[0].time =
                         localEntry.score
-                            < self.leaderboard[0].time
+                            < sudoku.leaderboard[0].time
                         ? localEntry.score
-                        : self.leaderboard[0].time
+                        : sudoku.leaderboard[0].time
                 }
 
                 if let leader = entries?.first {
-                    self.leaderboard[level.rawValue].time =
+                    sudoku.leaderboard[level.rawValue].time =
                         leader.score
                 }
             }
 
         }
     }
-
-    //    func readEntries(
-    //        level: Level,
-    //        scoreType: Bool,
-    //        localPlayer: GKLeaderboard.Entry?,
-    //        entries: [GKLeaderboard.Entry]
-    //    ) {
-    //        if scoreType {
-    //            if let localEntry = localPlayer {
-    //                self.leaderboard[0].score =
-    //                    localEntry.score
-    //                        > self.leaderboard[0].score
-    //                    ? localEntry.score
-    //                    : self.leaderboard[0].score
-    //            }
-    //
-    //            if let leader = entries.first {
-    //                self.leaderboard[level.rawValue].score =
-    //                    leader.score
-    //            }
-    //        } else {
-    //            if let localEntry = localPlayer {
-    //                self.leaderboard[0].time =
-    //                    localEntry.score
-    //                        < self.leaderboard[0].time
-    //                    ? localEntry.score
-    //                    : self.leaderboard[0].time
-    //            }
-    //
-    //            if let leader = entries.first {
-    //                self.leaderboard[level.rawValue].time =
-    //                    leader.score
-    //            }
-    //        }
-    //
-    //    }
 }
 
 #Preview {
     LeaderBoardView()
+        .environmentObject(Sudoku())
 }
-//
-// {
-//    let gameCenterViewControllerState: GKGameCenterViewControllerState?
-//
-//    func makeUIViewController(context: Context) -> GKGameCenterViewController {
-//        let vc = GKGameCenterViewController(
-//            state: gameCenterViewControllerState ?? .default
-//        )
-//        return vc
-//    }
-//
-//    func updateUIViewController(
-//        _ uiViewController: GKGameCenterViewController,
-//        context: Context
-//    ) {
-//        // Update the view controller if needed, e.g., changing the state
-//        // uiViewController.setViewControllerState(gameCenterViewControllerState, animated: false)
-//    }
-// }

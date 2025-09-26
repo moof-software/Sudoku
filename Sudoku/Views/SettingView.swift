@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+struct SettingPreference {
+    @EnvironmentObject var sudoku: Sudoku
+
+    var autoSelect: Bool = false
+    var useLevelBestScore: Bool = false
+    var showStatusBar: Bool = false
+    var hideTimer: Bool = false
+    var gameCenter: Bool = true
+}
+
 /// View that lets users set sounds, effects, and tile patterns.
 ///
 /// Contains:
@@ -32,6 +42,7 @@ import SwiftUI
 ///             - Action: TBD
 struct SettingView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var sudoku: Sudoku
 
     @State private var soundOn: Bool = true
     @State private var selectedEffect = 1
@@ -49,7 +60,8 @@ struct SettingView: View {
                             localized:
                                 "Move slider to change the volume of the melody"
                         ),
-                    sliderType: true
+                    sliderType: true,
+                    data: $sudoku.setting.autoSelect
                 )
                 SettingSlideBarView(
                     imageName: "waveform.path",
@@ -59,7 +71,8 @@ struct SettingView: View {
                             localized:
                                 "Move slider to change the volume of the effects"
                         ),
-                    sliderType: true
+                    sliderType: true,
+                    data: $sudoku.setting.autoSelect
                 )
             }
             .padding(.vertical, 4)
@@ -73,7 +86,8 @@ struct SettingView: View {
                             localized:
                                 "After a tile match, auto-select all tiles with the same number"
                         ),
-                    sliderType: false
+                    sliderType: false,
+                    data: $sudoku.setting.autoSelect
                 )
                 SettingSlideBarView(
                     imageName: "square.grid.3x3.middle.filled",
@@ -83,7 +97,8 @@ struct SettingView: View {
                             localized:
                                 "At game end, compare scores using level best score instead of the overall best"
                         ),
-                    sliderType: false
+                    sliderType: false,
+                    data: $sudoku.setting.useLevelBestScore
                 )
             }
             .padding(.vertical, 4)
@@ -97,7 +112,8 @@ struct SettingView: View {
                             localized:
                                 "Always show status bar when playing a game"
                         ),
-                    sliderType: false
+                    sliderType: false,
+                    data: $sudoku.setting.showStatusBar
                 )
                 SettingSlideBarView(
                     imageName: "timer",
@@ -107,7 +123,8 @@ struct SettingView: View {
                             localized:
                                 "Hide timer while playing (total time shown at the end of session)"
                         ),
-                    sliderType: false
+                    sliderType: false,
+                    data: $sudoku.setting.hideTimer
                 )
             }
             .padding(.vertical, 4)
@@ -120,7 +137,8 @@ struct SettingView: View {
                             localized:
                                 "Enable the Game Center for leaderboards and score uploads"
                         ),
-                    sliderType: false
+                    sliderType: false,
+                    data: $sudoku.setting.gameCenter
                 )
             }
             .padding(.vertical, 4)
