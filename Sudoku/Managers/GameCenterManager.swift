@@ -153,8 +153,7 @@ class GameCenterManager {
 
             if let leaderboard = loadedboards.first {
                 for leaderboard in loadedboards {
-                    let (localPlayerEntry, entries, _) =
-                        try await leaderboard.loadEntries(
+                    let (localPlayerEntry, entries, _) = try await leaderboard.loadEntries(
                             for: .global,
                             timeScope: .allTime,
                             range: NSRange(location: 1, length: 10)  // Ranks 1-100
@@ -162,8 +161,7 @@ class GameCenterManager {
 
                     if let leaderboardTitle = leaderboard.title {
                         if leaderboardTitle
-                            == self.getLevelLeaderboardTitle(level: level)
-                        {
+                            == self.getLevelLeaderboardTitle(level: level) {
                             if level == .player {
                                 if let localEntry = localPlayerEntry {
                                     readerboardData.score = localEntry.score
