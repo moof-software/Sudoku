@@ -107,7 +107,7 @@ class GameCenterManager {
             RecordedBest(score: 0, run: 0, time: 900),
             RecordedBest(score: 0, run: 0, time: 300),
             RecordedBest(score: 0, run: 0, time: 600),
-            RecordedBest(score: 0, run: 0, time: 900),
+            RecordedBest(score: 0, run: 0, time: 900)
         ]
 
         guard localPlayer.isAuthenticated else {
