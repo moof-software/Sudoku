@@ -153,9 +153,6 @@ class GameCenterManager {
 
             if let leaderboard = loadedboards.first {
                 for leaderboard in loadedboards {
-                    print(
-                        "Leaderboard Tile: \(leaderboard.title ?? "None" )"
-                    )
                     let (localPlayerEntry, entries, _) =
                         try await leaderboard.loadEntries(
                             for: .global,
@@ -170,33 +167,20 @@ class GameCenterManager {
                             if level == .player {
                                 if let localEntry = localPlayerEntry {
                                     readerboardData.score = localEntry.score
-                                    print(
-                                        "Local Player Score: \(localEntry.score), Rank: \(localEntry.rank)"
-                                    )
                                 }
                             } else {
                                 if let leader = entries.first {
-
                                     readerboardData.score = leader.score
-                                    print(
-                                        "Player: \(leader.player.displayName), Score: \(leader.score), Rank: \(leader.rank)"
-                                    )
                                 }
                             }
                         } else {
                             if level == .player {
                                 if let localEntry = localPlayerEntry {
                                     readerboardData.time = localEntry.score
-                                    print(
-                                        "Local Player Time: \(localEntry.score), Rank: \(localEntry.rank)"
-                                    )
                                 }
                             } else {
                                 if let leader = entries.first {
                                     readerboardData.time = leader.score
-                                    print(
-                                        "Player: \(leader.player.displayName), Time: \(leader.score), Rank: \(leader.rank)"
-                                    )
                                 }
                             }
                         }
