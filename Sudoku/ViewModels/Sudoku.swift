@@ -33,7 +33,7 @@ class Sudoku: ObservableObject {
     )
     @Published var score: ScoreElements = ScoreElements(
         isRunning: false,
-        level: .none,
+        level: .player,
         scores: Scores(),
         time: 0,
         playtime: 0,
@@ -69,11 +69,11 @@ class Sudoku: ObservableObject {
     }
     @Published var setting: SettingPreference = SettingPreference()
     @Published var gameCenterAccess: Bool = false
-    @Published var leaderboard: [RecordedBest] = [
-        RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0),
-        RecordedBest(score: 0, run: 0, time: 0)
+    @Published var bestRecord: [RecordedBest] = [
+        RecordedBest(score: 0, run: 0, time: 900),
+        RecordedBest(score: 0, run: 0, time: 300),
+        RecordedBest(score: 0, run: 0, time: 600),
+        RecordedBest(score: 0, run: 0, time: 900)
     ]
 
     var gameTimer: Timer = Timer()
@@ -100,7 +100,7 @@ class Sudoku: ObservableObject {
         table.updateCellInfo()
 
         notes.initAllNotes()
-        makeTable(level: .none)
+        makeTable(level: .player)
         initScore()
         initNumberPadData()
     }

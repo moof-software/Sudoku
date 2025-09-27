@@ -110,73 +110,10 @@ struct ScoreView: View {
         }
         .onAppear {
             if sudoku.score.total != 0 {
-                submitScoreToGameCenter(score: sudoku.score)
+                GameCenterManager.instance.submitScoreToGameCenter(score: sudoku.score)
             }
             if sudoku.score.playtime != 0 {
-                submitTimeToGameCenter(score: sudoku.score)
-            }
-        }
-    }
-
-    func submitScoreToGameCenter(score: ScoreElements) {
-        let localPlayer = GKLocalPlayer.local
-        var levelString: String = ""
-        switch score.level {
-        case .medium:
-            levelString = "mediumlevel"
-        case .hard:
-            levelString = "hardlevel"
-        default:
-            levelString = "easylevel"
-        }
-        let leaderboardID = "sudokupro." + levelString + ".leaderboard.score"
-
-        guard GKLocalPlayer.local.isAuthenticated else {
-            print("Local player not authenticated. Cannot submit score.")
-            return
-        }
-        // Submit score
-        GKLeaderboard.submitScore(
-            score.total,
-            context: 0,
-            player: localPlayer,
-            leaderboardIDs: [leaderboardID]
-        ) { error in
-            if let error = error {
-                print("Error submitting score: \(error.localizedDescription)")
-            } else {
-                print("Score submitted successfully!")
-            }
-        }
-    }
-
-    func submitTimeToGameCenter(score: ScoreElements) {
-        let localPlayer = GKLocalPlayer.local
-        var levelString: String = ""
-        switch score.level {
-        case .medium:
-            levelString = "mediumlevel"
-        case .hard:
-            levelString = "hardlevel"
-        default:
-            levelString = "easylevel"
-        }
-        let leaderboardID = "sudokupro." + levelString + ".leaderboard.time"
-        guard GKLocalPlayer.local.isAuthenticated else {
-            print("Local player not authenticated. Cannot submit time.")
-            return
-        }
-        // Submit time
-        GKLeaderboard.submitScore(
-            score.playtime,
-            context: 0,
-            player: localPlayer,
-            leaderboardIDs: [leaderboardID]
-        ) { error in
-            if let error = error {
-                print("Error submitting time: \(error.localizedDescription)")
-            } else {
-                print("Time submitted successfully!")
+                GameCenterManager.instance.submitTimeToGameCenter(score: sudoku.score)
             }
         }
     }

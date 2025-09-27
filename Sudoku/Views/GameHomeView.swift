@@ -133,10 +133,10 @@ struct GameHomeView: View {
                             LeaderBoardView()
                         }
                     )
-                    .disabled(
-                        sudoku.gameCenterAccess && sudoku.setting.gameCenter
-                            ? false : true
-                    )
+//                    .disabled(
+//                        sudoku.gameCenterAccess && sudoku.setting.gameCenter
+//                            ? false : true
+//                    )
 
                     Spacer()
 
@@ -178,125 +178,9 @@ struct GameHomeView: View {
             )
             .onAppear {
                 if sudoku.setting.gameCenter {
-                    athenticateGameCenter()
+                    GameCenterManager.instance.authenticateGameCenter()
                 }
             }
-        }
-    }
-
-    func athenticateGameCenter() {
-        let localPlayer = GKLocalPlayer.local
-        localPlayer.authenticateHandler = { _, error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "")
-                sudoku.gameCenterAccess = false
-                return
-            }
-            print("\(GKLocalPlayer.local.alias) is ready to play!")
-
-            sudoku.gameCenterAccess = true
-
-            loadGameLeaderboards()
-        }
-    }
-
-    func loadGameLeaderboards() {
-        guard GKLocalPlayer.local.isAuthenticated else {
-            print("Local player not authenticated. Cannot submit score.")
-            return
-        }
-
-        getLeaderboardData(level: .easy)
-        getLeaderboardData(level: .medium)
-        getLeaderboardData(level: .hard)
-    }
-
-    func getLeaderboardData(level: Level) {
-        var leaderboards: [GKLeaderboard] = []
-
-        // Replace with your actual leaderboard IDs from App Store Connect
-        let leaderboardIDs = sudoku.score.getLeaderboardIDs(level: level)
-
-        GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) { loadedboards, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print(
-                        "Failed to load leaderboards: \(error.localizedDescription)"
-                    )
-                } else if let loadedLeaderboards = loadedboards {
-                    leaderboards = loadedLeaderboards
-
-                    for leaderboard in leaderboards {
-                        if let leaderboardTitle = leaderboard.title {
-                            if leaderboardTitle
-                                == sudoku.score.getLevelLeaderboardTitle(
-                                    level: level
-                                ) {
-                                readLeaderboard(
-                                    level: level,
-                                    leaderboard: leaderboard,
-                                    scoreType: true
-                                )
-                            } else {
-                                readLeaderboard(
-                                    level: level,
-                                    leaderboard: leaderboard,
-                                    scoreType: false
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-    }
-
-    func readLeaderboard(
-        level: Level,
-        leaderboard: GKLeaderboard,
-        scoreType: Bool
-    ) {
-        leaderboard.loadEntries(
-            for: .global,
-            timeScope: .allTime,
-            range: NSRange(location: 1, length: 10)
-        ) { localPlayerEntry, entries, _, error in
-            if let error = error {
-                print(
-                    "Error loading entries: \(error.localizedDescription)"
-                )
-                return
-            }
-
-            if scoreType {
-                if let localEntry = localPlayerEntry {
-                    sudoku.leaderboard[0].score =
-                        localEntry.score
-                            > sudoku.leaderboard[0].score
-                        ? localEntry.score
-                        : sudoku.leaderboard[0].score
-                }
-
-                if let leader = entries?.first {
-                    sudoku.leaderboard[level.rawValue].score =
-                        leader.score
-                }
-            } else {
-                if let localEntry = localPlayerEntry {
-                    sudoku.leaderboard[0].time =
-                        localEntry.score
-                            < sudoku.leaderboard[0].time
-                        ? localEntry.score
-                        : sudoku.leaderboard[0].time
-                }
-
-                if let leader = entries?.first {
-                    sudoku.leaderboard[level.rawValue].time =
-                        leader.score
-                }
-            }
-
         }
     }
 }
