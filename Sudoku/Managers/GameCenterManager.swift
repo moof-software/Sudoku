@@ -30,7 +30,7 @@ class GameCenterManager {
         }
         return [
             "sudokupro." + levelString + ".leaderboard.score",
-            "sudokupro." + levelString + ".leaderboard.time",
+            "sudokupro." + levelString + ".leaderboard.time"
         ]
     }
 
