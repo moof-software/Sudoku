@@ -15,7 +15,7 @@ import GameKit
 ///     - medium: 2 for 41 empty cells in sudoku board
 ///     - hard: 3 for 52 empty cells in sudoku board
 enum Level: Int, Codable {
-    case none = 0
+    case player = 0
     case easy
     case medium
     case hard

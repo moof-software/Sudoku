@@ -50,15 +50,15 @@ struct LeaderBoardView: View {
                         Text(String(localized: "playtime:"))
                     }
                     VStack(alignment: .leading) {
-                        Text("\(sudoku.leaderboard[0].score)")
+                        Text("\(sudoku.bestRecord[Level.player.rawValue].score)")
                             .foregroundStyle(Color.blue)
                         Text("\(gamesPlayed)")
                         Text("\(perfectGames)")
                         Text(
                             String(
                                 format: "%02d:%02d",
-                                sudoku.leaderboard[0].time / 60,
-                                sudoku.leaderboard[0].time % 60
+                                sudoku.bestRecord[Level.player.rawValue].time / 60,
+                                sudoku.bestRecord[Level.player.rawValue].time % 60
                             )
                         )
                     }
@@ -76,126 +76,28 @@ struct LeaderBoardView: View {
             Spacer()
             BestScoreView(
                 level: .easy,
-                best: sudoku.leaderboard[Level.easy.rawValue]
+                best: sudoku.bestRecord[Level.easy.rawValue]
             )
             Spacer()
             BestScoreView(
                 level: .medium,
-                best: sudoku.leaderboard[Level.medium.rawValue]
+                best: sudoku.bestRecord[Level.medium.rawValue]
             )
             Spacer()
             BestScoreView(
                 level: .hard,
-                best: sudoku.leaderboard[Level.hard.rawValue]
+                best: sudoku.bestRecord[Level.hard.rawValue]
             )
             Spacer()
             Spacer()
         }
         .onAppear {
-            loadGameLeaderboards()
+            Task {
+                sudoku.bestRecord = await GameCenterManager.instance.loadGameLeaderboards()
+            }
         }
         .sheet(isPresented: $isShowingGameCenter) {
             GameCenterView(state: .leaderboards)  // Or .leaderboard for
-        }
-    }
-
-    func loadGameLeaderboards() {
-        guard GKLocalPlayer.local.isAuthenticated else {
-            print("Local player not authenticated. Cannot submit score.")
-            return
-        }
-
-        getLeaderboardData(level: .easy)
-        getLeaderboardData(level: .medium)
-        getLeaderboardData(level: .hard)
-    }
-
-    func getLeaderboardData(level: Level) {
-        var leaderboards: [GKLeaderboard] = []
-
-        // Replace with your actual leaderboard IDs from App Store Connect
-        let leaderboardIDs = sudoku.score.getLeaderboardIDs(level: level)
-
-        GKLeaderboard.loadLeaderboards(IDs: leaderboardIDs) { loadedboards, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print(
-                        "Failed to load leaderboards: \(error.localizedDescription)"
-                    )
-                } else if let loadedLeaderboards = loadedboards {
-                    leaderboards = loadedLeaderboards
-
-                    for leaderboard in leaderboards {
-                        if let leaderboardTitle = leaderboard.title {
-                            if leaderboardTitle
-                                == sudoku.score.getLevelLeaderboardTitle(
-                                    level: level
-                                ) {
-                                readLeaderboard(
-                                    level: level,
-                                    leaderboard: leaderboard,
-                                    scoreType: true
-                                )
-                            } else {
-                                readLeaderboard(
-                                    level: level,
-                                    leaderboard: leaderboard,
-                                    scoreType: false
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-    }
-
-    func readLeaderboard(
-        level: Level,
-        leaderboard: GKLeaderboard,
-        scoreType: Bool
-    ) {
-        leaderboard.loadEntries(
-            for: .global,
-            timeScope: .allTime,
-            range: NSRange(location: 1, length: 10)
-        ) { localPlayerEntry, entries, _, error in
-            if let error = error {
-                print(
-                    "Error loading entries: \(error.localizedDescription)"
-                )
-                return
-            }
-
-            if scoreType {
-                if let localEntry = localPlayerEntry {
-                    sudoku.leaderboard[0].score =
-                        localEntry.score
-                            > sudoku.leaderboard[0].score
-                        ? localEntry.score
-                        : sudoku.leaderboard[0].score
-                }
-
-                if let leader = entries?.first {
-                    sudoku.leaderboard[level.rawValue].score =
-                        leader.score
-                }
-            } else {
-                if let localEntry = localPlayerEntry {
-                    sudoku.leaderboard[0].time =
-                        localEntry.score
-                            < sudoku.leaderboard[0].time
-                        ? localEntry.score
-                        : sudoku.leaderboard[0].time
-                }
-
-                if let leader = entries?.first {
-                    sudoku.leaderboard[level.rawValue].time =
-                        leader.score
-                }
-            }
-
         }
     }
 }

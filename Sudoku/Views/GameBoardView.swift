@@ -208,8 +208,13 @@ struct GameBoardView: View {
         //        .onAppear {
         //            sudoku.startScoreCounter()
         //        }
+        .onAppear {
+            AudioManager.instnace.prepareBGSound()
+            AudioManager.instnace.playBGsound()
+        }
         .onDisappear {
             sudoku.setScoreCounter(pause: true)
+            AudioManager.instnace.stopBGsound()
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
