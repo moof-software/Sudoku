@@ -31,7 +31,7 @@ struct CellView: View {
                 sudoku.startScoreCounter()
             }
 
-            AudioManager.instnace.playEffect()
+            AudioManager.instance.playEffect()
 
         } label: {
             if sudoku.table.cell[row][col].visible {

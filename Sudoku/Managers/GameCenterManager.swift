@@ -9,6 +9,39 @@ import Foundation
 import GameKit
 import SwiftUI
 
+/// Class for managing Game Center access and leaderboards throughout the game.
+///
+/// - Parameters:
+///     - instance: static constant calling the class itself (singleton pattern).
+///     - localPlayer: variable calling for the local player in Game Kit.
+///     - init: private variable.
+///
+/// - Methods:
+///     - `getLeaderboardIDs`
+///         - Parameter: `level` of type `Level`
+///         - Returns: an array of `String`s
+///         - Function: retrieves leaderboard IDs
+///     - `getLevelLeaderboardTitle`
+///         - Parameter: `level` of type `Level`
+///         - Returns: an array of strings
+///         - Function: retreives the title of leaderboards
+///     - `authenticateGameCenter`
+///         - Function: authenticates local player
+///     - `submitScoreToGameCenter`
+///         - Parameter: `score` of type `ScoreElements`
+///         - Function: Submits local player's score to Game Center
+///     - `submitTimeToGameCenter`
+///         - Parameter: `score` of type `ScoreElements`
+///         - Function: Submits local player's time to Game Center
+///     - `loadGameLeaderboards`
+///         - async
+///         - Returns: an array of `RecordedBest`s
+///         - Function: awaits and inserts scores retrieved from Game Center Leaderboards
+///     - `getLeaderboardData`
+///         - async
+///         - Parameter: `level` of type `Level`
+///         - Returns: `RecordedBest`
+///         - Function: awaits and brings in data from Game Kit Leadarboard.
 class GameCenterManager {
     static let instance = GameCenterManager()
 
@@ -18,6 +51,14 @@ class GameCenterManager {
 
     }
 
+    /// Function for retrieves leaderboard IDs.
+    /// - Parameters:
+    ///     - level: selected level of type `Level`
+    /// - Returns:
+    ///     - An arry of `String`s.
+    /// - Logic:
+    ///     - Creates a varaible of an emtpy string titled `levelString`.
+    ///     - Set variable according to level and return IDs for score and time leaderboard.
     func getLeaderboardIDs(level: Level) -> [String] {
         var levelString: String = ""
         switch level {
@@ -34,6 +75,13 @@ class GameCenterManager {
         ]
     }
 
+    /// Function for retreives the title of leaderboards.
+    /// - Parameters:
+    ///     - level: selected level of type `Level`
+    /// - Returns:`String`
+    /// - Logic:
+    ///     - Creates a varaible of an emtpy string titled `titleString`.
+    ///     - Set variable according to level and return title.
     func getLevelLeaderboardTitle(level: Level) -> String {
         var titleString: String = ""
         switch level {
@@ -47,6 +95,9 @@ class GameCenterManager {
         return titleString
     }
 
+    /// Function for authenticating local player.
+    /// - Logic:
+    ///     - uses `authenticateHandler` function from GK to authenticate local player.
     func authenticateGameCenter() {
         localPlayer.authenticateHandler = { _, error in
             guard error == nil else {
@@ -57,6 +108,12 @@ class GameCenterManager {
         }
     }
 
+    /// Function for submitting local player's score to Game Center
+    /// - Parameters:
+    ///     - score: local player score of type `ScoreElements`
+    /// - Logic:
+    ///     - Makes sure local player is authenticated with `guard`.
+    ///     - uses `submitScore` from Game Kit to input local score to GK.
     func submitScoreToGameCenter(score: ScoreElements) {
         let localPlayer = GKLocalPlayer.local
         let leaderboardIDs = getLeaderboardIDs(level: score.level)
@@ -80,6 +137,12 @@ class GameCenterManager {
         }
     }
 
+    /// Function for submitting local player's time to Game Center
+    /// - Parameters:
+    ///     - score: local player score of type `ScoreElements`
+    /// - Logic:
+    ///     - Makes sure local player is authenticated with `guard`.
+    ///     - uses `submitScore` from Game Kit to input local time to GK.
     func submitTimeToGameCenter(score: ScoreElements) {
         let localPlayer = GKLocalPlayer.local
         let leaderboardIDs = getLeaderboardIDs(level: score.level)
@@ -102,6 +165,13 @@ class GameCenterManager {
         }
     }
 
+    /// Async function for awaiting and inserting scores retrieved from Game Center Leaderboards
+    /// - Returns: an arry of `RecordedBest`s
+    /// - Logic:
+    ///     - Creates an array of `RecordedBest`
+    ///     - Makes sure local player is authenticated with `guard`
+    ///     - Use function `getLeaderboardData` to bring in leaderboard data of each levels
+    ///     - Inserts each leaderboard data to respective location in array (use Level's raw value)
     func loadGameLeaderboards() async -> [RecordedBest] {
         var bestScore: [RecordedBest] = [
             RecordedBest(score: 0, run: 0, time: 900),
@@ -135,6 +205,17 @@ class GameCenterManager {
         return bestScore
     }
 
+    /// Async function for awaiting and bringing in data from Game Kit Leadarboard
+    /// - Parameters:
+    ///     - level: recorded level of type `Level`
+    /// - Returns:`RecordedBest`
+    /// - Logic:
+    ///     - Creates variable `readerboardData` of type `RecordedBest` and sets it to hard level inputs.
+    ///     - Retrieve leaderboard IDs.
+    ///     - Await leaderboards with Game Kit's `loadLeaderboards` function.
+    ///     - Loads in top ten entries from each leaderboard.
+    ///         - If we are at player level, load best scores and times for player only.
+    ///         - Else, just let the first place's data be the data brought in.
     func getLeaderboardData(level: Level) async -> RecordedBest {
         //var leaderboards: [GKLeaderboard] = []
         var readerboardData: RecordedBest = RecordedBest(
@@ -142,7 +223,7 @@ class GameCenterManager {
             run: 0,
             time: 900
         )
-        // Replace with your actual leaderboard IDs from App Store Connect
+        // Retrieve leaderboard data
         let leaderboardIDs = getLeaderboardIDs(level: level)
 
         do {
@@ -151,12 +232,13 @@ class GameCenterManager {
                 IDs: leaderboardIDs
             )
 
+            // loadedboards.first != nil .... is this right?
             if let leaderboard = loadedboards.first {
                 for leaderboard in loadedboards {
                     let (localPlayerEntry, entries, _) = try await leaderboard.loadEntries(
                             for: .global,
                             timeScope: .allTime,
-                            range: NSRange(location: 1, length: 10)  // Ranks 1-100
+                            range: NSRange(location: 1, length: 10)  // Ranks 1-10
                         )
 
                     if let leaderboardTitle = leaderboard.title {
