@@ -17,7 +17,8 @@ import Foundation
 ///
 /// - Methods:
 ///     - `playEffect`
-///         - Function: Brings in an effct sound from Bundle URL and inputs into `effectPlayer`. Plays effect immediately,
+///         - Function: Brings in an effct sound from Bundle URL and inputs into `effectPlayer`
+///           Plays effect immediately.
 ///     - `prepareBGSound`
 ///         - Function: Brings in a background soundf from Bundle URL and inputs into `AVAudioPlayer`. Sets loop to -1
 ///     - `playBGSound`

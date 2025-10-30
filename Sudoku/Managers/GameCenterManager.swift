@@ -217,7 +217,7 @@ class GameCenterManager {
     ///         - If we are at player level, load best scores and times for player only.
     ///         - Else, just let the first place's data be the data brought in.
     func getLeaderboardData(level: Level) async -> RecordedBest {
-        //var leaderboards: [GKLeaderboard] = []
+        // var leaderboards: [GKLeaderboard] = []
         var readerboardData: RecordedBest = RecordedBest(
             score: 0,
             run: 0,
