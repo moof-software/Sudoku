@@ -21,7 +21,6 @@ import SwiftUI
 ///         - soft, light, medium, rigid, heavy
 class HapticManager {
     static let instance = HapticManager() // singleton
-    
     /// Function for haptics based on notification.
     /// - Logic:
     ///     - creates a generator and calls notification has happened on said generator.
@@ -29,7 +28,6 @@ class HapticManager {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(type)
     }
-    
     /// Function for haptics based on impact.
     /// - Logic:
     ///     - creates a generator and calls feedback has happened on said generator.
