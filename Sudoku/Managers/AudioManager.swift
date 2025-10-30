@@ -25,7 +25,7 @@ import Foundation
 ///     - `playEffect`
 ///         - Function: Stops background sound.
 class AudioManager {
-    static let instance = AudioManager()
+    static let instance = AudioManager() // singleton
 
     var effectPlayer: AVAudioPlayer?
     var backgroundPlayer: AVAudioPlayer?
